@@ -1,0 +1,7 @@
+.landing-component {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(250, 250, 250);
+  width: 100%;
+  height: 800px;
+}
