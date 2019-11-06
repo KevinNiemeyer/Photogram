@@ -1,14 +1,14 @@
 import React from 'react';
 import './Logo.css';
-
+import './logo.png';
 class Logo extends React.Component {
   state = {};
 
   render() {
     return (
       <div className='logo-component'>
-        <p className='logo-script'>InstaUnsplashGram</p>
-        <h1>Logo</h1>
+        <i class='fa fa-camera'></i>
+        <h2 className='logo-script'>InstaUnsplashGram</h2>
       </div>
     );
   }

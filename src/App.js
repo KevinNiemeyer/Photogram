@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Landing from './components/Landing';
 import './App.css';
+import './reset.css';
 
 class App extends React.Component {
   state = {};
