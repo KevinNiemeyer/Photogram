@@ -5,3 +5,8 @@
   width: 100%;
   flex: 1;
 }
+
+.nav-component i {
+  padding: 15px;
+  font-size: 25px;
+}

@@ -8,12 +8,14 @@
 
 .logo-script {
   font-family: 'Dancing Script', cursive;
+  font-size: 30px;
+  padding-left: 10px;
 }
 
 .logo-component i {
   position: relative;
   font-size: 25px;
-  padding-right: 20px;
+  padding-right: 30px;
 }
 
 .logo-component i::after {

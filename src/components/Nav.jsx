@@ -4,9 +4,9 @@ export class Nav extends Component {
   render() {
     return (
       <div className='nav-component'>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
+        <i class='fa fa-compass'></i>
+        <i class='fa fa-heart'></i>
+        <i class='fa fa-user'></i>
       </div>
     );
   }

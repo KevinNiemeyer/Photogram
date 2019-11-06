@@ -2,11 +2,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  flex: 1;
-  border: solid #b2b4b6 1px;
+  width: 215px;
+  background-color: rgb(250, 250, 250);
+  border: solid lightgrey 1px;
   border-radius: 3px;
-  height: 30px;
+  height: 25px;
   overflow: hidden;
   position: relative;
 }
@@ -16,20 +16,22 @@
   align-items: center;
   justify-content: space-around;
   color: #b2b4b6;
-  height: 30px;
+  height: 25px;
   position: absolute;
-  left: 40%;
+  left: 35%;
   transition: all 0.5s ease;
   z-index: 10;
   outline: none;
+  font-size: 0.9em;
 }
 
 .search-bar-placeholder:focus {
-  transform: translateX(-40%);
+  transform: translateX(-35%);
 }
 
 .magnifying-glass {
   font-size: 1em; /* This controls the size. */
+
   display: inline-block;
   width: 0.4em;
   height: 0.4em;
@@ -54,19 +56,8 @@
   -o-transform: rotate(45deg);
 }
 
-.search-bar-cancel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  background-color: #b2b4b6;
-  color: white;
-  margin-left: 65px;
-}
-
 .search-bar-input {
   border: none;
   outline: none;
+  background-color: rgb(250, 250, 250);
 }
