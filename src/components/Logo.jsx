@@ -7,7 +7,7 @@ class Logo extends React.Component {
   render() {
     return (
       <div className='logo-component'>
-        <i class='fa fa-camera'></i>
+        <i className='fa fa-camera'></i>
         <h2 className='logo-script'>InstaUnsplashGram</h2>
       </div>
     );
