@@ -1,39 +1,54 @@
-import React from 'react';
-import Header from './components/Header';
-import Landing from './components/Landing';
-import Unsplash, { toJson } from 'unsplash-js';
-import './App.css';
-import './reset.css';
+import React from "react";
+import Header from "./components/Header";
+import Landing from "./pages/Landing";
+import Unsplash, { toJson } from "unsplash-js";
+import "./App.css";
+import "./reset.css";
 
 class App extends React.Component {
   state = {
-    photos: ''
+    photos: [],
+    page: 0
   };
 
   componentDidMount() {
     this.getData();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.getData();
+    }
+  }
+
   getData() {
+    this.setState({ loading: true });
     const unsplash = new Unsplash({
-      accessKey:
-        'deeaf0db05cb33f1ce444c03c075d393261f1f5789c4cb94cdeeef9b1e020fa4'
+      accessKey: process.env.REACT_APP_API_KEY
     });
     unsplash.photos
-      .listPhotos(2, 15, 'latest')
+      .listPhotos(this.state.page, 15, "latest")
       .then(toJson)
       .then(json => {
         //console.log(json);
         this.setState({
-          photos: json
+          photos: [...this.state.photos, ...json],
+          loading: false
         });
       });
   }
+
+  handleClick = () => this.setState({ page: this.state.page + 1 });
+
   render() {
+    const { loading, photos } = this.state;
+    console.log(photos);
     return (
-      <div className='app-container'>
+      <div className="app-container">
         <Header />
+
         <Landing photos={this.state.photos} />
+        <button onClick={this.handleClick}>Update</button>
       </div>
     );
   }

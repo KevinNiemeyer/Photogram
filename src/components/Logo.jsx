@@ -1,6 +1,6 @@
 import React from 'react';
+import logo from './logo.png';
 import './Logo.css';
-import './logo.png';
 class Logo extends React.Component {
   state = {};
 
