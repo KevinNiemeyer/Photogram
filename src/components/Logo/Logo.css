@@ -7,23 +7,23 @@
 }
 
 .logo-script {
+  position: relative;
   font-family: 'Dancing Script', cursive;
   font-size: 30px;
-  padding-left: 10px;
+  padding-left: 17px;
 }
 
-.logo-component i {
-  position: relative;
-  font-size: 25px;
-  padding-right: 30px;
+.logo-component .logo {
+  width: 30px;
+  padding-right: 15px;
 }
 
-.logo-component i::after {
+.logo-script::before {
   position: absolute;
   content: '';
   background-color: black;
-  width: 2px;
-  height: 40px;
-  left: 75%;
-  transform: translateY(-12%);
+  width: 1px;
+  height: 1em;
+
+  left: 0;
 }

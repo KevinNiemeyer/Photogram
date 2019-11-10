@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from './components/Header';
-import Landing from './components/Landing';
+import Header from './components/Header/Header';
+import Landing from './components/Landing/Landing';
 import Unsplash, { toJson } from 'unsplash-js';
 import './App.css';
 import './reset.css';
 
 class App extends React.Component {
   state = {
-    photos: ''
+    photos: []
   };
 
   componentDidMount() {

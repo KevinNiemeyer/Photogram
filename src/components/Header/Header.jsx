@@ -1,7 +1,7 @@
 import React from 'react';
-import Logo from './Logo';
-import SearchBar from './SearchBar';
-import Nav from './Nav';
+import Logo from '../Logo/Logo.jsx';
+import SearchBar from '../SearchBar';
+import Nav from '../Nav';
 import './Header.css';
 
 class Header extends React.Component {
