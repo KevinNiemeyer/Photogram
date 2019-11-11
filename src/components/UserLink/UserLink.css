@@ -1,0 +1,25 @@
+.user-link-component {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-link-pic {
+  border-radius: 25%;
+}
+
+.user-link {
+  display: flex;
+  align-items: center;
+  background-color: purple;
+  border-radius: 0 10px 10px 0;
+  height: 20px;
+  padding: 0 5px 0 5px;
+  color: grey;
+  font-size: 0.75em;
+}
+
+.user-link:hover {
+  color: white;
+}
