@@ -1,0 +1,11 @@
+.photo-component {
+  width: 20%;
+}
+
+.photo-component-image {
+  width: 100%;
+}
+
+.photo-user-link {
+  position: absolute;
+}
