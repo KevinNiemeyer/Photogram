@@ -1,8 +1,21 @@
 .user-link-component {
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  left: 7px;
+  bottom: 7px;
+  cursor: grab;
+}
+
+.user-link-component:hover .user-link-pic {
+  transform: scale(1.1);
+}
+
+.user-link-component:hover .user-link {
+  color: white;
 }
 
 .user-link-pic {
@@ -18,8 +31,4 @@
   padding: 0 5px 0 5px;
   color: grey;
   font-size: 0.75em;
-}
-
-.user-link:hover {
-  color: white;
 }

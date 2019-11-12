@@ -7,5 +7,6 @@
   width: 100%;
 }
 
-#photo-user-link {
+#photo-user-link:hover {
+  color: white;
 }
