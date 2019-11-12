@@ -45,8 +45,12 @@ class App extends React.Component {
         <Switch>
           <div className='app-container'>
             <HeaderComponent />
+            <Route
+              path='/'
+              component={LandingPage}
+              photos={this.state.photos}
+            />
             <Route path='/user' component={UserPage} />
-            <LandingPage photos={this.state.photos} />
           </div>
         </Switch>
       </Router>
@@ -55,3 +59,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+//<LandingPage photos={this.state.photos} />
