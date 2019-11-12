@@ -1,8 +1,8 @@
 import React from 'react';
-import Logo from '../Logo/Logo.jsx';
-import SearchBar from '../SearchBar/SearchBar';
-import Nav from '../Nav/Nav';
-import './Header.css';
+import Logo from '../Logo/LogoComponent.jsx';
+import SearchBar from '../SearchBar/SearchBarComponent';
+import Nav from '../Nav/NavComponent';
+import './HeaderStyles.css';
 
 class Header extends React.Component {
   state = {};

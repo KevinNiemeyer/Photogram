@@ -1,7 +1,9 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Landing from './components/Landing/Landing';
+import HeaderComponent from './components/Header/HeaderComponent';
+import LandingPage from './pages/Landing/LandingPage';
+import UserPage from './pages/User/UserPage';
 import Unsplash, { toJson } from 'unsplash-js';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import './reset.css';
 
@@ -39,10 +41,15 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className='app-container'>
-        <Header />
-        <Landing photos={this.state.photos} />
-      </div>
+      <Router>
+        <Switch>
+          <div className='app-container'>
+            <HeaderComponent />
+            <Route path='/user' component={UserPage} />
+            <LandingPage photos={this.state.photos} />
+          </div>
+        </Switch>
+      </Router>
     );
   }
 }

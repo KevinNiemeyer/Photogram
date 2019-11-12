@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import UserLink from '../UserLink/UserLink.jsx';
-import './Photo.css';
+import UserLink from '../UserLink/UserLinkComponent.jsx';
+import './PhotoStyles.css';
 
 export default class Photo extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class Photo extends Component {
           alt={this.props.photo.alt_description}
         />
 
-        <UserLink className='photo-user-link' photo={this.props.photo} />
+        <UserLink id='photo-user-link' photo={this.props.photo} />
       </div>
     );
   }

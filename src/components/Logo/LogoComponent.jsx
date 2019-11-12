@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import './Logo.css';
+import './LogoStyles.css';
 import logo from './logo.png';
+
 class Logo extends React.Component {
   render() {
     return (

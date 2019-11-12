@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import './Landing.css';
-import Photo from '../Photo/Photo';
+import { Link } from 'react-router-dom';
+import './LandingStyles.css';
+import Photo from '../../components/Photo/PhotoComponent';
+import User from '../User/UserPage';
+import { domainToASCII } from 'url';
 
 export class Landing extends Component {
-  //api calls here
   render() {
     if (!this.props.photos.length) return null;
     return (
