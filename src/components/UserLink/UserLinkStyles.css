@@ -8,13 +8,14 @@
   left: 7px;
   bottom: 7px;
   cursor: grab;
+  color: lightgrey;
 }
 
 .user-link-component:hover .user-link-pic {
   transform: scale(1.1);
 }
 
-.user-link-component:hover .user-link {
+.user-link-component:hover .user-link-name {
   color: white;
 }
 
@@ -30,9 +31,10 @@
   height: 20px;
   padding: 0 5px 0 5px;
   color: grey;
+  text-decoration: none;
   font-size: 0.75em;
 }
 
-.user-link:hover {
-  color: white;
+.user-link-name {
+  color: darkgrey;
 }

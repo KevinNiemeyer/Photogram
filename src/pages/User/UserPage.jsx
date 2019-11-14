@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Photo from '../../components/Photo/PhotoComponent';
 import { toJson } from 'unsplash-js';
 
 import './UserStyles.css';
@@ -6,6 +7,10 @@ import './UserStyles.css';
 import { unsplash } from '../../unsplash';
 
 class UserPage extends Component {
+  state = {
+    photos: []
+  };
+
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.getData();
@@ -17,15 +22,25 @@ class UserPage extends Component {
       .photos(this.props.match.params.userName, 1, 10, 'popular', false)
       .then(toJson)
       .then(json => {
-        console.log(json);
+        this.setState({
+          photos: json
+        });
       });
   }
 
   render() {
-    console.log(this.props.match.params.userId);
+    if (!this.state.photos.length) return null;
     return (
-      <div>
-        <h1>User: </h1>
+      <div className='landing-component'>
+        {this.state.photos.map(photo => {
+          return (
+            <Photo
+              key={photo.id}
+              className='user-component-photo'
+              photo={photo}
+            />
+          );
+        })}
       </div>
     );
   }
