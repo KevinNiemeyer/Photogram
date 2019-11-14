@@ -1,0 +1,12 @@
+.photo-component {
+  width: 20%;
+  position: relative;
+}
+
+.photo-component-image {
+  width: 100%;
+}
+
+#photo-user-link:hover {
+  color: white;
+}

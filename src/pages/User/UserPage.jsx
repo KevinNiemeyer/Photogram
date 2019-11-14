@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Photo from '../../components/Photo/PhotoComponent';
+import UserPhotoComponent from '../../components/UserPhoto/UserPhotoComponent';
 import { toJson } from 'unsplash-js';
 
 import './UserStyles.css';
@@ -34,7 +34,7 @@ class UserPage extends Component {
       <div className='landing-component'>
         {this.state.photos.map(photo => {
           return (
-            <Photo
+            <UserPhotoComponent
               key={photo.id}
               className='user-component-photo'
               photo={photo}

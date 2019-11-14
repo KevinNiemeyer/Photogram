@@ -26,15 +26,17 @@
 .user-link {
   display: flex;
   align-items: center;
-  background-color: purple;
+  background-color: lightblue;
   border-radius: 0 10px 10px 0;
-  height: 20px;
+  width: auto;
+  height: auto;
+  min-height: 20px;
   padding: 0 5px 0 5px;
-  color: grey;
-  text-decoration: none;
+  word-wrap: unset;
   font-size: 0.75em;
 }
 
 .user-link-name {
-  color: darkgrey;
+  color: purple;
+  text-decoration: none;
 }

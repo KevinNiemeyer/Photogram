@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import './LandingStyles.css';
-import Photo from '../../components/Photo/PhotoComponent';
+import LandingPhoto from '../../components/LandingPhoto/LandingPhotoComponent';
 import { unsplash } from '../../unsplash';
 
 export class Landing extends Component {
@@ -25,7 +25,6 @@ export class Landing extends Component {
       .listPhotos(2, 15, 'latest')
       .then(toJson)
       .then(json => {
-        //  console.log(json);
         this.setState({
           photos: json
         });
@@ -38,7 +37,7 @@ export class Landing extends Component {
       <div className='landing-component'>
         {this.state.photos.map(photo => {
           return (
-            <Photo
+            <LandingPhoto
               key={photo.id}
               className='landing-component-photo'
               photo={photo}
