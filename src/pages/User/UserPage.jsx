@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './UserStyles.css';
 
-export default function UserPage() {
+import { unsplash } from '../../unsplash';
+
+export function UserPage(props) {
+  console.log(props.match.params.userId);
   return (
     <div>
-      <h1>User Page</h1>
+      <h1>User: </h1>
     </div>
   );
 }
+
+export default UserPage;

@@ -1,18 +1,49 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { toJson } from 'unsplash-js';
 import './LandingStyles.css';
 import Photo from '../../components/Photo/PhotoComponent';
-import User from '../User/UserPage';
-import { domainToASCII } from 'url';
+import { unsplash } from '../../unsplash';
 
 export class Landing extends Component {
+  state = {
+    photos: []
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll);
+    this.getData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.getData();
+    }
+  }
+
+  getData() {
+    unsplash.photos
+      .listPhotos(2, 15, 'latest')
+      .then(toJson)
+      .then(json => {
+        //  console.log(json);
+        this.setState({
+          photos: json
+        });
+      });
+  }
+
   render() {
-    if (!this.props.photos.length) return null;
+    if (!this.state.photos.length) return null;
     return (
       <div className='landing-component'>
-        {this.props.photos.map(photo => {
-          console.log(photo);
-          return <Photo className='landing-component-photo' photo={photo} />;
+        {this.state.photos.map(photo => {
+          return (
+            <Photo
+              key={photo.id}
+              className='landing-component-photo'
+              photo={photo}
+            />
+          );
         })}
       </div>
     );

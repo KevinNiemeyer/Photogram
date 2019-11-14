@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import UserLink from '../UserLink/UserLinkComponent.jsx';
 import './PhotoStyles.css';
 
-export default class Photo extends Component {
+class Photo extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className='photo-component'>
         <img
@@ -18,3 +17,5 @@ export default class Photo extends Component {
     );
   }
 }
+
+export default Photo;
