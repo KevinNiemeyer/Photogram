@@ -27,3 +27,8 @@
 
   left: 0;
 }
+
+.landing-link {
+  text-decoration: none;
+  color: inherit;
+}

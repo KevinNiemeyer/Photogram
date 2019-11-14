@@ -34,16 +34,19 @@ export class Landing extends Component {
   render() {
     if (!this.state.photos.length) return null;
     return (
-      <div className='landing-component'>
-        {this.state.photos.map(photo => {
-          return (
-            <LandingPhoto
-              key={photo.id}
-              className='landing-component-photo'
-              photo={photo}
-            />
-          );
-        })}
+      <div className='container'>
+        <div className='landing-heading'>Latest Photos</div>
+        <div className='landing-component'>
+          {this.state.photos.map(photo => {
+            return (
+              <LandingPhoto
+                key={photo.id}
+                className='landing-component-photo'
+                photo={photo}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

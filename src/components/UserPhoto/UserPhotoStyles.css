@@ -1,12 +1,8 @@
-.photo-component {
-  width: 20%;
+.user-component {
+  width: 50%;
   position: relative;
 }
 
-.photo-component-image {
+.user-component-image {
   width: 100%;
-}
-
-#photo-user-link:hover {
-  color: white;
 }
