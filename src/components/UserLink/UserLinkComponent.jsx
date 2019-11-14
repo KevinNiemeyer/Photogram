@@ -15,8 +15,7 @@ class UserLink extends Component {
         <div className='user-link'>
           <Link
             to={`/user/${this.props.photo.user.name}`}
-            style={{ textDecoration: 'none' }}
-            user={this.props.photo.user.id}>
+            style={{ textDecoration: 'none' }}>
             {this.props.photo.user.name}
           </Link>
         </div>
