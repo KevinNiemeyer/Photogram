@@ -19,20 +19,16 @@
 }
 
 .user-info-component_user-data {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   width: 100%;
 }
 
-.user-info-component_user-data_row1,
-.user-info-component_user-data_row2,
-.user-info-component_user-data_row3 {
+.user-info-row {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   padding: 10px;
+  padding-left: 64px;
+  box-sizing: content-box;
 }
 
 .user-info-component_username {
