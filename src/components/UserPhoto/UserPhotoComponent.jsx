@@ -4,9 +4,9 @@ import './UserPhotoStyles.css';
 class UserPhotoComponent extends Component {
   render() {
     return (
-      <div className='user-component'>
+      <div className='user-photo-component'>
         <img
-          className='user-component-image'
+          className='user-photo-component-image'
           src={this.props.photo.urls.small}
           alt={this.props.photo.alt_description}
         />

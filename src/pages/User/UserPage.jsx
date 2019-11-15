@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import UserPhotoComponent from '../../components/UserPhoto/UserPhotoComponent';
+import UserInfoComponent from '../../components/UserInfo/UserInfoComponent';
+
 import { toJson } from 'unsplash-js';
 
 import './UserStyles.css';
@@ -14,7 +16,6 @@ class UserPage extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.getData();
-    console.log(this.props);
   }
 
   getData() {
@@ -31,12 +32,13 @@ class UserPage extends Component {
   render() {
     if (!this.state.photos.length) return null;
     return (
-      <div className='landing-component'>
+      <div className='user-page-component'>
+        <UserInfoComponent photo={this.state.photos} />
         {this.state.photos.map(photo => {
           return (
             <UserPhotoComponent
               key={photo.id}
-              className='user-component-photo'
+              className='user-photo-component'
               photo={photo}
             />
           );

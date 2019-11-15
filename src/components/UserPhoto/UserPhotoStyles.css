@@ -1,8 +1,8 @@
-.user-component {
+.user-photo-component {
   width: 50%;
   position: relative;
 }
 
-.user-component-image {
+.user-photo-component-image {
   width: 100%;
 }
