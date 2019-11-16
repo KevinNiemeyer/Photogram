@@ -1,7 +1,7 @@
 import React from 'react';
-import HeaderComponent from './components/Header/HeaderComponent';
-import LandingPage from './pages/Landing/LandingPage';
-import UserPage from './pages/User/UserPage';
+import HeaderComponent from './components/Header';
+import LandingPage from './pages/Landing';
+import UserPage from './pages/User';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';

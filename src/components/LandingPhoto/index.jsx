@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserLink from '../UserLink/UserLinkComponent.jsx';
+import UserLink from '../UserLink/index.jsx';
 import './LandingPhotoStyles.css';
 
 class LandingPhotoComponent extends Component {

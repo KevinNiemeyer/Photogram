@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import './LandingStyles.css';
-import LandingPhoto from '../../components/LandingPhoto/LandingPhotoComponent';
+import LandingPhoto from '../../components/LandingPhoto';
 import { unsplash } from '../../unsplash';
 
 export class Landing extends Component {

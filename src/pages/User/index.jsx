@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import UserPhotoComponent from '../../components/UserPhoto/UserPhotoComponent';
-import UserInfoComponent from '../../components/UserInfo/UserInfoComponent';
+import UserPhotoComponent from '../../components/UserPhoto';
+import UserInfoComponent from '../../components/UserInfo';
 
 import { toJson } from 'unsplash-js';
 
