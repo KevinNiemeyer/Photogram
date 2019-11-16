@@ -1,32 +1,25 @@
 import React from 'react';
 import './UserInfoStyles.css';
-import gear from '../../assets/gear_icon.png';
 
-export default function UserInfoComponent(props) {
-  console.log(props);
+export default function UserInfoComponent({ user }) {
   return (
     <div className='user-info-component'>
       <img
         className='user-info-component_image'
-        src={props.photo[0].user.profile_image.large}
-        alt={props.photo[0].user.username}
+        src={user.profile_image.large}
+        alt={user.username}
       />
 
       <div className='user-info-component_user-data'>
-        <div className='user-info-component_user-data_row1'>
-          <div className='user-info-component_username'>
-            {props.photo[0].user.username}
-          </div>
-
-          <input type='button' id='edit-profile-button' value='Edit Profile' />
-          <img src={gear} className='gear_icon' alt='gear' />
+        <div className='user-info-row'>
+          <div className='user-info-component_username'>{user.username}</div>
         </div>
-        <div className='user-info-component_user-data_row2'>
-          <p>{props.photo[0].user.total_collections} collections</p>
-          <p>{props.photo[0].user.total_photos} photos</p>
-          <p>{props.photo[0].user.total_likes} likes</p>
+        <div className='user-info-row'>
+          <div>{user.total_collections} collections</div>
+          <div>{user.total_photos} photos</div>
+          <div>{user.total_likes} likes</div>
         </div>
-        <div className='user-info-component_user-data_row3'>info</div>
+        <div className='user-info-row users-name'>{user.name}</div>
       </div>
     </div>
   );

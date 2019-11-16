@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import './SearchBarStyles.css';
 
-export class SearcBar extends Component {
+export class SearchBar extends Component {
+  state = {
+    searchTerm: ''
+  };
+  handleChange = e => this.setState({ searchTerm: e.target.value });
+
   render() {
     return (
       <div className='search-bar-component'>
         <form>
-          <div class='dropdown'>
-            <button class='dropbtn'>Search Category</button>
-            <div class='dropdown-content'>
+          <div className='dropdown'>
+            <button className='dropbtn'>Search Category</button>
+            <div className='dropdown-content'>
               <a href='#'>Users</a>
               <a href='#'>Collections</a>
               <a href='#'>Photos</a>
@@ -17,14 +22,15 @@ export class SearcBar extends Component {
           </div>
 
           <input
+            onChange={this.handleChange}
             type='text'
             className='search-bar-input'
             placeholder='Search'
           />
-          <div class='magnifying-glass-div'>
+          <div className='magnifying-glass-div'>
             <img
               src={MagnifyingGlassIcon}
-              class='magnifying-glass-icon'
+              className='magnifying-glass-icon'
               alt='magnifying-glass'
             />
           </div>
@@ -34,4 +40,4 @@ export class SearcBar extends Component {
   }
 }
 
-export default SearcBar;
+export default SearchBar;

@@ -10,8 +10,8 @@ export class Nav extends Component {
     return (
       <div className='nav-component'>
         <img src={compass} className='nav-icon' alt='compass' />
-        <img src={heart} classname='nav-icon' alt='heart' />
-        <img src={person} classname='nav-icon' alt='person' />
+        <img src={heart} className='nav-icon' alt='heart' />
+        <img src={person} className='nav-icon' alt='person' />
       </div>
     );
   }

@@ -31,17 +31,14 @@ class UserPage extends Component {
 
   render() {
     if (!this.state.photos.length) return null;
+    const { photos } = this.state;
+    const { user } = photos[0];
+
     return (
       <div className='user-page-component'>
-        <UserInfoComponent photo={this.state.photos} />
-        {this.state.photos.map(photo => {
-          return (
-            <UserPhotoComponent
-              key={photo.id}
-              className='user-photo-component'
-              photo={photo}
-            />
-          );
+        <UserInfoComponent user={user} />
+        {photos.map(photo => {
+          return <UserPhotoComponent key={photo.id} photo={photo} />;
         })}
       </div>
     );

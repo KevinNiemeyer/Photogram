@@ -7,58 +7,30 @@
   align-items: center;
 }
 
-.user-info-component_image-div {
-  text-align: center;
-
-  width: 100%;
-}
-
 .user-info-component_image {
   width: 150px;
   border-radius: 50%;
 }
 
 .user-info-component_user-data {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   width: 100%;
 }
 
-.user-info-component_user-data_row1,
-.user-info-component_user-data_row2,
-.user-info-component_user-data_row3 {
+.user-info-row {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  padding: 10px;
-}
+  justify-content: space-between;
+  width: auto;
+  padding: 12px 0px 12px 40px;
 
+  box-sizing: content-box;
+}
 .user-info-component_username {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 200;
 }
 
-#edit-profile-button {
-  background-color: rgb(250, 250, 250);
-  border: solid lightgrey 1px;
-  border-radius: 3px;
-  padding: 5px 10px 5px 10px;
-  margin: 0 0 0 20px;
+.users-name {
   font-weight: bold;
-  font-size: 14px;
-  outline: none;
-}
-
-#edit-profile-button:hover {
-  opacity: 0.8;
-}
-
-#edit-profile-button:active {
-  transform: scale(0.9);
-}
-
-.gear_icon {
-  width: 30px;
+  font-size: 1.2em;
+  color: rgb(247, 154, 120);
 }
