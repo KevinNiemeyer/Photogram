@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './LogoStyles.css';
 
-import logo from './logo.png';
+import logo from '../../assets/logo.png';
 
 class Logo extends React.Component {
   render() {

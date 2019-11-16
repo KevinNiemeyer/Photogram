@@ -5,8 +5,15 @@
   width: 100%;
   flex: 1;
 }
+.nav-component img {
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+}
 
-.nav-component i {
-  padding: 15px;
-  font-size: 25px;
+.nav-component img:hover {
+  transform: scale(1.1);
+}
+.nav-component img:active {
+  transform: scale(1);
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import './SearchBarStyles.css';
 
 export class SearcBar extends Component {
@@ -15,7 +16,18 @@ export class SearcBar extends Component {
             </div>
           </div>
 
-          <input type='text' className='search-bar-input'></input>
+          <input
+            type='text'
+            className='search-bar-input'
+            placeholder='Search'
+          />
+          <div class='magnifying-glass-div'>
+            <img
+              src={MagnifyingGlassIcon}
+              class='magnifying-glass-icon'
+              alt='magnifying-glass'
+            />
+          </div>
         </form>
       </div>
     );
