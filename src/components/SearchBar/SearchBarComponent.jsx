@@ -5,11 +5,18 @@ export class SearcBar extends Component {
   render() {
     return (
       <div className='search-bar-component'>
-        <div className='search-bar-placeholder' tabIndex='2'>
-          <div className='magnifying-glass'></div>
-          <p>Search</p>
+        <form>
+          <div class='dropdown'>
+            <button class='dropbtn'>Search Category</button>
+            <div class='dropdown-content'>
+              <a href='#'>Users</a>
+              <a href='#'>Collections</a>
+              <a href='#'>Photos</a>
+            </div>
+          </div>
+
           <input type='text' className='search-bar-input'></input>
-        </div>
+        </form>
       </div>
     );
   }
