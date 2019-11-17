@@ -18,7 +18,9 @@ export class SearchBar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.searchTerm) {
-      this.props.history.push(`/user/${this.state.searchTerm}`);
+      this.props.history.push(
+        `/search/${this.state.category}/${this.state.searchTerm}`
+      );
     }
   };
 

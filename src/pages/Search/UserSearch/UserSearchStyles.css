@@ -1,0 +1,8 @@
+.user-search-results {
+  display: flex;
+  flex-direction: column;
+}
+.user-search-link-name {
+  color: purple;
+  text-decoration: none;
+}
