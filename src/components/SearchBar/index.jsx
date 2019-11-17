@@ -18,9 +18,7 @@ export class SearchBar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.searchTerm) {
-      this.props.history.push(
-        `/${this.state.category}/${this.state.searchTerm}`
-      );
+      this.props.history.push(`/user/${this.state.searchTerm}`);
     }
   };
 
@@ -28,13 +26,12 @@ export class SearchBar extends Component {
     return (
       <form onSubmit={this.handleSubmit} className='search-bar-component'>
         <select
-          value=''
           onChange={this.handleCategoryChange}
           id='search-category-select'>
-          <option value='' disabled hidden>
+          <option value='' selected disabled hidden>
             Category
           </option>
-          <option value='Users'>Users</option>
+          <option value='User'>Users</option>
           <option value='Collections'>Collections</option>
           <option value='Photos'>Photos</option>
         </select>
