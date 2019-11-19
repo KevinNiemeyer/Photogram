@@ -16,8 +16,8 @@ class App extends React.Component {
           <div className='app-container'>
             <HeaderComponent />
             <Route path='/' exact component={LandingPage} />
-            <Route path='/user/:userName' component={UserPage} />
-            <Route path='/search/user/:user' component={UserSearch} />
+            <Route path='/user/:userName' exact component={UserPage} />
+            <Route path='/search/user/:user' exact component={UserSearch} />
           </div>
         </Switch>
       </Router>

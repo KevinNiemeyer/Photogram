@@ -11,10 +11,12 @@ export class SearchBar extends Component {
 
   handleSearchChange = e =>
     this.setState({ searchTerm: e.target.value.toLowerCase() });
+
   handleCategoryChange = e => {
     console.log(e.target.value);
     this.setState({ category: e.target.value.toLowerCase() });
   };
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.searchTerm) {
@@ -28,6 +30,7 @@ export class SearchBar extends Component {
     return (
       <form onSubmit={this.handleSubmit} className='search-bar-component'>
         <select
+          required
           onChange={this.handleCategoryChange}
           id='search-category-select'>
           <option value='' selected disabled hidden>
@@ -38,6 +41,7 @@ export class SearchBar extends Component {
           <option value='Photos'>Photos</option>
         </select>
         <input
+          required
           onChange={this.handleSearchChange}
           type='text'
           className='search-bar-input'

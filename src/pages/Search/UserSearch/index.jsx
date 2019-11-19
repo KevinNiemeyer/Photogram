@@ -9,13 +9,14 @@ export class UserSearch extends Component {
   state = {
     users: []
   };
+
   componentDidMount() {
     this.getData(this.props.match.params.user);
   }
 
   getData(user) {
     unsplash.search
-      .users({ user }, 1)
+      .users(user, 1)
       .then(toJson)
       .then(json => {
         this.setState({ users: json.results });
@@ -31,7 +32,7 @@ export class UserSearch extends Component {
           return (
             <Link
               className='user-search-link-name'
-              to={`/user/${user.username}`}
+              to={`/user/${this.props.match.params.user.username}`}
               style={{ textDecoration: 'none' }}>
               {user.username}
             </Link>
