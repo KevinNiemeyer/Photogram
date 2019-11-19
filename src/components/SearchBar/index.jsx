@@ -13,7 +13,6 @@ export class SearchBar extends Component {
     this.setState({ searchTerm: e.target.value.toLowerCase() });
 
   handleCategoryChange = e => {
-    console.log(e.target.value);
     this.setState({ category: e.target.value.toLowerCase() });
   };
 
@@ -60,12 +59,3 @@ export class SearchBar extends Component {
 }
 
 export default withRouter(SearchBar);
-
-/* <div className='dropdown'>
-<div className='dropbtn'>Search Category</div>
-<div className='dropdown-content'>
-  <a onClick={this.handleCategoryChange}>Users</a>
-  <a onClick={this.handleCategoryChange}>Collections</a>
-  <a onClick={this.handleCategoryChange}>Photos</a>
-</div>
-</div> */
