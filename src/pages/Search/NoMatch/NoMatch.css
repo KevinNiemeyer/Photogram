@@ -1,0 +1,7 @@
+.no-match-heading {
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  flex: 2;
+  margin: 20px;
+}
