@@ -4,7 +4,9 @@ import './NoMatch.css';
 export default class NoMatch extends Component {
   render() {
     return (
-      <div className='no-match-heading'>No results for "{this.props.user}"</div>
+      <div className='no-match-heading'>
+        No results for "{this.props.category}"
+      </div>
     );
   }
 }

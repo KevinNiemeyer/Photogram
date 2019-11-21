@@ -13,6 +13,7 @@ export class UserSearch extends Component {
 
   componentDidMount() {
     this.getData(this.props.match.params.user);
+    console.log(this.props.match.params);
   }
 
   componentDidUpdate() {
@@ -20,20 +21,17 @@ export class UserSearch extends Component {
   }
 
   getData(user) {
-    console.log(user);
     unsplash.search
       .users(user, 1)
       .then(toJson)
       .then(json => {
         this.setState({ users: json.results });
-        console.log(json);
       });
   }
   render() {
     const { users } = this.state;
     if (this.state.users.length === 0) {
-      console.log('test');
-      return <NoMatch user={this.props.match.params.user} />;
+      return <NoMatch category={this.props.match.params.user} />;
     }
     return (
       <div className='user-search-results'>

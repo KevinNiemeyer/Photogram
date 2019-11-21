@@ -3,6 +3,7 @@ import HeaderComponent from './components/Header';
 import LandingPage from './pages/Landing';
 import UserPage from './pages/User';
 import UserSearch from './pages/Search/UserSearch';
+import CollectionsSearch from './pages/Search/CollectionsSearch';
 import NoMatch from './pages/Search/NoMatch';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -20,6 +21,11 @@ class App extends React.Component {
             <Route path='/user/:userName' exact component={UserPage} />
             <Route path='/search/user/:user' exact component={UserSearch} />
             <Route path='/search/nomatch/:user' exact component={NoMatch} />
+            <Route
+              path='/search/collections/:collection'
+              exact
+              component={CollectionsSearch}
+            />
           </div>
         </Switch>
       </Router>
