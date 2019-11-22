@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
 import NoMatch from '../NoMatch/';
-
 import './CollectionsSearchStyles.css';
 import { unsplash } from '../../../unsplash';
 
@@ -30,6 +29,7 @@ export class ComponentsSearch extends Component {
 
   render() {
     const { collections } = this.state;
+
     if (collections.length === 0) {
       return <NoMatch category={this.props.match.params.collections} />;
     }
@@ -44,10 +44,13 @@ export class ComponentsSearch extends Component {
             return (
               <Link
                 className='collection-search-link-name'
-                to={`/search/collection/${collection.title}`}
-                style={{ textDecoration: 'none' }}>
-                <p>{collection.title}</p>
-                <img src={collection.cover_photo.urls.small} />
+                to={`/collection/${collection.id}`}
+                style={{ textDecoration: 'none' }}
+                key={collection.id}>
+                <div className='collection-search-link-title'>
+                  {collection.title}
+                </div>
+                <img src={collection.cover_photo.urls.small} alt='none' />
               </Link>
             );
           })}
