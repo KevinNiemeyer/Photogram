@@ -16,23 +16,33 @@ export class UserSearch extends Component {
     console.log(this.props.match.params);
   }
 
-  componentDidUpdate() {
-    this.getData(this.props.match.params.user);
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.user !== this.props.match.params.user) {
+      this.getData(this.props.match.params.user);
+    }
   }
 
   getData(user) {
+    this.setState({ loading: true })
     unsplash.search
       .users(user, 1)
       .then(toJson)
       .then(json => {
-        this.setState({ users: json.results });
+        const results = json.results;
+        if (!results.length) {
+          this.setState({ loading: false })
+          return this.props.history.push('/not-found')
+        }
+
+        this.setState({ users: results, loading: false });
       });
   }
   render() {
     const { users } = this.state;
-    if (this.state.users.length === 0) {
+    if (this.state.users.length === 0 && !this.state.loading) {
       return <NoMatch category={this.props.match.params.user} />;
     }
+    if (this.state.loading) return <div>Loading</div>
     return (
       <div className='user-search-results'>
         <p className='user-search-heading'>
