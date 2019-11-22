@@ -31,7 +31,7 @@ export class ComponentsSearch extends Component {
     const { collections } = this.state;
 
     if (collections.length === 0) {
-      return <NoMatch category={this.props.match.params.collections} />;
+      return <NoMatch category={this.props.match.params.collection} />;
     }
 
     return (
