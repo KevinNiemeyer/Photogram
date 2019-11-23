@@ -4,17 +4,18 @@ import UserLink from '../UserLink/index.jsx';
 
 const Container = styled.div`
   width: 50%;
+
   margin: 0 auto;
   position: relative;
 `;
 
 const Img = styled.img`
- width: 100%;
- opacity: ${props => props.isLoaded ? '1' : '0'};
- transition: 0.5s ease-in-out;
- position: absolute;
- top: 0;
- left: 0;
+  width: 100%;
+  opacity: ${props => (props.isLoaded ? '1' : '0')};
+  transition: 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const Preloader = styled.div`
@@ -28,13 +29,14 @@ const Preloader = styled.div`
 class LandingPhotoComponent extends Component {
   state = {
     isLoaded: false
-  }
+  };
 
-  handleLoading = () => this.setState({ isLoaded: true })
+  handleLoading = () => this.setState({ isLoaded: true });
   render() {
-    const ratio = (this.props.photo.width / this.props.photo.height) * 100
+    const ratio = (this.props.photo.width / this.props.photo.height) * 100;
     return (
       <Container>
+        <UserLink photo={this.props.photo} />
         <Preloader ratio={ratio} color={this.props.photo.color}>
           <Img
             src={this.props.photo.urls.small}
@@ -43,7 +45,6 @@ class LandingPhotoComponent extends Component {
             isLoaded={this.state.isLoaded}
           />
         </Preloader>
-        <UserLink photo={this.props.photo} />
       </Container>
     );
   }

@@ -11,13 +11,10 @@ export class Landing extends Component {
     page: 1
   };
 
-
-
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll);
     this.getData();
   }
-
 
   getData = () => {
     unsplash.photos
@@ -30,22 +27,23 @@ export class Landing extends Component {
           hasMore: !!json.length
         });
       });
-  }
+  };
 
   render() {
     if (!this.state.photos.length) return null;
     return (
-
       <div className='container'>
-        <div className='landing-heading'>Latest Photos</div>
+        <div className='landing-heading'>Latest Photos:</div>
         <div className='landing-page-component'>
           <InfiniteScroll
-
             pageStart={1}
             loadMore={this.getData}
             hasMore={true || false}
-            loader={<div className="loader" key={0}>Loading ...</div>}
-          >
+            loader={
+              <div className='loader' key={0}>
+                Loading ...
+              </div>
+            }>
             {this.state.photos.map(photo => {
               return <LandingPhoto key={photo.id} photo={photo} />;
             })}

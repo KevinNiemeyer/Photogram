@@ -1,15 +1,15 @@
-import React from "react";
-import HeaderComponent from "./components/Header";
-import LandingPage from "./pages/Landing";
-import UserPage from "./pages/User";
-import UserSearch from "./pages/Search/UserSearch";
-import CollectionsSearch from "./pages/Search/CollectionsSearch";
-import Collection from "./pages/Collection";
-import NoMatch from "./pages/Search/NoMatch";
+import React from 'react';
+import HeaderComponent from './components/Header';
+import LandingPage from './pages/Landing';
+import UserPage from './pages/User';
+import UserSearch from './pages/Search/UserSearch';
+import CollectionsSearch from './pages/Search/CollectionsSearch';
+import Collection from './pages/Collection';
+import NoMatch from './pages/Search/NoMatch';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
-import "./reset.css";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
+import './reset.css';
 
 const FourOhFour = () => <div>Not Found</div>;
 
@@ -18,19 +18,21 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <div className="app-container">
+          <div className='app-container'>
             <HeaderComponent />
-            <Route path="/" exact component={LandingPage} />
-            <Route path="/user/:userName" exact component={UserPage} />
-            <Route path="/search/user/:user" exact component={UserSearch} />
-            <Route path="/search/nomatch/:user" exact component={NoMatch} />
-            <Route
-              path="/search/collections/:collection"
-              exact
-              component={CollectionsSearch}
-            />
-            <Route path="/collection/:id" exact component={Collection} />
-            <Route path="*" component={FourOhFour} />
+            <div className='routes-container'>
+              <Route path='/' exact component={LandingPage} />
+              <Route path='/user/:userName' exact component={UserPage} />
+              <Route path='/search/user/:user' exact component={UserSearch} />
+              <Route path='/search/nomatch/:user' exact component={NoMatch} />
+              <Route
+                path='/search/collections/:collection'
+                exact
+                component={CollectionsSearch}
+              />
+              <Route path='/collection/:id' exact component={Collection} />
+              <Route path='*' component={FourOhFour} />
+            </div>
           </div>
         </Switch>
       </Router>

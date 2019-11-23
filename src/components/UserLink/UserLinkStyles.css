@@ -1,42 +1,44 @@
 .user-link-component {
-  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  left: 7px;
-  bottom: 7px;
-  cursor: grab;
+  width: auto;
+  background-color: rgb(247, 154, 120);
+  padding: 10px 0 7px 10px;
   color: lightgrey;
+  margin-top: 20px;
 }
 
 .user-link-component:hover .user-link-pic {
-  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .user-link-component:hover .user-link-name {
-  color: white;
+  opacity: 0.8;
+}
+
+.user-link-component:active .user-link-pic {
+  transform: scale(0.9);
 }
 
 .user-link-pic {
-  border-radius: 25%;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .user-link {
-  display: flex;
-  align-items: center;
-  background-color: lightblue;
-  border-radius: 0 10px 10px 0;
-  width: auto;
-  height: auto;
   min-height: 20px;
-  padding: 0 5px 0 5px;
+  padding-top: 15px;
+  padding-bottom: 10px;
   word-wrap: unset;
   font-size: 0.75em;
+  width: 100%;
 }
 
 .user-link-name {
+  display: flex;
+  align-items: center;
   color: purple;
   text-decoration: none;
 }
