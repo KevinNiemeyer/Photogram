@@ -2,28 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
 import NoMatch from '../NoMatch/';
-import './CollectionsSearchStyles.css';
+import './CollectionSearchStyles.css';
 import { unsplash } from '../../../unsplash';
 
-export class ComponentsSearch extends Component {
+export class CollectionSearch extends Component {
   state = {
     collections: []
   };
 
   componentDidMount() {
-    this.getData(this.props.match.params.collection);
+    this.getData();
   }
 
   componentDidUpdate() {
-    this.getData(this.props.match.params.collection);
+    this.getData();
   }
 
-  getData(collection) {
+  getData() {
+    //console.log(this.props.match.params.collection);
     unsplash.search
-      .collections(collection, 1)
+      .collections(this.props.match.params.collection, 1)
       .then(toJson)
       .then(json => {
         this.setState({ collections: json.results });
+        //console.log(this.state.collections);
       });
   }
 
@@ -60,7 +62,7 @@ export class ComponentsSearch extends Component {
   }
 }
 
-export default ComponentsSearch;
+export default CollectionSearch;
 
 /* unsplash.search.collections("dogs", 1)
   .then(toJson)

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import NoMatch from '../Search/NoMatch/';
+
 import './CollectionStyles.css';
 import { unsplash } from '../../unsplash';
 
@@ -11,8 +10,7 @@ export class Collection extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll);
-    this.getData(this.props.match.params.id);
+    this.getData();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -21,10 +19,11 @@ export class Collection extends Component {
     }
   }
 
-  getData(id) {
-    console.log(id);
+  getData() {
+    // console.log(this.props.match.params.id);
+
     unsplash.collections
-      .getCollectionPhotos(id, 1, 10, 'popular')
+      .getCollection(3816141, 1, 10, 'popular')
       .then(toJson)
       .then(json => {
         console.log(json.results);
