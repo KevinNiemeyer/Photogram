@@ -20,7 +20,7 @@
   margin: 20px;
 }
 
-.user-search-link-name {
+.user-search-link {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -29,11 +29,15 @@
   padding: 20px;
 }
 
-.user-search-link-name img {
+.user-search-link img {
   margin-right: 20px;
   border-radius: 50%;
 }
 
-.user-search-link-name:hover {
-  transform: scale(1.1);
+.user-search-link:hover {
+  opacity: 0.8;
+}
+
+.user-search-link:active img {
+  transform: scale(0.9);
 }

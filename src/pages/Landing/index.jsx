@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import './LandingStyles.css';
-import LandingPhoto from '../../components/LandingPhoto';
+import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
 
 export class Landing extends Component {
@@ -45,7 +45,7 @@ export class Landing extends Component {
               </div>
             }>
             {this.state.photos.map(photo => {
-              return <LandingPhoto key={photo.id} photo={photo} />;
+              return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>
         </div>

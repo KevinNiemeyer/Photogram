@@ -23,15 +23,15 @@ export class UserSearch extends Component {
   }
 
   getData(user) {
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     unsplash.search
       .users(user, 1)
       .then(toJson)
       .then(json => {
         const results = json.results;
         if (!results.length) {
-          this.setState({ loading: false })
-          return this.props.history.push('/not-found')
+          this.setState({ loading: false });
+          return this.props.history.push('/not-found');
         }
 
         this.setState({ users: results, loading: false });
@@ -42,7 +42,7 @@ export class UserSearch extends Component {
     if (this.state.users.length === 0 && !this.state.loading) {
       return <NoMatch category={this.props.match.params.user} />;
     }
-    if (this.state.loading) return <div>Loading</div>
+    if (this.state.loading) return <div>Loading</div>;
     return (
       <div className='user-search-results'>
         <p className='user-search-heading'>
@@ -52,7 +52,7 @@ export class UserSearch extends Component {
           {users.map(user => {
             return (
               <Link
-                className='user-search-link-name'
+                className='user-search-link'
                 id={user.id}
                 to={`/user/${user.username}`}
                 style={{ textDecoration: 'none' }}>
