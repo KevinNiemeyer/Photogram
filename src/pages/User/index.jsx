@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserPhotoComponent from '../../components/UserPhoto';
 import UserInfoComponent from '../../components/UserInfo';
+import LandingPhoto from '../../components/LandingPhoto';
 
 import { toJson } from 'unsplash-js';
 
@@ -38,7 +39,7 @@ class UserPage extends Component {
       <div className='user-page-component'>
         <UserInfoComponent user={user} />
         {photos.map(photo => {
-          return <UserPhotoComponent key={photo.id} photo={photo} />;
+          return <LandingPhoto key={photo.id} photo={photo} />;
         })}
       </div>
     );
