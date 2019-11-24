@@ -26,7 +26,7 @@ const Preloader = styled.div`
   position: relative;
 `;
 
-class LandingPhotoComponent extends Component {
+class Photo extends Component {
   state = {
     isLoaded: false
   };
@@ -50,4 +50,4 @@ class LandingPhotoComponent extends Component {
   }
 }
 
-export default LandingPhotoComponent;
+export default Photo;
