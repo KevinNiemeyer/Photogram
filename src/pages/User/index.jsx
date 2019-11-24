@@ -16,8 +16,7 @@ class UserPage extends Component {
     this.getData();
   }
 
-  getData() {
-    //console.log(this.props.match.params.user);
+  getData = () => {
     unsplash.users
       .photos(
         this.props.match.params.userName,
@@ -34,7 +33,7 @@ class UserPage extends Component {
           hasMore: !!json.length
         });
       });
-  }
+  };
 
   render() {
     if (!this.state.photos.length) return null;
