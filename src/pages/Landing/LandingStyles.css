@@ -1,4 +1,4 @@
-.container {
+.landing-page {
   display: flex;
   flex-direction: row;
 
@@ -13,7 +13,7 @@
   flex: 1;
 }
 
-.landing-page-component {
+.landing-results {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -21,7 +21,4 @@
   flex-wrap: wrap;
   padding: 20px;
   flex: 2;
-}
-
-.landing-page-component > div {
 }

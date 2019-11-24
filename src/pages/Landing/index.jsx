@@ -32,9 +32,9 @@ export class Landing extends Component {
   render() {
     if (!this.state.photos.length) return null;
     return (
-      <div className='container'>
+      <div className='landing-page'>
         <div className='landing-heading'>Latest Photos:</div>
-        <div className='landing-page-component'>
+        <div className='landing-results'>
           <InfiniteScroll
             pageStart={1}
             loadMore={this.getData}

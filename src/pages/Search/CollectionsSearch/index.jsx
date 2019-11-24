@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import NoMatch from '../NoMatch/';
 import './CollectionSearchStyles.css';
 import { unsplash } from '../../../unsplash';
 
@@ -19,29 +18,24 @@ export class CollectionSearch extends Component {
   }
 
   getData() {
-    //console.log(this.props.match.params.collection);
     unsplash.search
       .collections(this.props.match.params.collection, 1)
       .then(toJson)
       .then(json => {
         this.setState({ collections: json.results });
-        //console.log(this.state.collections);
       });
   }
 
   render() {
     const { collections } = this.state;
 
-    if (collections.length === 0) {
-      return <NoMatch category={this.props.match.params.collection} />;
-    }
-
     return (
-      <div className='collection-search-results'>
+      <div className='collection-search-page'>
         <p className='collection-search-heading'>
-          Search results for "{this.props.match.params.collection}"
+          Search results for "{this.props.match.params.collection}":
         </p>
-        <div className='collection-search-results-container'>
+
+        <div className='collection-search-results'>
           {collections.map(collection => {
             return (
               <Link
