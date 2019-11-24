@@ -12,7 +12,6 @@ export class Landing extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll);
     this.getData();
   }
 
