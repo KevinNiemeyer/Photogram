@@ -17,7 +17,7 @@ class UserPage extends Component {
   }
 
   getData() {
-    console.log(this.props.match.userName);
+    //console.log(this.props.match.params.user);
     unsplash.users
       .photos(
         this.props.match.params.userName,
