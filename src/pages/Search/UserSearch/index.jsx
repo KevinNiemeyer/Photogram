@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import './UserSearchStyles.css';
 import { unsplash } from '../../../unsplash';
@@ -22,13 +21,11 @@ export class UserSearch extends Component {
 
   getData = () => {
     unsplash.search
-      .users(this.props.match.params.user, this.state.page)
+      .users(this.props.match.params.user, 1)
       .then(toJson)
       .then(json => {
         this.setState({
-          users: json.results,
-          page: this.state.page + 1,
-          hasMore: !!json.results.length
+          users: json.results
         });
       });
   };
@@ -41,27 +38,18 @@ export class UserSearch extends Component {
           Search results for "{this.props.match.params.user}"
         </p>
         <div className='user-search-results'>
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={this.getData}
-            loader={
-              <div className='loader' key={0}>
-                Loading ...
-              </div>
-            }>
-            {users.map(user => {
-              return (
-                <Link
-                  className='user-search-link'
-                  id={user.id}
-                  to={`/user/${user.username}`}
-                  style={{ textDecoration: 'none' }}>
-                  <img src={user.profile_image.medium} alt={user.p} />
-                  <p>{user.username}</p>
-                </Link>
-              );
-            })}
-          </InfiniteScroll>
+          {users.map(user => {
+            return (
+              <Link
+                className='user-search-link'
+                id={user.id}
+                to={`/user/${user.username}`}
+                style={{ textDecoration: 'none' }}>
+                <img src={user.profile_image.medium} alt={user.p} />
+                <p>{user.username}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     );
