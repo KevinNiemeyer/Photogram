@@ -21,7 +21,7 @@ class UserPage extends Component {
       .photos(
         this.props.match.params.userName,
         this.state.page,
-        10,
+        5,
         'popular',
         false
       )

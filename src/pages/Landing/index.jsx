@@ -17,7 +17,7 @@ export class Landing extends Component {
 
   getData = () => {
     unsplash.photos
-      .listPhotos(this.state.page, 15, 'latest')
+      .listPhotos(this.state.page, 5, 'latest')
       .then(toJson)
       .then(json => {
         this.setState({
@@ -44,6 +44,7 @@ export class Landing extends Component {
               </div>
             }>
             {this.state.photos.map(photo => {
+              console.log(photo);
               return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>

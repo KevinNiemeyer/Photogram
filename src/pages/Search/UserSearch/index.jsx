@@ -21,7 +21,7 @@ export class UserSearch extends Component {
 
   getData = () => {
     unsplash.search
-      .users(this.props.match.params.user, 1)
+      .users(this.props.match.params.user, 1, 5)
       .then(toJson)
       .then(json => {
         this.setState({

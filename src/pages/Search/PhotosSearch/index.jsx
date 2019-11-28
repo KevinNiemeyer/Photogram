@@ -17,7 +17,7 @@ export class PhotoSearch extends Component {
 
   getData = () => {
     unsplash.search
-      .photos(this.props.match.params.searchTerm, 1, 10, {
+      .photos(this.props.match.params.searchTerm, 1, 5, {
         orientation: 'portrait'
       })
       .then(toJson)

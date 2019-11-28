@@ -19,7 +19,7 @@ export class CollectionSearch extends Component {
 
   getData() {
     unsplash.search
-      .collections(this.props.match.params.collection, 1)
+      .collections(this.props.match.params.collection, 1, 5)
       .then(toJson)
       .then(json => {
         this.setState({ collections: json.results });
