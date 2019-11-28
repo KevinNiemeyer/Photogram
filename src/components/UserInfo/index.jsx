@@ -1,9 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import './UserInfoStyles.css';
+
+const Container = styled.div`
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    align-items: center;
+`;
 
 export default function UserInfoComponent({ user }) {
   return (
-    <div className='user-info-component'>
+    <Container>
       <img
         className='user-info-component_image'
         src={user.profile_image.large}
@@ -21,6 +32,6 @@ export default function UserInfoComponent({ user }) {
         </div>
         <div className='user-info-row users-name'>{user.name}</div>
       </div>
-    </div>
+    </Container>
   );
 }

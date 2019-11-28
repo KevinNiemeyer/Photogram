@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import UserInfoComponent from '../../components/UserInfo';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
-import './UserStyles.css';
+// import './UserStyles.css';
 import Photo from '../../components/Photo';
 import styled from 'styled-components';
 import { unsplash } from '../../unsplash';
 
 const UserContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+
 `;
 
 class UserPage extends Component {
@@ -60,9 +57,12 @@ class UserPage extends Component {
               Loading ...
             </div>
           }>
+
           {photos.map(photo => {
             return <Photo key={photo.id} photo={photo} />;
           })}
+
+
         </InfiniteScroll>
       </UserContainer>
     );

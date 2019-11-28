@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
+import 'react-loading-bar/dist/index.css'
+import Loading from 'react-loading-bar'
 import './LandingStyles.css';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
@@ -8,7 +10,7 @@ import { unsplash } from '../../unsplash';
 export class Landing extends Component {
   state = {
     photos: [],
-    page: 1
+    page: 1, loading: false
   };
 
   componentDidMount() {
@@ -16,6 +18,7 @@ export class Landing extends Component {
   }
 
   getData = () => {
+    this.setState({ loading: true })
     unsplash.photos
       .listPhotos(this.state.page, 5, 'latest')
       .then(toJson)
@@ -23,7 +26,8 @@ export class Landing extends Component {
         this.setState({
           photos: [...this.state.photos, ...json],
           page: this.state.page + 1,
-          hasMore: !!json.length
+          hasMore: !!json.length,
+          loading: false
         });
       });
   };
@@ -32,6 +36,8 @@ export class Landing extends Component {
     if (!this.state.photos.length) return null;
     return (
       <div className='landing-page'>
+        <Loading show
+          color="red" />
         <div className='landing-heading'>Latest Photos:</div>
         <div className='landing-results'>
           <InfiniteScroll
