@@ -61,9 +61,3 @@ export class Collection extends Component {
 }
 
 export default Collection;
-
-/* <div className='landing-page-component'>
-{this.state.photos.map(photo => {
-  return <LandingPhoto key={photo.id} photo={photo} />;
-})}
-</div> */
