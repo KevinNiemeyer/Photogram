@@ -3,8 +3,13 @@ import UserInfoComponent from '../../components/UserInfo';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import './UserStyles.css';
+import styled from 'styled-components';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
+
+const Container = styled.div`
+  margin: 0 auto;
+`;
 
 class UserPage extends Component {
   state = {
@@ -41,7 +46,7 @@ class UserPage extends Component {
     const { user } = photos[0];
 
     return (
-      <div className='user-page-component'>
+      <Container>
         <UserInfoComponent user={user} />
         <InfiniteScroll
           pageStart={1}
@@ -56,7 +61,7 @@ class UserPage extends Component {
             return <Photo key={photo.id} photo={photo} />;
           })}
         </InfiniteScroll>
-      </div>
+      </Container>
     );
   }
 }

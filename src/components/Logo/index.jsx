@@ -1,21 +1,52 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './LogoStyles.css';
-
+import styled from 'styled-components';
 import logo from '../../assets/logo.png';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 30px;
+  padding-right: 15px;
+`;
+
+const Img = styled.img`
+  width: 30px;
+  padding-right: 15px;
+`;
+
+const H2 = styled.h2`
+  position: relative;
+  font-family: 'Dancing Script', cursive;
+  font-size: 30px;
+  padding-left: 17px;
+  color: black;
+  &::before {
+    position: absolute;
+    content: '';
+    background-color: black;
+    width: 1px;
+    height: 1em;
+
+    left: 0;
+  }
+`;
 
 class Logo extends React.Component {
   render() {
     return (
-      <div className='logo-component'>
-        <Link className='landing-link' to='/'>
-          <img className='logo' src={logo} />
+      <Container>
+        <Link style={{ textDecoration: 'none' }} to='/'>
+          <Img src={logo} />
         </Link>
-        <Link className='landing-link' to='/'>
-          <h2 className='logo-script'>Photogram</h2>
+
+        <Link style={{ textDecoration: 'none' }} to='/'>
+          <H2>Photogram</H2>
         </Link>
-      </div>
+      </Container>
     );
   }
 }

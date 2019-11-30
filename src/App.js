@@ -16,10 +16,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <div className='app-container'>
-            <HeaderComponent />
-            <div className='routes-container'>
+        <div className='app-container'>
+          <HeaderComponent />
+          <div className='routes-container'>
+            <Switch>
               <Route path='/' exact component={LandingPage} />
               <Route path='/user/:userName' exact component={UserPage} />
               <Route path='/search/user/:user' exact component={UserSearch} />
@@ -35,9 +35,9 @@ class App extends React.Component {
                 component={PhotosSearch}
               />
               <Route path='*' component={FourOhFour} />
-            </div>
+            </Switch>
           </div>
-        </Switch>
+        </div>
       </Router>
     );
   }

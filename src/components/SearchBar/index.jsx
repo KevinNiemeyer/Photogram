@@ -1,7 +1,41 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
-import './SearchBarStyles.css';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  display: flex;
+`;
+
+const Input = styled.input`
+  border: none;
+  outline: none;
+  min-height: 25px;
+  padding-left: 10px;
+  background-color: rgb(250, 250, 250);
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 0 10px 0 10px;
+
+  background-color: rgb(247, 154, 120);
+  border-radius: 0 3px 3px 0;
+  outline: none;
+  border: none;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active img {
+    transform: scale(0.9);
+  }
+`;
+
+const Img = styled.img`
+  width: 15px;
+  height: 15px;
+`;
 
 export class SearchBar extends Component {
   state = {
@@ -27,11 +61,8 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className='search-bar-component'>
-        <select
-          required
-          onChange={this.handleCategoryChange}
-          id='search-category-select'>
+      <Form onSubmit={this.handleSubmit}>
+        <select required onChange={this.handleCategoryChange}>
           <option value='' selected disabled hidden>
             Category
           </option>
@@ -39,21 +70,16 @@ export class SearchBar extends Component {
           <option value='Collections'>Collections</option>
           <option value='Photos'>Photos</option>
         </select>
-        <input
+        <Input
           required
           onChange={this.handleSearchChange}
           type='text'
-          className='search-bar-input'
           placeholder='Search'
         />
-        <button className='magnifying-glass-div'>
-          <img
-            src={MagnifyingGlassIcon}
-            className='magnifying-glass-icon'
-            alt='magnifying-glass'
-          />
-        </button>
-      </form>
+        <Button>
+          <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
+        </Button>
+      </Form>
     );
   }
 }
