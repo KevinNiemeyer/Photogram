@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UserInfoComponent from '../../components/UserInfo';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
-import './UserStyles.css';
 import styled from 'styled-components';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
@@ -11,6 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
+const Loader = styled.div``;
 class UserPage extends Component {
   state = {
     photos: [],
@@ -52,11 +52,7 @@ class UserPage extends Component {
           pageStart={1}
           loadMore={this.getData}
           hasMore={true || false}
-          loader={
-            <div className='loader' key={0}>
-              Loading ...
-            </div>
-          }>
+          loader={<Loader key={0}>Loading ...</Loader>}>
           {photos.map(photo => {
             return <Photo key={photo.id} photo={photo} />;
           })}

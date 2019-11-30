@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserLink from '../UserLink/index.jsx';
 
 const Container = styled.div`
-  width: 50%;
+  width: 25%;
   margin: 0 auto;
   position: relative;
 `;

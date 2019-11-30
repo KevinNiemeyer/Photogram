@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
-import './LandingStyles.css';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin: 0 auto;
+
+  background-color: rgb(250, 250, 250);
+`;
+
+const Heading = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40px;
+  padding: 20px 0 0 20px;
+`;
+
+const Results = styled.div`
+  position: relative;
+  padding: 20px;
+`;
+
+const Loader = styled.div``;
 
 export class Landing extends Component {
   state = {
@@ -31,25 +51,21 @@ export class Landing extends Component {
   render() {
     if (!this.state.photos.length) return null;
     return (
-      <div className='landing-page'>
-        <div className='landing-heading'>Latest Photos:</div>
-        <div className='landing-results'>
+      <Container>
+        <Heading>Latest Photos:</Heading>
+        <Results>
           <InfiniteScroll
             pageStart={1}
             loadMore={this.getData}
             hasMore={true || false}
-            loader={
-              <div className='loader' key={0}>
-                Loading ...
-              </div>
-            }>
+            loader={<Loader key={0}>Loading ...</Loader>}>
             {this.state.photos.map(photo => {
               console.log(photo);
               return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>
-        </div>
-      </div>
+        </Results>
+      </Container>
     );
   }
 }

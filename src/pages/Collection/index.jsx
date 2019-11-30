@@ -2,8 +2,28 @@ import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
-import './CollectionStyles.css';
 import { unsplash } from '../../unsplash';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin: 0 auto;
+
+  background-color: rgb(250, 250, 250);
+`;
+
+const Heading = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40px;
+  padding: 20px 0 0 20px;
+`;
+
+const Results = styled.div`
+  position: relative;
+  padding: 20px;
+`;
+
+const Loader = styled.div``;
 
 export class Collection extends Component {
   state = {
@@ -35,27 +55,22 @@ export class Collection extends Component {
 
   render() {
     const { photos } = this.state;
-    console.log(photos);
     if (!photos.length) return null;
     return (
-      <div className='collection-page'>
-        <div className='collection-heading'>Collection: </div>
-        <div className='collection-results'>
+      <Container>
+        <Heading>Collection: </Heading>
+        <Results>
           <InfiniteScroll
             pageStart={1}
             loadMore={this.getData}
             hasMore={true || false}
-            loader={
-              <div className='loader' key={0}>
-                Loading ...
-              </div>
-            }>
+            loader={<Loader key={0}>Loading ...</Loader>}>
             {photos.map(photo => {
               return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>
-        </div>
-      </div>
+        </Results>
+      </Container>
     );
   }
 }

@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
-import './PhotosSearchStyles.css';
 import Photo from '../../../components/Photo';
 import { unsplash } from '../../../unsplash';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin: 0 auto;
+
+  background-color: rgb(250, 250, 250);
+`;
+
+const Heading = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40px;
+  padding: 20px 0 0 20px;
+`;
+
+const Results = styled.div`
+  width: 100%;
+  position: relative;
+  padding: 20px;
+`;
+
+const Loader = styled.div``;
 
 export class PhotoSearch extends Component {
   state = {
@@ -33,26 +54,22 @@ export class PhotoSearch extends Component {
   render() {
     if (!this.state.photos.length) return null;
     return (
-      <div className='photo-search-page'>
-        <p className='photo-search-heading'>
+      <Container>
+        <Heading>
           Search results for "{this.props.match.params.searchTerm}"
-        </p>
-        <div className='landing-results'>
+        </Heading>
+        <Results>
           <InfiniteScroll
             pageStart={1}
             loadMore={this.getData}
             hasMore={true || false}
-            loader={
-              <div className='loader' key={0}>
-                Loading ...
-              </div>
-            }>
+            loader={<Loader key={0}>Loading ...</Loader>}>
             {this.state.photos.map(photo => {
               return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>
-        </div>
-      </div>
+        </Results>
+      </Container>
     );
   }
 }

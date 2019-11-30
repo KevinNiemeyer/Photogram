@@ -1,8 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import './CollectionSearchStyles.css';
 import { unsplash } from '../../../unsplash';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin: 0 auto;
+  width: 50%;
+  background-color: rgb(250, 250, 250);
+`;
+
+const Heading = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  font-size: 40px;
+  padding: 20px 0 0 20px;
+`;
+
+const Results = styled.div`
+  position: relative;
+  padding: 20px;
+`;
+
+const LinkName = styled.div`
+  color: purple;
+  width: 50%;
+  margin: 0 auto;
+  text-decoration: none;
+  padding: 20px;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+const LinkTitle = styled.div`
+  background-color: rgb(247, 154, 120);
+  padding: 10px;
+  font-size: 20px;
+`;
+const Img = styled.img`
+  margin-right: 20px;
+  width: 100%;
+`;
 
 export class CollectionSearch extends Component {
   state = {
@@ -30,28 +68,27 @@ export class CollectionSearch extends Component {
     const { collections } = this.state;
 
     return (
-      <div className='collection-search-page'>
-        <p className='collection-search-heading'>
+      <Container>
+        <Heading>
           Search results for "{this.props.match.params.collection}":
-        </p>
+        </Heading>
 
-        <div className='collection-search-results'>
+        <Results>
           {collections.map(collection => {
             return (
-              <Link
-                className='collection-search-link-name'
-                to={`/collection/${collection.id}`}
-                style={{ textDecoration: 'none' }}
-                key={collection.id}>
-                <div className='collection-search-link-title'>
-                  {collection.title}
-                </div>
-                <img src={collection.cover_photo.urls.small} alt='none' />
-              </Link>
+              <LinkName>
+                <Link
+                  to={`/collection/${collection.id}`}
+                  style={{ textDecoration: 'none' }}
+                  key={collection.id}>
+                  <LinkTitle>{collection.title}</LinkTitle>
+                  <Img src={collection.cover_photo.urls.small} alt='none' />
+                </Link>
+              </LinkName>
             );
           })}
-        </div>
-      </div>
+        </Results>
+      </Container>
     );
   }
 }
