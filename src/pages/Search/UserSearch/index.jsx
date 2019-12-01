@@ -77,6 +77,7 @@ export class UserSearch extends Component {
             return (
               <LinkName>
                 <Link
+                  category='user'
                   id={user.id}
                   to={`/user/${user.username}`}
                   style={{ textDecoration: 'none' }}>

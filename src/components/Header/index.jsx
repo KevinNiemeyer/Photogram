@@ -14,7 +14,7 @@ const Container = styled.div`
   flex: 1;
   border-bottom: solid 1px lightgrey;
   background-color: white;
-  z-index: 1;
+  z-index: 2;
 `;
 
 class Header extends React.Component {

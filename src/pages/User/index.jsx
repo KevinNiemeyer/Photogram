@@ -54,7 +54,7 @@ class UserPage extends Component {
           hasMore={true || false}
           loader={<Loader key={0}>Loading ...</Loader>}>
           {photos.map(photo => {
-            return <Photo key={photo.id} photo={photo} />;
+            return <Photo category='user' key={photo.id} photo={photo} />;
           })}
         </InfiniteScroll>
       </Container>

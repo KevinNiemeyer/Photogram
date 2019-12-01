@@ -60,7 +60,6 @@ export class Landing extends Component {
             hasMore={true || false}
             loader={<Loader key={0}>Loading ...</Loader>}>
             {this.state.photos.map(photo => {
-              console.log(photo);
               return <Photo key={photo.id} photo={photo} />;
             })}
           </InfiniteScroll>

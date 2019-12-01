@@ -36,6 +36,12 @@ const Img = styled.img`
 `;
 
 class UserLink extends Component {
+  componentDidMount() {
+    this.setState({
+      category: this.props.category
+    });
+  }
+
   render() {
     return (
       <Container>
