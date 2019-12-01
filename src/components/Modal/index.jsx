@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  position: absolute;
-  left: 0;
+  position: fixed;
+  border: solid black 1px;
+  display: flex;
+  left: 35%;
   top: 0;
-  width: 100%;
+  max-width: 80vw;
   z-index: 1;
+  margin-top: 100px;
 `;
 const Img = styled.img``;
 
@@ -28,14 +31,12 @@ export class Modal extends Component {
     if (!this.props.show) {
       return null;
     }
-    console.log(this.props);
     return (
       <Container>
         <Img src={this.props.photo} alt='nada' />
 
         <Close
           onClick={e => {
-            console.log('test');
             this.onClose(e);
           }}>
           &times;

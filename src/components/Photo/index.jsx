@@ -23,7 +23,7 @@ class Photo extends Component {
     show: false
   };
 
-  showModal = () => {
+  toggleModal = () => {
     this.setState({ ...this.state, show: !this.state.show });
   };
 
@@ -32,12 +32,12 @@ class Photo extends Component {
       <Container>
         <UserLink category='this.props.category' photo={this.props.photo} />
         <Img
-          onClick={this.showModal}
+          onClick={this.toggleModal}
           src={this.props.photo.urls.small}
           alt={this.props.photo.alt_description}
         />
         <Modal
-          onClose={this.showModal}
+          onClose={this.toggleModal}
           show={this.state.show}
           photo={this.props.photo.urls.small}></Modal>
       </Container>
