@@ -10,7 +10,6 @@ const Container = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
   cursor: pointer;
   transition: 0.3s;
   &:hover {
@@ -25,6 +24,7 @@ class Photo extends Component {
 
   toggleModal = () => {
     this.setState({ ...this.state, show: !this.state.show });
+    console.log(this.props.photo);
   };
 
   render() {

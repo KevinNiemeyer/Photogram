@@ -5,13 +5,27 @@ const Container = styled.div`
   position: fixed;
   border: solid black 1px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   left: 35%;
   top: 0;
-  max-width: 80vw;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-  margin-top: 100px;
+  margin-top: 37px;
+  background-color: black;
 `;
-const Img = styled.img``;
+
+const Container2 = styled.div`
+  position: relative;
+`;
+
+const Img = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+`;
 
 const Close = styled.span`
   position: absolute;
@@ -22,25 +36,32 @@ const Close = styled.span`
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
+
 export class Modal extends Component {
   onClose = e => {
     this.props.onClose && this.props.onClose(e);
   };
+
   render() {
     if (!this.props.show) {
       return null;
     }
     return (
       <Container>
-        <Img src={this.props.photo} alt='nada' />
+        <Container2>
+          <Img src={this.props.photo} alt='nada' />
 
-        <Close
-          onClick={e => {
-            this.onClose(e);
-          }}>
-          &times;
-        </Close>
+          <Close
+            onClick={e => {
+              this.onClose(e);
+            }}>
+            &times;
+          </Close>
+        </Container2>
       </Container>
     );
   }
