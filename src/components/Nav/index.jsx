@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   flex: 1;
+  z-index: 10;
 `;
 
 const Img = styled.img`

@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container1 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: auto;
-  background-color: rgb(247, 154, 120);
-  padding: 10px 0 7px 10px;
+  padding-bottom: 10px;
   color: lightgrey;
-  margin-top: 20px;
-  &t:hover img {
-    cursor: pointer;
-  }
-  &:hover Name {
+  &:hover img {
     opacity: 0.8;
   }
   &:active img {
@@ -23,40 +17,33 @@ const Container = styled.div`
   }
 `;
 
-const Name = styled.div`
-  display: flex;
-  align-items: center;
-  color: purple;
-  text-decoration: none;
-`;
-
 const Img = styled.img`
   border-radius: 50%;
-  margin-right: 10px;
 `;
 
-class UserLink extends Component {
-  componentDidMount() {
-    this.setState({
-      category: this.props.category
-    });
-  }
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'red',
+  display: 'flex',
+  alignItems: 'center'
+};
 
+class UserLink extends Component {
   render() {
     return (
-      <Container>
-        <Name>
-          <Link
-            to={`/user/${this.props.photo.user.username}`}
-            style={{ textDecoration: 'none' }}>
-            <Img
-              alt={this.props.photo.description}
-              src={this.props.photo.user.profile_image.small}
-            />
-            {this.props.photo.user.name}
-          </Link>
-        </Name>
-      </Container>
+      <Container1 id='userlink-container'>
+        <Link
+          style={linkStyle}
+          id='userlink-link'
+          to={`/user/${this.props.photo.user.username}`}>
+          <Img
+            id='userlink-image'
+            alt={this.props.photo.description}
+            src={this.props.photo.user.profile_image.small}
+          />
+          {this.props.photo.user.name}
+        </Link>
+      </Container1>
     );
   }
 }

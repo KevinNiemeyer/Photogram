@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import UserLink from '../UserLink/';
 import Modal from '../Modal';
 
-const Container = styled.div`
-  width: 25%;
-  margin: 0 auto;
-  position: relative;
-`;
+const Container = styled.div``;
 
 const Img = styled.img`
+  width: 150px;
+  height: 150px;
   cursor: pointer;
   transition: 0.3s;
   &:hover {
@@ -29,14 +26,15 @@ class Photo extends Component {
 
   render() {
     return (
-      <Container>
-        <UserLink category='this.props.category' photo={this.props.photo} />
+      <Container id='photo-container'>
         <Img
+          id='photo-img'
           onClick={this.toggleModal}
           src={this.props.photo.urls.small}
           alt={this.props.photo.alt_description}
         />
         <Modal
+          id='modal'
           onClose={this.toggleModal}
           show={this.state.show}
           photo={this.props.photo.urls.small}></Modal>
