@@ -32,7 +32,10 @@ const Results = styled.div`
 const divStyle = {
   border: 'solid black 1px'
 };
-const PhotoContainer = styled.div``;
+const PhotoContainer = styled.div`
+  width: 150px;
+  height: auto;
+`;
 
 const Loader = styled.div``;
 

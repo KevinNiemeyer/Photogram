@@ -4,13 +4,26 @@ import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
 import Photo from '../../components/Photo';
+import UserLink from '../../components/UserLink';
 import { unsplash } from '../../unsplash';
 
 const Container = styled.div`
   margin: 0 auto;
 `;
 
+const Results = styled.div``;
+
+const divStyle = {
+  border: 'solid black 1px'
+};
+const PhotoContainer = styled.div`
+  width: 150px;
+  height: auto;
+  padding: 20px;
+`;
+
 const Loader = styled.div``;
+
 class UserPage extends Component {
   state = {
     photos: [],
@@ -48,15 +61,21 @@ class UserPage extends Component {
     return (
       <Container>
         <UserInfoComponent user={user} />
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={true || false}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          {photos.map(photo => {
-            return <Photo category='user' key={photo.id} photo={photo} />;
-          })}
-        </InfiniteScroll>
+        <Results id='landing-results' style={divStyle}>
+          <InfiniteScroll
+            pageStart={1}
+            loadMore={this.getData}
+            hasMore={true || false}
+            loader={<Loader key={0}>Loading ...</Loader>}>
+            {photos.map(photo => {
+              return (
+                <PhotoContainer id='photo-container'>
+                  <Photo category='user' key={photo.id} photo={photo} />
+                </PhotoContainer>
+              );
+            })}
+          </InfiniteScroll>
+        </Results>
       </Container>
     );
   }
