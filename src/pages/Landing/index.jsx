@@ -35,6 +35,7 @@ const divStyle = {
 const PhotoContainer = styled.div`
   width: 150px;
   height: auto;
+  padding: 20px;
 `;
 
 const Loader = styled.div``;

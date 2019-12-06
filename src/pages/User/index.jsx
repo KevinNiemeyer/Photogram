@@ -4,18 +4,16 @@ import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
 import Photo from '../../components/Photo';
-import UserLink from '../../components/UserLink';
 import { unsplash } from '../../unsplash';
 
 const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Results = styled.div``;
+const Results = styled.div`
+  border: 'solid black 1px';
+`;
 
-const divStyle = {
-  border: 'solid black 1px'
-};
 const PhotoContainer = styled.div`
   width: 150px;
   height: auto;
@@ -61,7 +59,7 @@ class UserPage extends Component {
     return (
       <Container>
         <UserInfoComponent user={user} />
-        <Results id='landing-results' style={divStyle}>
+        <Results>
           <InfiniteScroll
             pageStart={1}
             loadMore={this.getData}

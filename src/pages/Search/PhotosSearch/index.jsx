@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../../components/Photo';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
+import UserLink from '../../../components/UserLink';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -21,6 +22,12 @@ const Heading = styled.div`
 const Results = styled.div`
   width: 100%;
   position: relative;
+  padding: 20px;
+`;
+
+const PhotoContainer = styled.div`
+  width: 150px;
+  height: auto;
   padding: 20px;
 `;
 
@@ -65,7 +72,12 @@ export class PhotoSearch extends Component {
             hasMore={true || false}
             loader={<Loader key={0}>Loading ...</Loader>}>
             {this.state.photos.map(photo => {
-              return <Photo key={photo.id} photo={photo} />;
+              return (
+                <PhotoContainer>
+                  <UserLink id='userlink' photo={photo} />
+                  <Photo key={photo.id} photo={photo} />
+                </PhotoContainer>
+              );
             })}
           </InfiniteScroll>
         </Results>

@@ -23,8 +23,12 @@ const Results = styled.div`
 `;
 
 const LinkName = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: purple;
-  width: 50%;
+  width: 150px;
+  height: 150px;
   margin: 0 auto;
   text-decoration: none;
   padding: 20px;
@@ -33,13 +37,14 @@ const LinkName = styled.div`
   }
 `;
 const LinkTitle = styled.div`
-  background-color: rgb(247, 154, 120);
   padding: 10px;
   font-size: 20px;
+  text-align: center;
 `;
 const Img = styled.img`
-  margin-right: 20px;
-  width: 100%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 `;
 
 export class UserSearch extends Component {

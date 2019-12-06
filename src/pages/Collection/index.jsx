@@ -4,10 +4,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
 import styled from 'styled-components';
+import UserLink from '../../components/UserLink';
 
 const Container = styled.div`
   margin: 0 auto;
-
   background-color: rgb(250, 250, 250);
 `;
 
@@ -18,10 +18,13 @@ const Heading = styled.div`
   padding: 20px 0 0 20px;
 `;
 
-const Results = styled.div`
-  position: relative;
+const PhotoContainer = styled.div`
+  width: 150px;
+  height: auto;
   padding: 20px;
 `;
+
+const Results = styled.div``;
 
 const Loader = styled.div``;
 
@@ -66,7 +69,13 @@ export class Collection extends Component {
             hasMore={true || false}
             loader={<Loader key={0}>Loading ...</Loader>}>
             {photos.map(photo => {
-              return <Photo key={photo.id} photo={photo} />;
+              console.log(photo.user.username);
+              return (
+                <PhotoContainer>
+                  <UserLink id='userlink' photo={photo} />
+                  <Photo key={photo.id} photo={photo} />
+                </PhotoContainer>
+              );
             })}
           </InfiniteScroll>
         </Results>

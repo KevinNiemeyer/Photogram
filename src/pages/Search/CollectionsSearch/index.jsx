@@ -33,7 +33,6 @@ const LinkName = styled.div`
   }
 `;
 const LinkTitle = styled.div`
-  background-color: rgb(247, 154, 120);
   padding: 10px;
   font-size: 20px;
 `;
