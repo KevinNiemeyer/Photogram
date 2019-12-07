@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 50%;
+  text-align: center;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -18,28 +18,34 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
   position: relative;
   padding: 20px;
+  width: 100%;
 `;
 
-const LinkName = styled.div`
-  color: purple;
-  width: 50%;
-  margin: 0 auto;
-  text-decoration: none;
+const LinkContainer = styled.div`
+  width: 150px;
+  height: auto;
   padding: 20px;
   &:hover {
     opacity: 0.8;
   }
 `;
 const LinkTitle = styled.div`
-  padding: 10px;
+  padding: 10px 0px;
   font-size: 20px;
 `;
 const Img = styled.img`
   margin-right: 20px;
   width: 100%;
 `;
+const linkStyle = {
+  textDecoration: 'none'
+};
 
 export class CollectionSearch extends Component {
   state = {
@@ -75,15 +81,15 @@ export class CollectionSearch extends Component {
         <Results>
           {collections.map(collection => {
             return (
-              <LinkName>
+              <LinkContainer>
                 <Link
                   to={`/collection/${collection.id}`}
-                  style={{ textDecoration: 'none' }}
+                  style={linkStyle}
                   key={collection.id}>
                   <LinkTitle>{collection.title}</LinkTitle>
                   <Img src={collection.cover_photo.urls.small} alt='none' />
                 </Link>
-              </LinkName>
+              </LinkContainer>
             );
           })}
         </Results>

@@ -21,8 +21,8 @@ const Heading = styled.div`
 
 const Results = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   position: relative;
   padding: 20px;

@@ -22,7 +22,7 @@ const Results = styled.div`
   padding: 20px;
 `;
 
-const LinkName = styled.div`
+const LinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +80,7 @@ export class UserSearch extends Component {
         <Results>
           {users.map(user => {
             return (
-              <LinkName>
+              <LinkContainer>
                 <Link
                   category='user'
                   id={user.id}
@@ -89,7 +89,7 @@ export class UserSearch extends Component {
                   <LinkTitle>{user.username}</LinkTitle>
                   <Img src={user.profile_image.medium} alt={user.p} />
                 </Link>
-              </LinkName>
+              </LinkContainer>
             );
           })}
         </Results>

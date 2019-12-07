@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container1 = styled.div`
+const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;
-  color: lightgrey;
   &:hover img {
     opacity: 0.8;
   }
@@ -25,13 +24,18 @@ const linkStyle = {
   textDecoration: 'none',
   color: 'red',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  paddingLeft: '5px'
+};
+
+const pStyle = {
+  paddingLeft: '10px'
 };
 
 class UserLink extends Component {
   render() {
     return (
-      <Container1 id='userlink-container'>
+      <LinkContainer id='userlink-container'>
         <Link
           style={linkStyle}
           id='userlink-link'
@@ -41,9 +45,9 @@ class UserLink extends Component {
             alt={this.props.photo.description}
             src={this.props.photo.user.profile_image.small}
           />
-          {this.props.photo.user.name}
+          <p style={pStyle}>{this.props.photo.user.name}</p>
         </Link>
-      </Container1>
+      </LinkContainer>
     );
   }
 }
