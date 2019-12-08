@@ -56,10 +56,6 @@ export class CollectionSearch extends Component {
     this.getData();
   }
 
-  componentDidUpdate() {
-    this.getData();
-  }
-
   getData() {
     unsplash.search
       .collections(this.props.match.params.collection, 1, 5)

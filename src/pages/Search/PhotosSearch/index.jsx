@@ -20,9 +20,15 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
   position: relative;
   padding: 20px;
+  padding-right: 20px;
+  width: 100%;
 `;
 
 const PhotoContainer = styled.div`
@@ -65,12 +71,12 @@ export class PhotoSearch extends Component {
         <Heading>
           Search results for "{this.props.match.params.searchTerm}"
         </Heading>
-        <Results>
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={this.getData}
-            hasMore={true || false}
-            loader={<Loader key={0}>Loading ...</Loader>}>
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={true || false}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results id='landing-results'>
             {this.state.photos.map(photo => {
               return (
                 <PhotoContainer>
@@ -79,8 +85,8 @@ export class PhotoSearch extends Component {
                 </PhotoContainer>
               );
             })}
-          </InfiniteScroll>
-        </Results>
+          </Results>
+        </InfiniteScroll>
       </Container>
     );
   }

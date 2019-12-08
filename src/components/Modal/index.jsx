@@ -32,7 +32,9 @@ const Close = styled.span`
   right: 0;
   top: 0;
   padding: 20px;
-  color: white;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;

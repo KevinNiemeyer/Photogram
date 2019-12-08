@@ -21,17 +21,15 @@ const Heading = styled.div`
 
 const Results = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   position: relative;
   padding: 20px;
   width: 100%;
 `;
 
-const divStyle = {
-  border: 'solid black 1px'
-};
 const PhotoContainer = styled.div`
   width: 150px;
   height: auto;
@@ -68,13 +66,14 @@ export class Landing extends Component {
     return (
       <Container id='landing-container'>
         <Heading id='landing-heading'>Latest Photos:</Heading>
-        <Results id='landing-results' style={divStyle}>
-          <InfiniteScroll
-            id='infinite-scroll'
-            pageStart={1}
-            loadMore={this.getData}
-            hasMore={true || false}
-            loader={<Loader key={0}>Loading ...</Loader>}>
+
+        <InfiniteScroll
+          id='infinite-scroll'
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={true || false}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results id='landing-results'>
             {this.state.photos.map(photo => {
               return (
                 <PhotoContainer id='photo-container'>
@@ -83,8 +82,8 @@ export class Landing extends Component {
                 </PhotoContainer>
               );
             })}
-          </InfiniteScroll>
-        </Results>
+          </Results>
+        </InfiniteScroll>
       </Container>
     );
   }
