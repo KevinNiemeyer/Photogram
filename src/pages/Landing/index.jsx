@@ -22,15 +22,7 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
-<<<<<<< HEAD
  
-=======
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
->>>>>>> 7683d2537702cafc0ecdb8d0a2719bbe22eb4155
   position: relative;
   padding: 20px;
   width: 100%;
@@ -69,7 +61,6 @@ const Landing = () => {
       });
   };
 
-<<<<<<< HEAD
   useEffect(() => {
     getData()
   },[])
@@ -105,34 +96,6 @@ const Landing = () => {
       )}}
    </LayoutContext.Consumer>
   );
-=======
-  render() {
-    if (!this.state.photos.length) return null;
-    return (
-      <Container id='landing-container'>
-        <Heading id='landing-heading'>Latest Photos:</Heading>
-
-        <InfiniteScroll
-          id='infinite-scroll'
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={true || false}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results id='landing-results'>
-            {this.state.photos.map(photo => {
-              return (
-                <PhotoContainer id='photo-container'>
-                  <UserLink id='userlink' photo={photo} />
-                  <Photo id='photo' key={photo.id} photo={photo} />
-                </PhotoContainer>
-              );
-            })}
-          </Results>
-        </InfiniteScroll>
-      </Container>
-    );
-  }
->>>>>>> 7683d2537702cafc0ecdb8d0a2719bbe22eb4155
 }
 
 export default Landing;
