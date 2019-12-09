@@ -57,10 +57,6 @@ export class UserSearch extends Component {
     this.getData();
   }
 
-  componentDidUpdate() {
-    this.getData();
-  }
-
   getData = () => {
     unsplash.search
       .users(this.props.match.params.user, 1, 5)

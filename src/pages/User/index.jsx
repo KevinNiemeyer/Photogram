@@ -11,7 +11,14 @@ const Container = styled.div`
 `;
 
 const Results = styled.div`
-  border: 'solid black 1px';
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 20px;
+  width: 100%;
 `;
 
 const PhotoContainer = styled.div`
@@ -59,12 +66,13 @@ class UserPage extends Component {
     return (
       <Container>
         <UserInfoComponent user={user} />
-        <Results>
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={this.getData}
-            hasMore={true || false}
-            loader={<Loader key={0}>Loading ...</Loader>}>
+
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={true || false}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results id='landing-results'>
             {photos.map(photo => {
               return (
                 <PhotoContainer id='photo-container'>
@@ -72,8 +80,8 @@ class UserPage extends Component {
                 </PhotoContainer>
               );
             })}
-          </InfiniteScroll>
-        </Results>
+          </Results>
+        </InfiniteScroll>
       </Container>
     );
   }

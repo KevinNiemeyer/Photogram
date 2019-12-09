@@ -11,6 +11,18 @@ const Container = styled.div`
   background-color: rgb(250, 250, 250);
 `;
 
+const Results = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 20px;
+  padding-right: 20px;
+  width: 100%;
+`;
+
 const Heading = styled.div`
   margin: 0 auto;
   text-align: center;
@@ -23,8 +35,6 @@ const PhotoContainer = styled.div`
   height: auto;
   padding: 20px;
 `;
-
-const Results = styled.div``;
 
 const Loader = styled.div``;
 
@@ -62,12 +72,13 @@ export class Collection extends Component {
     return (
       <Container>
         <Heading>Collection: </Heading>
-        <Results>
-          <InfiniteScroll
-            pageStart={1}
-            loadMore={this.getData}
-            hasMore={true || false}
-            loader={<Loader key={0}>Loading ...</Loader>}>
+
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={true || false}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results id='component-results'>
             {photos.map(photo => {
               console.log(photo.user.username);
               return (
@@ -77,8 +88,8 @@ export class Collection extends Component {
                 </PhotoContainer>
               );
             })}
-          </InfiniteScroll>
-        </Results>
+          </Results>
+        </InfiniteScroll>
       </Container>
     );
   }
