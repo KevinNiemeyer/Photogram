@@ -25,7 +25,7 @@ const Results = styled.div`
   padding: 20px;
   width: 100%;
   ${props =>
-    props.isRow &&
+    props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
@@ -44,7 +44,7 @@ const PhotoContainer = styled.div`
           height: 80vh;
         `}
   ${props =>
-    props.isRow &&
+    props.isGrid &&
     css`
       width: 250px;
       height: 250px;
@@ -87,13 +87,13 @@ const Landing = () => {
               loadMore={getData}
               hasMore
               loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results isRow={value.isRow} id='landing-results'>
+              <Results isGrid={value.isGrid} id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
                     <PhotoContainer
                       key={photo.id}
-                      isRow={value.isRow}
+                      isGrid={value.isGrid}
                       landscape={width > height}
                       id='photo-container'>
                       <UserLink
@@ -103,7 +103,7 @@ const Landing = () => {
                       />
                       <Photo
                         landscape={width > height}
-                        isRow={value.isRow}
+                        isGrid={value.isGrid}
                         id='photo'
                         key={photo.id}
                         photo={photo}

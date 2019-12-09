@@ -16,14 +16,21 @@ export const LayoutContext = React.createContext();
 
 class App extends React.Component {
   state = {
-    isRow: true
-  }
+    isGrid: true,
+    isList: false,
+    isColumn: false
+  };
 
-  toggleRow = () => this.setState({ isRow: !this.state.isRow })
+  toggleRow = () =>
+    this.setState({
+      isGrid: !this.state.isGrid,
+      isColumn: !this.state.isColumn
+    });
 
   render() {
     return (
-      <LayoutContext.Provider value={{ isRow: this.state.isRow, toggleRow: this.toggleRow }}>
+      <LayoutContext.Provider
+        value={{ isGrid: this.state.isGrid, toggleRow: this.toggleRow }}>
         <Router>
           <div className='app-container'>
             <HeaderComponent />
@@ -54,4 +61,3 @@ class App extends React.Component {
 }
 
 export default App;
-

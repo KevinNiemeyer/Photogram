@@ -43,7 +43,7 @@ class Photo extends Component {
   render() {
     return (
       <Container id='photo-container'>
-        {this.props.isRow ? (
+        {this.props.isGrid ? (
           <Thumbnail
             src={this.props.photo.urls.small}
             onClick={this.toggleModal}
