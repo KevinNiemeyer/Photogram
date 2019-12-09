@@ -1,12 +1,11 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import UserLink from '../../components/UserLink';
-import {LayoutContext} from '../../App';
-
+import { LayoutContext } from '../../App';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -22,26 +21,34 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
- 
   position: relative;
   padding: 20px;
   width: 100%;
-  ${props => props.isRow && css`
-    display: flex;
-    flex-wrap: wrap;
-  `}
+  ${props =>
+    props.isRow &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+    `}
 `;
 
 const PhotoContainer = styled.div`
-  ${props => props.landscape ? css`
-    width: 80vw;
-  ` : css`
-    height: 80vh;
-  `}
-  ${props => props.isRow && css`
-    width: 250px;
-    height: 250px;
-  `}
+  margin-bottom: 50px;
+  padding: 10px;
+  ${props =>
+    props.landscape
+      ? css`
+          width: 80vw;
+        `
+      : css`
+          height: 80vh;
+        `}
+  ${props =>
+    props.isRow &&
+    css`
+      width: 250px;
+      height: 250px;
+    `}
 `;
 
 const Loader = styled.div``;
@@ -50,52 +57,67 @@ const Landing = () => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
 
-
   const getData = () => {
     unsplash.photos
       .listPhotos(page, 25, 'latest')
       .then(toJson)
       .then(json => {
         setPhotos([...photos, ...json]);
-        setPage(page + 1)
+        setPage(page + 1);
       });
   };
 
   useEffect(() => {
-    getData()
-  },[])
+    getData();
+  }, []);
 
   return (
     <LayoutContext.Consumer>
-      {(value) => {
-        console.log('argument', value)
+      {value => {
+        console.log('argument', value);
         return (
-        <Container id='landing-container'>
-          <Heading id='landing-heading'>Latest Photos: <button onClick={value.toggleRow} >Toggle Row</button></Heading>
-          <InfiniteScroll
-            id='infinite-scroll'
-            pageStart={1}
-            loadMore={getData}
-            hasMore
-            loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results isRow={value.isRow} id='landing-results' style={divStyle}>
+          <Container id='landing-container'>
+            <Heading id='landing-heading'>
+              Latest Photos:{' '}
+              <button onClick={value.toggleRow}>Toggle Row</button>
+            </Heading>
+            <InfiniteScroll
+              id='infinite-scroll'
+              pageStart={1}
+              loadMore={getData}
+              hasMore
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results isRow={value.isRow} id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
-
-
                   return (
-                    <PhotoContainer isRow={value.isRow} landscape={width > height} id='photo-container'>
-                      <UserLink id='userlink' photo={photo} />
-                      <Photo landscape={width > height} isRow={value.isRow} id='photo' key={photo.id} photo={photo} />
+                    <PhotoContainer
+                      key={photo.id}
+                      isRow={value.isRow}
+                      landscape={width > height}
+                      id='photo-container'>
+                      <UserLink
+                        key={photo.user.id}
+                        id='userlink'
+                        photo={photo}
+                      />
+                      <Photo
+                        landscape={width > height}
+                        isRow={value.isRow}
+                        id='photo'
+                        key={photo.id}
+                        photo={photo}
+                      />
                     </PhotoContainer>
                   );
                 })}
               </Results>
-          </InfiniteScroll>
-        </Container>
-      )}}
-   </LayoutContext.Consumer>
+            </InfiniteScroll>
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
   );
-}
+};
 
 export default Landing;

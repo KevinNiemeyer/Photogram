@@ -19,7 +19,6 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   padding: 0 10px 0 10px;
-
   background-color: rgb(247, 154, 120);
   border-radius: 0 3px 3px 0;
   outline: none;
@@ -63,7 +62,7 @@ export class SearchBar extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <select required onChange={this.handleCategoryChange}>
-          <option value='' selected disabled hidden>
+          <option value='' default selected disabled hidden>
             Category
           </option>
           <option value='User'>Users</option>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal from '../Modal';
 
 const Container = styled.div`
@@ -13,18 +13,21 @@ const Img = styled.img`
   &:hover {
     opacity: 0.7;
   }
-  ${props => props.landscape ? css`
-    width: 100%;
-  `:css`
-    height: 100%;
-  `}
-`;
 
+  ${props =>
+    props.landscape
+      ? css`
+          width: 100%;
+        `
+      : css`
+          height: 100%;
+        `}
+`;
 
 const Thumbnail = styled.div`
   width: 100%;
   height: 100%;
-  background: url(${props => props.src}) no-repeat center center; 
+  background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
 `;
 
@@ -40,8 +43,12 @@ class Photo extends Component {
   render() {
     return (
       <Container id='photo-container'>
-        {this.props.isRow ? 
-          <Thumbnail src={this.props.photo.urls.small}  onClick={this.toggleModal} /> : 
+        {this.props.isRow ? (
+          <Thumbnail
+            src={this.props.photo.urls.small}
+            onClick={this.toggleModal}
+          />
+        ) : (
           <Img
             landscape={this.props.landscape}
             id='photo-img'
@@ -49,7 +56,7 @@ class Photo extends Component {
             src={this.props.photo.urls.regular}
             alt={this.props.photo.alt_description}
           />
-        }
+        )}
         <Modal
           id='modal'
           onClose={this.toggleModal}
