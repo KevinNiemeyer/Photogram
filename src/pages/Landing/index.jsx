@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import UserLink from '../../components/UserLink';
+import {LayoutContext} from '../../App';
+
 
 const Container = styled.div`
   margin: 0 auto;
@@ -20,73 +22,83 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+ 
   position: relative;
   padding: 20px;
   width: 100%;
+  ${props => props.isRow && css`
+    display: flex;
+    flex-wrap: wrap;
+  `}
 `;
 
 const divStyle = {
   border: 'solid black 1px'
 };
 const PhotoContainer = styled.div`
-  width: 150px;
-  height: auto;
-  padding: 20px;
+  ${props => props.landscape ? css`
+    width: 80vw;
+  ` : css`
+    height: 80vh;
+  `}
+  ${props => props.isRow && css`
+    width: 250px;
+    height: 250px;
+  `}
 `;
 
 const Loader = styled.div``;
 
-export class Landing extends Component {
-  state = {
-    photos: [],
-    page: 1
-  };
+const Landing = () => {
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
 
-  componentDidMount() {
-    this.getData();
-  }
 
-  getData = () => {
+  const getData = () => {
     unsplash.photos
-      .listPhotos(this.state.page, 5, 'latest')
+      .listPhotos(page, 25, 'latest')
       .then(toJson)
       .then(json => {
-        this.setState({
-          photos: [...this.state.photos, ...json],
-          page: this.state.page + 1,
-          hasMore: !!json.length
-        });
+        setPhotos([...photos, ...json]);
+        setPage(page + 1)
       });
   };
 
-  render() {
-    if (!this.state.photos.length) return null;
-    return (
-      <Container id='landing-container'>
-        <Heading id='landing-heading'>Latest Photos:</Heading>
-        <Results id='landing-results' style={divStyle}>
+  useEffect(() => {
+    getData()
+  },[])
+
+  return (
+    <LayoutContext.Consumer>
+      {(value) => {
+        console.log('argument', value)
+        return (
+        <Container id='landing-container'>
+          <Heading id='landing-heading'>Latest Photos: <button onClick={value.toggleRow} >Toggle Row</button></Heading>
           <InfiniteScroll
             id='infinite-scroll'
             pageStart={1}
-            loadMore={this.getData}
-            hasMore={true || false}
+            loadMore={getData}
+            hasMore
             loader={<Loader key={0}>Loading ...</Loader>}>
-            {this.state.photos.map(photo => {
-              return (
-                <PhotoContainer id='photo-container'>
-                  <UserLink id='userlink' photo={photo} />
-                  <Photo id='photo' key={photo.id} photo={photo} />
-                </PhotoContainer>
-              );
-            })}
+              <Results isRow={value.isRow} id='landing-results' style={divStyle}>
+                {photos.map(photo => {
+                  const { height, width } = photo;
+
+
+                  return (
+                    <PhotoContainer isRow={value.isRow} landscape={width > height} id='photo-container'>
+                      <UserLink id='userlink' photo={photo} />
+                      <Photo landscape={width > height} isRow={value.isRow} id='photo' key={photo.id} photo={photo} />
+                    </PhotoContainer>
+                  );
+                })}
+              </Results>
           </InfiniteScroll>
-        </Results>
-      </Container>
-    );
-  }
+        </Container>
+      )}}
+   </LayoutContext.Consumer>
+  );
 }
+
 export default Landing;

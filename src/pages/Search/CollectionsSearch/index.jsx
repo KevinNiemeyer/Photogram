@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
+import InfiniteScroll from 'react-infinite-scroller';
+
+const Loader = styled.div``;
 
 const Container = styled.div`
   margin: 0 auto;
@@ -49,23 +52,39 @@ const linkStyle = {
 
 export class CollectionSearch extends Component {
   state = {
-    collections: []
+    collections: [],
+    page: 1,
+    hasMore: true
   };
 
   componentDidMount() {
     this.getData();
   }
 
-  componentDidUpdate() {
-    this.getData();
-  }
+  // componentDidUpdate() {
+  //   this.getData();
+  // }
 
-  getData() {
+  getData = () => {
+    console.log('getData',this.state)
     unsplash.search
-      .collections(this.props.match.params.collection, 1, 5)
+      .collections(this.props.match.params.collection, this.state.page, 5)
       .then(toJson)
       .then(json => {
-        this.setState({ collections: json.results });
+        if(!json.results.length){
+          return this.setState({hasMore: false})
+        }
+
+        this.setState((state) => {
+          const newState = { collections: [...state.collections, ...json.results], page: state.page + 1 };
+          if(!state.totalPages){
+            newState.totalPages = json.total_pages
+          }
+          if(newState.page === state.totalPages){
+            newState.hasMore = false;
+          }
+          return newState;
+        });
       });
   }
 
@@ -78,21 +97,27 @@ export class CollectionSearch extends Component {
           Search results for "{this.props.match.params.collection}":
         </Heading>
 
-        <Results>
-          {collections.map(collection => {
-            return (
-              <LinkContainer>
-                <Link
-                  to={`/collection/${collection.id}`}
-                  style={linkStyle}
-                  key={collection.id}>
-                  <LinkTitle>{collection.title}</LinkTitle>
-                  <Img src={collection.cover_photo.urls.small} alt='none' />
-                </Link>
-              </LinkContainer>
-            );
-          })}
-        </Results>
+        <InfiniteScroll
+            pageStart={1}
+            loadMore={this.getData}
+            hasMore={this.state.hasMore}
+            loader={<Loader key={0}>Loading ...</Loader>}>
+            <Results>
+              {collections.map(collection => {
+                return (
+                  <LinkContainer>
+                    <Link
+                      to={`/collection/${collection.id}`}
+                      style={linkStyle}
+                      key={collection.id}>
+                      <LinkTitle>{collection.title}</LinkTitle>
+                      <Img src={collection.cover_photo.urls.small} alt='none' />
+                    </Link>
+                  </LinkContainer>
+                );
+              })}
+            </Results>
+        </InfiniteScroll>
       </Container>
     );
   }

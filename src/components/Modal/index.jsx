@@ -12,19 +12,19 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  margin-top: 37px;
-  background-color: black;
+  z-index: 3;
+  background-color: rgba(0,0,0,.45);
 `;
 
 const Container2 = styled.div`
-  position: relative;
+  display: flex;
+  justify-content: center;
+  aling-items: center;
 `;
 
 const Img = styled.img`
   display: block;
-  width: 100%;
-  height: auto;
+  width: 70%;
 `;
 
 const Close = styled.span`

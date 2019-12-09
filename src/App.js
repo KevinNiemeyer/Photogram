@@ -12,37 +12,46 @@ import './reset.css';
 
 const FourOhFour = () => <div>Not Found</div>;
 
+export const LayoutContext = React.createContext();
+
 class App extends React.Component {
+  state = {
+    isRow: true
+  }
+
+  toggleRow = () => this.setState({ isRow: !this.state.isRow })
+
   render() {
     return (
-      <Router>
-        <div className='app-container'>
-          <HeaderComponent />
-          <div className='routes-container'>
-            <Switch>
-              <Route path='/' exact component={LandingPage} />
-              <Route path='/user/:userName' exact component={UserPage} />
-              <Route path='/search/user/:user' exact component={UserSearch} />
-              <Route
-                path='/search/collections/:collection'
-                exact
-                component={CollectionsSearch}
-              />
-              <Route path='/collection/:id' exact component={Collection} />
-              <Route
-                path='/search/photos/:searchTerm'
-                exact
-                component={PhotosSearch}
-              />
-              <Route path='*' component={FourOhFour} />
-            </Switch>
+      <LayoutContext.Provider value={{ isRow: this.state.isRow, toggleRow: this.toggleRow }}>
+        <Router>
+          <div className='app-container'>
+            <HeaderComponent />
+            <div className='routes-container'>
+              <Switch>
+                <Route path='/' exact component={LandingPage} />
+                <Route path='/user/:userName' exact component={UserPage} />
+                <Route path='/search/user/:user' exact component={UserSearch} />
+                <Route
+                  path='/search/collections/:collection'
+                  exact
+                  component={CollectionsSearch}
+                />
+                <Route path='/collection/:id' exact component={Collection} />
+                <Route
+                  path='/search/photos/:searchTerm'
+                  exact
+                  component={PhotosSearch}
+                />
+                <Route path='*' component={FourOhFour} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </LayoutContext.Provider>
     );
   }
 }
 
 export default App;
 
-//<LandingPage photos={this.state.photos} />
