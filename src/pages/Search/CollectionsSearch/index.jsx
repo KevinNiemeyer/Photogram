@@ -61,16 +61,12 @@ export class CollectionSearch extends Component {
     this.getData();
   }
 
-<<<<<<< HEAD
   // componentDidUpdate() {
   //   this.getData();
   // }
 
   getData = () => {
     console.log('getData',this.state)
-=======
-  getData() {
->>>>>>> 7683d2537702cafc0ecdb8d0a2719bbe22eb4155
     unsplash.search
       .collections(this.props.match.params.collection, this.state.page, 5)
       .then(toJson)
