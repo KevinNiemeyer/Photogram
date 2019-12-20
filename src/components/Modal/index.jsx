@@ -13,13 +13,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   z-index: 3;
-  background-color: rgba(0,0,0,.45);
+  background-color: rgba(0, 0, 0, 0.45);
 `;
 
 const Container2 = styled.div`
   display: flex;
   justify-content: center;
-  aling-items: center;
+  align-items: center;
 `;
 
 const Img = styled.img`

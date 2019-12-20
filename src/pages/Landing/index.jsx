@@ -6,6 +6,7 @@ import { unsplash } from '../../unsplash';
 import styled, { css } from 'styled-components';
 import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
+import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -74,12 +75,14 @@ const Landing = () => {
   return (
     <LayoutContext.Consumer>
       {value => {
-        console.log('argument', value);
+        //console.log('argument', value);
         return (
           <Container id='landing-container'>
             <Heading id='landing-heading'>
-              Latest Photos:{' '}
-              <button onClick={value.toggleRow}>Toggle Row</button>
+              Latest Photos: <SelectView value={value}></SelectView>
+              <button onClick={value.toggleRow}>
+                {value.isGrid ? 'Grid View' : 'Column View'}
+              </button>
             </Heading>
             <InfiniteScroll
               id='infinite-scroll'
