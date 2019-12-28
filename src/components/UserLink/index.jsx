@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const LinkContainer = styled.div`
   display: flex;
@@ -8,6 +8,11 @@ const LinkContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;
+  ${props =>
+    props.isList &&
+    css`
+      margin-left: 20px;
+    `}
   &:hover img {
     opacity: 0.8;
   }
@@ -34,8 +39,9 @@ const pStyle = {
 
 class UserLink extends Component {
   render() {
+    console.log(this.props);
     return (
-      <LinkContainer id='userlink-container'>
+      <LinkContainer isList={this.props.isList} id='userlink-container'>
         <Link
           style={linkStyle}
           id='userlink-link'

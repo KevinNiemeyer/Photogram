@@ -6,44 +6,36 @@ import { LayoutContext } from '../../App';
 
 const ButtonContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
   font-size: 16px;
   align-items: center;
   margin: 20xpx;
   background-color: rgb(250, 250, 250);
-`;
-
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  margin: 5px;
-  width: 75px;
-  height: 25px;
-  font-size: 16px;
-  &:hover {
-    opacity: 0.5;
+  & h3 {
+    width: 100%;
+    text-align: left;
   }
-  &:focus {
-    background-color: rgb(247, 154, 120);
-  }
-  cursor: pointer;
 `;
 
 const RadioGroup = styled.ul`
+  width: 100%;
   list-style-type: none;
-  margin: 25px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0;
+  display: flex;
   & li {
-    float: left;
     margin: 0 5px 0 0;
-    width: 100px;
-    height: 40px;
+    width: 85px;
+    height: 35px;
     position: relative;
   }
   & label,
   & input {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -53,7 +45,7 @@ const RadioGroup = styled.ul`
       opacity: 0.01;
       z-index: 100;
       &:checked + label {
-        background: yellow;
+        background: rgb(247, 154, 120);
       }
     }
     &label {
@@ -77,22 +69,39 @@ export class SelectView extends Component {
     return (
       <LayoutContext.Consumer>
         {value => {
-          console.log(value);
           return (
             <ButtonContainer id='select-view-container'>
               <h3>View:</h3>
-              <RadioGroup class='selectButtons'>
+              <RadioGroup className='selectButtons'>
                 <li>
-                  <input type='radio' id='a25' name='amount' />
-                  <label for='a25'>Grid</label>
+                  <input
+                    type='radio'
+                    id='grid'
+                    onChange={value.toggleView}
+                    name='isGrid'
+                    checked={value.isGrid ? true : false}
+                  />
+                  <label for='grid'>Grid</label>
                 </li>
                 <li>
-                  <input type='radio' id='a50' name='amount' />
-                  <label for='a50'>List</label>
+                  <input
+                    type='radio'
+                    id='list'
+                    onChange={value.toggleView}
+                    name='isList'
+                    checked={value.isList ? true : false}
+                  />
+                  <label for='list'>List</label>
                 </li>
                 <li>
-                  <input type='radio' id='a75' name='amount' />
-                  <label for='a75'>Column</label>
+                  <input
+                    type='radio'
+                    id='column'
+                    onChange={value.toggleView}
+                    name='isColumn'
+                    checked={value.isColumn ? true : false}
+                  />
+                  <label for='column'>Column</label>
                 </li>
               </RadioGroup>
             </ButtonContainer>

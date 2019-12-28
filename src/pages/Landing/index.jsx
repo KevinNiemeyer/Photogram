@@ -31,6 +31,13 @@ const Results = styled.div`
       display: flex;
       flex-wrap: wrap;
     `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
 `;
 
 const PhotoContainer = styled.div`
@@ -50,6 +57,15 @@ const PhotoContainer = styled.div`
       width: 250px;
       height: 250px;
     `}
+    ${props =>
+      props.isList &&
+      css`
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        width: 64px;
+        height: 64px;
+      `}
 `;
 
 const Loader = styled.div``;
@@ -75,14 +91,10 @@ const Landing = () => {
   return (
     <LayoutContext.Consumer>
       {value => {
-        //console.log('argument', value);
         return (
           <Container id='landing-container'>
             <Heading id='landing-heading'>
               Latest Photos: <SelectView value={value}></SelectView>
-              <button onClick={value.toggleRow}>
-                {value.isGrid ? 'Grid View' : 'Column View'}
-              </button>
             </Heading>
             <InfiniteScroll
               id='infinite-scroll'
@@ -90,16 +102,25 @@ const Landing = () => {
               loadMore={getData}
               hasMore
               loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results isGrid={value.isGrid} id='landing-results'>
+              <Results
+                isGrid={value.isGrid}
+                isColumn={value.isColumn}
+                isList={value.isList}
+                id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
                     <PhotoContainer
                       key={photo.id}
                       isGrid={value.isGrid}
+                      isColumn={value.isColumn}
+                      isList={value.isList}
                       landscape={width > height}
                       id='photo-container'>
                       <UserLink
+                        isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
                         key={photo.user.id}
                         id='userlink'
                         photo={photo}
@@ -107,6 +128,8 @@ const Landing = () => {
                       <Photo
                         landscape={width > height}
                         isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
                         id='photo'
                         key={photo.id}
                         photo={photo}

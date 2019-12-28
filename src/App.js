@@ -15,22 +15,38 @@ const FourOhFour = () => <div>Not Found</div>;
 export const LayoutContext = React.createContext();
 
 class App extends React.Component {
+  //state for grid/list/column view
   state = {
     isGrid: true,
     isList: false,
     isColumn: false
   };
 
-  toggleRow = () =>
-    this.setState({
-      isGrid: !this.state.isGrid,
-      isColumn: !this.state.isColumn
+  toggleView = e => {
+    //get current values from state and copy it
+    const currentValues = { ...this.state }; //spread the state object
+    //set all copied state values to false
+    Object.keys(currentValues).forEach(prop => {
+      currentValues[prop] = false;
     });
-
+    console.log(e.target.name);
+    this.setState({
+      //paste copy back into state & update the current target.value
+      ...currentValues, //spread the object
+      [e.target.name]: true
+    });
+  };
   render() {
+    console.log(this.state);
     return (
       <LayoutContext.Provider
-        value={{ isGrid: this.state.isGrid, toggleRow: this.toggleRow }}>
+        value={{
+          isGrid: this.state.isGrid,
+          isList: this.state.isList,
+          isColumn: this.state.isColumn,
+          //toggleRow: this.toggleRow,
+          toggleView: this.toggleView
+        }}>
         <Router>
           <div className='app-container'>
             <HeaderComponent />

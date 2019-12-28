@@ -7,7 +7,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const Img = styled.img`
+const ColumnPhoto = styled.img`
   cursor: pointer;
   transition: 0.3s;
   &:hover {
@@ -24,9 +24,16 @@ const Img = styled.img`
         `}
 `;
 
-const Thumbnail = styled.div`
+const GridPhoto = styled.img`
   width: 100%;
   height: 100%;
+  background: url(${props => props.src}) no-repeat center center;
+  background-size: cover;
+`;
+
+const ListPhoto = styled.img`
+  width: 64px;
+  height: 64px;
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
 `;
@@ -44,16 +51,25 @@ class Photo extends Component {
     return (
       <Container id='photo-container'>
         {this.props.isGrid ? (
-          <Thumbnail
+          <GridPhoto
             src={this.props.photo.urls.small}
             onClick={this.toggleModal}
           />
-        ) : (
-          <Img
+        ) : this.props.isColumn ? (
+          <ColumnPhoto
             landscape={this.props.landscape}
-            id='photo-img'
+            id='column-photo-img'
             onClick={this.toggleModal}
             src={this.props.photo.urls.regular}
+            alt={this.props.photo.alt_description}
+          />
+        ) : (
+          <ListPhoto
+            isList={this.props.isList}
+            landscape={this.props.landscape}
+            id='list-photo-img'
+            onClick={this.toggleModal}
+            src={this.props.photo.urls.thumb}
             alt={this.props.photo.alt_description}
           />
         )}
