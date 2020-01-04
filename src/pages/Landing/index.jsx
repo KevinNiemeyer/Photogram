@@ -84,6 +84,7 @@ const Landing = () => {
       });
   };
 
+  // is this code needed, and if so, why?
   useEffect(() => {
     getData();
   }, []);
@@ -94,7 +95,8 @@ const Landing = () => {
         return (
           <Container id='landing-container'>
             <Heading id='landing-heading'>
-              Latest Photos: <SelectView value={value}></SelectView>
+              Latest Photos:
+              <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll
               id='infinite-scroll'

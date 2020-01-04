@@ -5,6 +5,8 @@ import Photo from '../../../components/Photo';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
 import UserLink from '../../../components/UserLink';
+import { LayoutContext } from '../../App';
+import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -66,6 +68,8 @@ export class PhotoSearch extends Component {
 
   render() {
     if (!this.state.photos.length) return null;
+    <LayoutContext.Consumer>
+    {value => {
     return (
       <Container>
         <Heading>

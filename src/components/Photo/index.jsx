@@ -65,7 +65,6 @@ class Photo extends Component {
           />
         ) : (
           <ListPhoto
-            isList={this.props.isList}
             landscape={this.props.landscape}
             id='list-photo-img'
             onClick={this.toggleModal}
