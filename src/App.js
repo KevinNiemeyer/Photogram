@@ -29,13 +29,21 @@ class App extends React.Component {
     Object.keys(currentValues).forEach(prop => {
       currentValues[prop] = false;
     });
-    console.log(e.target.name);
-    this.setState({
+    const gridSettings = {
       //paste copy back into state & update the current target.value
       ...currentValues, //spread the object
       [e.target.name]: true
-    });
+    };
+    this.setState(gridSettings);
+
+    localStorage.setItem('gridSettings', JSON.stringify(gridSettings));
   };
+
+  componentDidMount() {
+    const gridSettings = localStorage.getItem('gridSettings');
+    if (gridSettings) this.setState(JSON.parse(gridSettings));
+  }
+
   render() {
     console.log(this.state);
     return (

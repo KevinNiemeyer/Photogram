@@ -40,9 +40,14 @@ const Results = styled.div`
     `}
 `;
 
-const PhotoContainer = styled.div`
+const ResultContainer = styled.div`
   margin-bottom: 50px;
   padding: 10px;
+  ${props =>
+    !props.isGrid &&
+    css`
+      display: flex;
+    `}
   ${props =>
     props.landscape
       ? css`
@@ -57,15 +62,22 @@ const PhotoContainer = styled.div`
       width: 250px;
       height: 250px;
     `}
-    ${props =>
-      props.isList &&
-      css`
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        width: 64px;
-        height: 64px;
-      `}
+  ${props =>
+    props.isList &&
+    css`
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      width: 100%;
+      height: 64px;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      padding-bottom: 75px;
+    `}
 `;
 
 const Loader = styled.div``;
@@ -112,13 +124,13 @@ const Landing = () => {
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
-                    <PhotoContainer
+                    <ResultContainer
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
                       landscape={width > height}
-                      id='photo-container'>
+                      id='result-container'>
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
@@ -136,7 +148,7 @@ const Landing = () => {
                         key={photo.id}
                         photo={photo}
                       />
-                    </PhotoContainer>
+                    </ResultContainer>
                   );
                 })}
               </Results>

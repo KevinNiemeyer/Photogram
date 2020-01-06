@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import Modal from '../Modal';
 
 const Container = styled.div`
-  width: 100%;
   height: 100%;
 `;
 
@@ -48,6 +47,7 @@ class Photo extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <Container id='photo-container'>
         {this.props.isGrid ? (

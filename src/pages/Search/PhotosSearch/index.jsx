@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../../components/Photo';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
 import UserLink from '../../../components/UserLink';
+import { LayoutContext } from '../../../App';
+import SelectView from '../../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -39,56 +41,84 @@ const PhotoContainer = styled.div`
 
 const Loader = styled.div``;
 
-export class PhotoSearch extends Component {
-  state = {
-    photos: [],
-    page: 1
-  };
+const PhotoSearch = props => {
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
+  const getData = () => {
     unsplash.search
-      .photos(this.props.match.params.searchTerm, 1, 5, {
+      //getting stuck here. how do I get props from here??
+      .photos(props.match.params.searchTerm, 1, 5, {
         orientation: 'portrait'
       })
       .then(toJson)
       .then(json => {
-        this.setState({
-          photos: [...this.state.photos, ...json.results],
-          page: this.state.page + 1,
-          hasMore: !!json.results.length
-        });
+        console.log(json);
+        setPhotos([...photos, ...json.results]);
+        setPage(page + 1);
       });
   };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  render() {
-    if (!this.state.photos.length) return null;
-    return (
-      <Container>
-        <Heading>
-          Search results for "{this.props.match.params.searchTerm}"
-        </Heading>
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={true || false}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results id='landing-results'>
-            {this.state.photos.map(photo => {
-              return (
-                <PhotoContainer>
-                  <UserLink id='userlink' photo={photo} />
-                  <Photo key={photo.id} photo={photo} />
-                </PhotoContainer>
-              );
-            })}
-          </Results>
-        </InfiniteScroll>
-      </Container>
-    );
-  }
-}
+  return (
+    <LayoutContext.Consumer>
+      {value => {
+        console.log(photos);
+        return (
+          <Container>
+            <Heading>
+              Search results for {props.match.params.searchTerm}
+              <SelectView value={value}></SelectView>
+            </Heading>
+            <InfiniteScroll
+              id='infinite-scroll'
+              pageStart={1}
+              loadMore={getData}
+              hasMore
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results
+                isGrid={value.isGrid}
+                isColumn={value.isColumn}
+                isList={value.isList}
+                id='landing-results'>
+                {photos.map(photo => {
+                  const { height, width } = photo;
+                  return (
+                    <PhotoContainer
+                      key={photo.id}
+                      isGrid={value.isGrid}
+                      isColumn={value.isColumn}
+                      isList={value.isList}
+                      landscape={width > height}
+                      id='photo-container'>
+                      <UserLink
+                        isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
+                        key={photo.user.id}
+                        id='userlink'
+                        photo={photo}
+                      />
+                      <Photo
+                        landscape={width > height}
+                        isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
+                        id='photo'
+                        key={photo.id}
+                        photo={photo}
+                      />
+                    </PhotoContainer>
+                  );
+                })}
+              </Results>
+            </InfiniteScroll>
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
+  );
+};
 export default PhotoSearch;
