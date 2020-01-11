@@ -66,27 +66,30 @@ export class CollectionSearch extends Component {
   // }
 
   getData = () => {
-    console.log('getData',this.state)
+    console.log('getData', this.state);
     unsplash.search
       .collections(this.props.match.params.collection, this.state.page, 5)
       .then(toJson)
       .then(json => {
-        if(!json.results.length){
-          return this.setState({hasMore: false})
+        if (!json.results.length) {
+          return this.setState({ hasMore: false });
         }
 
-        this.setState((state) => {
-          const newState = { collections: [...state.collections, ...json.results], page: state.page + 1 };
-          if(!state.totalPages){
-            newState.totalPages = json.total_pages
+        this.setState(state => {
+          const newState = {
+            collections: [...state.collections, ...json.results],
+            page: state.page + 1
+          };
+          if (!state.totalPages) {
+            newState.totalPages = json.total_pages;
           }
-          if(newState.page === state.totalPages){
+          if (newState.page === state.totalPages) {
             newState.hasMore = false;
           }
           return newState;
         });
       });
-  }
+  };
 
   render() {
     const { collections } = this.state;
@@ -98,25 +101,25 @@ export class CollectionSearch extends Component {
         </Heading>
 
         <InfiniteScroll
-            pageStart={1}
-            loadMore={this.getData}
-            hasMore={this.state.hasMore}
-            loader={<Loader key={0}>Loading ...</Loader>}>
-            <Results>
-              {collections.map(collection => {
-                return (
-                  <LinkContainer>
-                    <Link
-                      to={`/collection/${collection.id}`}
-                      style={linkStyle}
-                      key={collection.id}>
-                      <LinkTitle>{collection.title}</LinkTitle>
-                      <Img src={collection.cover_photo.urls.small} alt='none' />
-                    </Link>
-                  </LinkContainer>
-                );
-              })}
-            </Results>
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={this.state.hasMore}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results>
+            {collections.map(collection => {
+              return (
+                <LinkContainer>
+                  <Link
+                    to={`/collection/${collection.id}`}
+                    style={linkStyle}
+                    key={collection.id}>
+                    <LinkTitle>{collection.title}</LinkTitle>
+                    <Img src={collection.cover_photo.urls.small} alt='none' />
+                  </Link>
+                </LinkContainer>
+              );
+            })}
+          </Results>
         </InfiniteScroll>
       </Container>
     );
