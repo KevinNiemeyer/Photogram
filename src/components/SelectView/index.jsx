@@ -30,6 +30,9 @@ const RadioGroup = styled.ul`
     width: 85px;
     height: 35px;
     position: relative;
+    &:hover {
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
   & label,
   & input {
@@ -46,15 +49,6 @@ const RadioGroup = styled.ul`
       z-index: 100;
       &:checked + label {
         background: rgb(247, 154, 120);
-      }
-    }
-    &label {
-      padding: 5px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      z-index: 90;
-      &:hover {
-        background: #ddd;
       }
     }
   }
