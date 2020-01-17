@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
 import styled from 'styled-components';
 import UserLink from '../../components/UserLink';
+import { LayoutContext } from '../../App';
+import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -38,61 +40,79 @@ const PhotoContainer = styled.div`
 
 const Loader = styled.div``;
 
-export class Collection extends Component {
-  state = {
-    photos: [],
-    page: 1
-  };
+const Collection = props => {
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
+  const getData = () => {
     unsplash.collections
-      .getCollectionPhotos(
-        this.props.match.params.id,
-        this.state.page,
-        10,
-        'popular'
-      )
+      .getCollectionPhotos(props.match.params.id, page, 10, 'popular')
       .then(toJson)
       .then(json => {
-        this.setState({
-          photos: [...this.state.photos, ...json],
-          page: this.state.page + 1,
-          hasMore: !!json.length
-        });
+        setPhotos([...photos, ...json]);
+        setPage(page + 1);
       });
   };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  render() {
-    const { photos } = this.state;
-    if (!photos.length) return null;
-    return (
-      <Container>
-        <Heading>Collection: </Heading>
+  return (
+    <LayoutContext.Consumer>
+      {value => {
+        console.log(value);
+        return (
+          <Container>
+            <Heading>Collection:</Heading>
 
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={true || false}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results id='component-results'>
-            {photos.map(photo => {
-              console.log(photo.user.username);
-              return (
-                <PhotoContainer>
-                  <UserLink id='userlink' photo={photo} />
-                  <Photo key={photo.id} photo={photo} />
-                </PhotoContainer>
-              );
-            })}
-          </Results>
-        </InfiniteScroll>
-      </Container>
-    );
-  }
-}
+            <InfiniteScroll
+              id='infinite-scroll'
+              pageStart={1}
+              loadMore={getData}
+              hasMore
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results
+                isGrid={value.isGrid}
+                isColumn={value.isColumn}
+                isList={value.isList}
+                id='landing-results'>
+                {photos.map(photo => {
+                  const { height, width } = photo;
+                  return (
+                    <PhotoContainer
+                      key={photo.id}
+                      isGrid={value.isGrid}
+                      isColumn={value.isColumn}
+                      isList={value.isList}
+                      landscape={width > height}
+                      id='photo-container'>
+                      <UserLink
+                        isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
+                        key={photo.user.id}
+                        id='userlink'
+                        photo={photo}
+                      />
+                      <Photo
+                        landscape={width > height}
+                        isGrid={value.isGrid}
+                        isColumn={value.isColumn}
+                        isList={value.isList}
+                        id='photo'
+                        key={photo.id}
+                        photo={photo}
+                      />
+                    </PhotoContainer>
+                  );
+                })}
+              </Results>
+            </InfiniteScroll>
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
+  );
+};
 
 export default Collection;

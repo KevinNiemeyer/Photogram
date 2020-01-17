@@ -10,7 +10,6 @@ import SelectView from '../../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
-
   background-color: rgb(250, 250, 250);
 `;
 
@@ -47,7 +46,6 @@ const PhotoSearch = props => {
 
   const getData = () => {
     unsplash.search
-      //getting stuck here. how do I get props from here??
       .photos(props.match.params.searchTerm, 1, 5, {
         orientation: 'portrait'
       })

@@ -54,7 +54,8 @@ export class CollectionSearch extends Component {
   state = {
     collections: [],
     page: 1,
-    hasMore: true
+    hasMore: true,
+    collection: ''
   };
 
   componentDidMount() {
@@ -66,7 +67,6 @@ export class CollectionSearch extends Component {
   // }
 
   getData = () => {
-    console.log('getData', this.state);
     unsplash.search
       .collections(this.props.match.params.collection, this.state.page, 5)
       .then(toJson)
@@ -78,7 +78,8 @@ export class CollectionSearch extends Component {
         this.setState(state => {
           const newState = {
             collections: [...state.collections, ...json.results],
-            page: state.page + 1
+            page: state.page + 1,
+            collection: state.collection
           };
           if (!state.totalPages) {
             newState.totalPages = json.total_pages;
@@ -96,7 +97,7 @@ export class CollectionSearch extends Component {
 
     return (
       <Container>
-        <Heading>
+        <Heading collection={this.state.collection}>
           Search results for "{this.props.match.params.collection}":
         </Heading>
 
