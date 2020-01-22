@@ -67,6 +67,11 @@ class App extends React.Component {
                   exact
                   component={CollectionsSearch}
                 />
+                <Route
+                  path='/search/collections/:collection/:id' //figure out how to use this with collection
+                  exact
+                  component={CollectionsSearch}
+                />
                 <Route path='/collection/:id' exact component={Collection} />
                 <Route
                   path='/search/photos/:searchTerm'

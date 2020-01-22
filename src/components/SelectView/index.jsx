@@ -9,6 +9,7 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  padding: 30px 0px 30px 75px;
   font-size: 16px;
   align-items: center;
   margin: 20xpx;

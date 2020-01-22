@@ -60,7 +60,6 @@ const Collection = props => {
   return (
     <LayoutContext.Consumer>
       {value => {
-        console.log(value);
         return (
           <Container>
             <Heading>Collection:</Heading>
