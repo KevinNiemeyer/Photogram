@@ -40,7 +40,7 @@ const Results = styled.div`
     `}
 `;
 
-const PhotoContainer = styled.div`
+const ResultContainer = styled.div`
   margin-bottom: 50px;
   padding: 10px;
   ${props =>
@@ -96,10 +96,10 @@ const Landing = () => {
       });
   };
 
+  // is this code needed, and if so, why?
   useEffect(() => {
     getData();
-  }, []); // empty array for componentDidMount,
-  // put value in array for componentDidUpdate
+  }, []);
 
   return (
     <LayoutContext.Consumer>
@@ -111,7 +111,7 @@ const Landing = () => {
               <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll
-              id='landing-infinite-scroll'
+              id='infinite-scroll'
               pageStart={1}
               loadMore={getData}
               hasMore
@@ -124,13 +124,13 @@ const Landing = () => {
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
-                    <PhotoContainer
+                    <ResultContainer
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
                       landscape={width > height}
-                      id='landing-page-photo-container'>
+                      id='result-container'>
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
@@ -148,7 +148,7 @@ const Landing = () => {
                         key={photo.id}
                         photo={photo}
                       />
-                    </PhotoContainer>
+                    </ResultContainer>
                   );
                 })}
               </Results>
