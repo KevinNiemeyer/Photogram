@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import styled, { css } from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -77,17 +77,11 @@ const selectStyle = {};
 
 const Loader = styled.div``;
 
-class UserPage extends Component {
-  state = {
-    photos: [],
-    page: 1
-  };
+const Landing = () => {
+  const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
+  const getData = () => {
     unsplash.users
       .photos(
         this.props.match.params.userName,
@@ -105,60 +99,58 @@ class UserPage extends Component {
         });
       });
   };
+  useEffect(() => {
+    getData();
+  }, []); // empty array for componentDidMount,
+  // put value in array for componentDidUpdate
 
-  render() {
-    if (!this.state.photos.length) return null;
-    const { photos } = this.state;
-    const { user } = photos[0];
-
-    return (
-      <LayoutContext.Consumer>
-        {value => {
-          return (
-            <Container>
-              <UserInfoComponent user={user} />
-              <SelectView style={selectStyle} />
-              <InfiniteScroll
-                id='user-page-infinite-scroll'
-                pageStart={1}
-                loadMore={this.getData}
-                hasMore={true || false}
-                loader={<Loader key={0}>Loading ...</Loader>}>
-                <Results
-                  id='user-results'
-                  isGrid={value.isGrid}
-                  isColumn={value.isColumn}
-                  isList={value.isList}>
-                  {photos.map(photo => {
-                    const { height, width } = photo;
-                    return (
-                      <PhotoContainer
-                        id='user-page-photo-container'
-                        key={photo.id}
+  return (
+    <LayoutContext.Consumer>
+      {value => {
+        return (
+          <Container>
+            <UserInfoComponent user={user} />
+            <SelectView style={selectStyle} />
+            <InfiniteScroll
+              id='user-page-infinite-scroll'
+              pageStart={1}
+              loadMore={this.getData}
+              hasMore={true || false}
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results
+                id='user-results'
+                isGrid={value.isGrid}
+                isColumn={value.isColumn}
+                isList={value.isList}>
+                {photos.map(photo => {
+                  const { height, width } = photo;
+                  return (
+                    <PhotoContainer
+                      id='user-page-photo-container'
+                      key={photo.id}
+                      isGrid={value.isGrid}
+                      isColumn={value.isColumn}
+                      isList={value.isList}
+                      landscape={width > height}>
+                      <Photo
+                        category='user'
+                        landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
-                        landscape={width > height}>
-                        <Photo
-                          category='user'
-                          landscape={width > height}
-                          isGrid={value.isGrid}
-                          isColumn={value.isColumn}
-                          isList={value.isList}
-                          key={photo.id}
-                          photo={photo}
-                        />
-                      </PhotoContainer>
-                    );
-                  })}
-                </Results>
-              </InfiniteScroll>
-            </Container>
-          );
-        }}
-      </LayoutContext.Consumer>
-    );
-  }
-}
+                        key={photo.id}
+                        photo={photo}
+                      />
+                    </PhotoContainer>
+                  );
+                })}
+              </Results>
+            </InfiniteScroll>
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
+  );
+};
 
 export default UserPage;
