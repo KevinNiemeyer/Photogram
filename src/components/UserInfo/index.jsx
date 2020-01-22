@@ -39,7 +39,8 @@ const FullName = styled.div`
   color: rgb(247, 154, 120);
 `;
 
-export default function UserInfoComponent({ user }) {
+export default function UserInfo({ user }) {
+  console.log(user);
   return (
     <Container>
       <Img src={user.profile_image.large} alt={user.username} />

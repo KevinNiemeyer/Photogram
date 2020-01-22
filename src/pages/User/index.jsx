@@ -1,44 +1,81 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import React, { Component } from 'react';
-import UserInfoComponent from '../../components/UserInfo';
->>>>>>> parent of 74f9191... Add select view to User page
+import UserInfo from '../../components/UserInfo';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
+import { LayoutContext } from '../../App';
+import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
 `;
 
 const Results = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
   position: relative;
   padding: 20px;
   width: 100%;
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
 `;
 
 const PhotoContainer = styled.div`
-  width: 150px;
-  height: auto;
-  padding: 20px;
+margin-bottom: 50px;
+padding: 10px;
+${props =>
+  !props.isGrid &&
+  css`
+    display: flex;
+  `}
+${props =>
+  props.landscape
+    ? css`
+        width: 80vw;
+      `
+    : css`
+        height: 80vh;
+      `}
+${props =>
+  props.isGrid &&
+  css`
+    width: 250px;
+    height: 250px;
+  `}
+${props =>
+  props.isList &&
+  css`
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: 100%;
+    height: 64px;
+  `}
+${props =>
+  props.isColumn &&
+  css`
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding-bottom: 75px;
+  `}
 `;
-
-const selectStyle = {};
 
 const Loader = styled.div``;
 
-const Landing = () => {
+const UserPage = () => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
-
   const getData = () => {
     unsplash.users
       .photos(
@@ -50,11 +87,8 @@ const Landing = () => {
       )
       .then(toJson)
       .then(json => {
-        this.setState({
-          photos: [...this.state.photos, ...json],
-          page: this.state.page + 1,
-          hasMore: !!json.length
-        });
+        setPhotos([...photos, ...json]);
+        setPage(page + 1);
       });
   };
   useEffect(() => {
@@ -62,22 +96,21 @@ const Landing = () => {
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
 
-<<<<<<< HEAD
   return (
     <LayoutContext.Consumer>
       {value => {
         return (
           <Container>
-            <UserInfoComponent user={user} />
-            <SelectView style={selectStyle} />
+            <UserInfo user={page} />
+            <SelectView value={value}></SelectView>
             <InfiniteScroll
-              id='user-page-infinite-scroll'
+              id='infinite-scroll'
               pageStart={1}
-              loadMore={this.getData}
-              hasMore={true || false}
+              loadMore={getData}
+              hasMore
               loader={<Loader key={0}>Loading ...</Loader>}>
               <Results
-                id='user-results'
+                id='landing-results'
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
                 isList={value.isList}>
@@ -85,7 +118,7 @@ const Landing = () => {
                   const { height, width } = photo;
                   return (
                     <PhotoContainer
-                      id='user-page-photo-container'
+                      id='photo-container'
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
@@ -97,6 +130,7 @@ const Landing = () => {
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
+                        id='photo'
                         key={photo.id}
                         photo={photo}
                       />
@@ -111,35 +145,5 @@ const Landing = () => {
     </LayoutContext.Consumer>
   );
 };
-=======
-  render() {
-    if (!this.state.photos.length) return null;
-    const { photos } = this.state;
-    const { user } = photos[0];
-
-    return (
-      <Container>
-        <UserInfoComponent user={user} />
-
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={true || false}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results id='landing-results'>
-            {photos.map(photo => {
-              return (
-                <PhotoContainer id='photo-container'>
-                  <Photo category='user' key={photo.id} photo={photo} />
-                </PhotoContainer>
-              );
-            })}
-          </Results>
-        </InfiniteScroll>
-      </Container>
-    );
-  }
-}
->>>>>>> parent of 74f9191... Add select view to User page
 
 export default UserPage;
