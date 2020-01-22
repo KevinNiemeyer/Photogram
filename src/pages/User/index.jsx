@@ -31,9 +31,11 @@ const PhotoContainer = styled.div`
   padding: 20px;
 `;
 
+const selectStyle = {};
+
 const Loader = styled.div``;
 
-const UserPage = () => {
+const Landing = () => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -48,9 +50,11 @@ const UserPage = () => {
       )
       .then(toJson)
       .then(json => {
-        setPhotos([...photos, ...json]);
-        setPage(page + 1);
-        console.log(photos);
+        this.setState({
+          photos: [...this.state.photos, ...json],
+          page: this.state.page + 1,
+          hasMore: !!json.length
+        });
       });
   };
   useEffect(() => {
@@ -65,12 +69,12 @@ const UserPage = () => {
         return (
           <Container>
             <UserInfoComponent user={user} />
-            <SelectView />
+            <SelectView style={selectStyle} />
             <InfiniteScroll
               id='user-page-infinite-scroll'
               pageStart={1}
-              loadMore={getData}
-              hasMore
+              loadMore={this.getData}
+              hasMore={true || false}
               loader={<Loader key={0}>Loading ...</Loader>}>
               <Results
                 id='user-results'
