@@ -73,35 +73,28 @@ ${props =>
 
 const Loader = styled.div``;
 
-const UserPage = () => {
+const UserPage = props => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
   const getData = () => {
     unsplash.users
-      .photos(
-        this.props.match.params.userName,
-        this.state.page,
-        5,
-        'popular',
-        false
-      )
+      .photos(props.match.params.userName, page, 5, 'popular', false)
       .then(toJson)
       .then(json => {
         setPhotos([...photos, ...json]);
         setPage(page + 1);
       });
   };
+  console.log(photos['0'].id);
   useEffect(() => {
     getData();
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
-
   return (
     <LayoutContext.Consumer>
       {value => {
         return (
           <Container>
-            <UserInfo user={page} />
             <SelectView value={value}></SelectView>
             <InfiniteScroll
               id='infinite-scroll'

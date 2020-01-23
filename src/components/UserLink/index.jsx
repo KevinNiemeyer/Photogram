@@ -38,7 +38,6 @@ const linkStyle = {
 const pStyle = {
   paddingLeft: '10px'
 };
-
 class UserLink extends Component {
   render() {
     return (
