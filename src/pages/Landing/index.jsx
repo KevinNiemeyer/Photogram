@@ -22,14 +22,13 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
-  position: relative;
-  padding: 20px;
   width: 100%;
   ${props =>
     props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
     `}
   ${props =>
     props.isColumn &&
@@ -41,13 +40,13 @@ const Results = styled.div`
 `;
 
 const ResultContainer = styled.div`
-  margin-bottom: 50px;
-  padding: 10px;
-  ${props =>
-    !props.isGrid &&
-    css`
-      display: flex;
-    `}
+
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+
   ${props =>
     props.landscape
       ? css`
@@ -56,12 +55,15 @@ const ResultContainer = styled.div`
       : css`
           height: 80vh;
         `}
-  ${props =>
-    props.isGrid &&
-    css`
-      width: 250px;
-      height: 250px;
-    `}
+    ${props =>
+      props.isGrid &&
+      css`
+        display: flex;
+        width: 250px;
+        height: 250px;
+        padding-left: 15px;
+        padding-right: 15px;
+      `}
   ${props =>
     props.isList &&
     css`
@@ -69,14 +71,14 @@ const ResultContainer = styled.div`
       justify-content: flex-end;
       width: 100%;
       height: 64px;
+      padding-left: 30px;
     `}
   ${props =>
     props.isColumn &&
     css`
       display: flex;
       flex-direction: column;
-      width: 30%;
-      padding-bottom: 75px;
+      width: 50%;
     `}
 `;
 

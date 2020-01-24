@@ -11,7 +11,9 @@ const ButtonContainer = styled.div`
   width: 100%;
   font-size: 16px;
   align-items: center;
-  margin: 20xpx;
+  padding: 30px;
+  border-bottom: solid lightgrey 1px;
+  margin-bottom: 20px;
   background-color: rgb(250, 250, 250);
   & h3 {
     width: 100%;

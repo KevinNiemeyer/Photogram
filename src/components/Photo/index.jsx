@@ -7,11 +7,8 @@ const Container = styled.div`
 `;
 
 const ColumnPhoto = styled.img`
-  cursor: pointer;
-  transition: 0.3s;
-  &:hover {
-    opacity: 0.7;
-  }
+  background: url(${props => props.src}) no-repeat center center;
+  background-size: cover;
 
   ${props =>
     props.landscape
@@ -25,7 +22,7 @@ const ColumnPhoto = styled.img`
 
 const GridPhoto = styled.img`
   width: 100%;
-  height: 100%;
+  height: 200px;
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
 `;

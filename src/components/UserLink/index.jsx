@@ -8,7 +8,6 @@ const LinkContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;
-  padding-left: 30px;
 
   ${props =>
     props.isList &&

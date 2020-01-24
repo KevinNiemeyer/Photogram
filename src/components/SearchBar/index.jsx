@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const Form = styled.form`
   display: flex;
+  width: 100%;
 `;
 
 const Input = styled.input`

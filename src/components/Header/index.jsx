@@ -7,11 +7,11 @@ import styled from 'styled-components';
 const Container = styled.div`
   position: fixed;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 75px;
-  flex: 1;
+
   border-bottom: solid 1px lightgrey;
   background-color: white;
   z-index: 2;
@@ -25,7 +25,6 @@ class Header extends React.Component {
       <Container>
         <Logo />
         <SearchBar />
-        <Nav />
       </Container>
     );
   }

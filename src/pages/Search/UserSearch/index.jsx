@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { unsplash } from '../../../unsplash';
 
 const Container = styled.div`
-  margin: 0 auto;
-  width: 50%;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -20,16 +18,18 @@ const Heading = styled.div`
 const Results = styled.div`
   position: relative;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: purple;
   width: 150px;
-  height: 150px;
-  margin: 0 auto;
+  height: 100%;
+  padding: 20px;
   text-decoration: none;
   padding: 20px;
   &:hover {
@@ -39,6 +39,7 @@ const LinkContainer = styled.div`
 const LinkTitle = styled.div`
   padding: 10px;
   font-size: 20px;
+  color: rgb(247, 154, 120);
   text-align: center;
 `;
 const Img = styled.img`
@@ -71,12 +72,12 @@ export class UserSearch extends Component {
     const { users } = this.state;
     if (!this.state.users.length) return null;
     return (
-      <Container>
+      <Container id='user-search-container'>
         <Heading>Search results for "{this.props.match.params.user}"</Heading>
-        <Results>
+        <Results id='user-search-results'>
           {users.map(user => {
             return (
-              <LinkContainer>
+              <LinkContainer id='user-search-link-container'>
                 <Link
                   category='user'
                   id={user.id}

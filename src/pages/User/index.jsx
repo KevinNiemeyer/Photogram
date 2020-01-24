@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 
 const Results = styled.div`
-  position: relative;
   padding: 20px;
   width: 100%;
   ${props =>
@@ -21,6 +20,7 @@ const Results = styled.div`
     css`
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
     `}
   ${props =>
     props.isColumn &&
@@ -32,13 +32,8 @@ const Results = styled.div`
 `;
 
 const PhotoContainer = styled.div`
-margin-bottom: 50px;
-padding: 10px;
-${props =>
-  !props.isGrid &&
-  css`
-    display: flex;
-  `}
+cursor: pointer;
+
 ${props =>
   props.landscape
     ? css`
@@ -50,22 +45,28 @@ ${props =>
 ${props =>
   props.isGrid &&
   css`
+    display: flex;
+    justify-content: space-around;
     width: 250px;
     height: 250px;
+    padding: 0;
+    margin-left: 20x;
+    margin-right: 20px;
   `}
 ${props =>
   props.isList &&
   css`
-    flex-direction: row-reverse;
-    justify-content: flex-end;
     width: 100%;
     height: 64px;
+    padding-left: 10px;
+    padding-bottom: 50px;
   `}
 ${props =>
   props.isColumn &&
   css`
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 30%;
     padding-bottom: 75px;
   `}

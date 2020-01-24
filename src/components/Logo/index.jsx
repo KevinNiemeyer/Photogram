@@ -8,9 +8,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
   width: 30px;
   padding-right: 15px;
+  width: 100%;
 `;
 
 const Img = styled.img`
