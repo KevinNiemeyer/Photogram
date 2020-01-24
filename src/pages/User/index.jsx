@@ -85,16 +85,18 @@ const UserPage = props => {
         setPage(page + 1);
       });
   };
-  console.log(photos['0'].id);
+
   useEffect(() => {
     getData();
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
+  const user = photos.length ? photos[0].user : null;
   return (
     <LayoutContext.Consumer>
       {value => {
         return (
           <Container>
+            <UserInfo user={user} />
             <SelectView value={value}></SelectView>
             <InfiniteScroll
               id='infinite-scroll'

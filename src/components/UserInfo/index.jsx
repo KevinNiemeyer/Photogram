@@ -40,6 +40,10 @@ const FullName = styled.div`
 `;
 
 export default function UserInfo({ user }) {
+  console.log(user);
+  if (!user) {
+    return null;
+  }
   return (
     <Container>
       <Img src={user.profile_image.large} alt={user.username} />
