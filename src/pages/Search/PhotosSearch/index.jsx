@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
-import Photo from '../../../components/Photo';
-import { unsplash } from '../../../unsplash';
-import styled from 'styled-components';
-import UserLink from '../../../components/UserLink';
-import { LayoutContext } from '../../../App';
-import SelectView from '../../../components/SelectView';
-
+import React, { useState, useEffect } from "react";
+import { toJson } from "unsplash-js";
+import InfiniteScroll from "react-infinite-scroller";
+import Photo from "../../../components/Photo";
+import { unsplash } from "../../../unsplash";
+import styled from "styled-components";
+import UserLink from "../../../components/UserLink";
+import { LayoutContext } from "../../../App";
+import SelectView from "../../../components/SelectView";
+import PhotosList from "../../../components/PhotosList";
 const Container = styled.div`
   margin: 0 auto;
   background-color: rgb(250, 250, 250);
@@ -46,9 +46,7 @@ const PhotoSearch = props => {
 
   const getData = () => {
     unsplash.search
-      .photos(props.match.params.searchTerm, 1, 5, {
-        orientation: 'portrait'
-      })
+      .photos(props.match.params.searchTerm, page, 5)
       .then(toJson)
       .then(json => {
         console.log(json);
@@ -70,49 +68,7 @@ const PhotoSearch = props => {
               Search results for {props.match.params.searchTerm}
               <SelectView value={value}></SelectView>
             </Heading>
-            <InfiniteScroll
-              id='infinite-scroll'
-              pageStart={1}
-              loadMore={getData}
-              hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results
-                isGrid={value.isGrid}
-                isColumn={value.isColumn}
-                isList={value.isList}
-                id='landing-results'>
-                {photos.map(photo => {
-                  const { height, width } = photo;
-                  return (
-                    <PhotoContainer
-                      key={photo.id}
-                      isGrid={value.isGrid}
-                      isColumn={value.isColumn}
-                      isList={value.isList}
-                      landscape={width > height}
-                      id='photo-container'>
-                      <UserLink
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        key={photo.user.id}
-                        id='userlink'
-                        photo={photo}
-                      />
-                      <Photo
-                        landscape={width > height}
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        id='photo'
-                        key={photo.id}
-                        photo={photo}
-                      />
-                    </PhotoContainer>
-                  );
-                })}
-              </Results>
-            </InfiniteScroll>
+            <PhotosList getData={getData} photos={photos} />
           </Container>
         );
       }}

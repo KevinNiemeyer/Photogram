@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import React, { Component } from "react";
+import styled, { css } from "styled-components";
 
 const Container = styled.div`
   position: fixed;
@@ -8,7 +8,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   left: 35%;
-  top: 20px;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -31,10 +31,10 @@ const Img = styled.img`
   ${props =>
     props.landscape
       ? css`
-          width: 80vw;
+          width: 70vw;
         `
       : css`
-          height: 80vh;
+          height: 70vh;
         `}
 `;
 
@@ -65,11 +65,12 @@ export class Modal extends Component {
       return null;
     }
     return (
-      <Container id='container1'>
-        <Container2 id='container2'>
+      <Container id="container1">
+        <Container2 id="container2">
           <Img
             src={this.props.photo}
-            alt='nada'
+            alt="nada"
+            landscape={this.props.landscape}
             onClick={e => {
               this.onClose(e);
             }}
@@ -78,7 +79,8 @@ export class Modal extends Component {
           <Close
             onClick={e => {
               this.onClose(e);
-            }}>
+            }}
+          >
             &times;
           </Close>
         </Container2>

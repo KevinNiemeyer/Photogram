@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import Modal from '../Modal';
+import React, { Component } from "react";
+import styled, { css } from "styled-components";
+import Modal from "../Modal";
 
 const Container = styled.div`
   height: 100%;
@@ -25,6 +25,9 @@ const GridPhoto = styled.img`
   height: 200px;
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const ListPhoto = styled.img`
@@ -45,7 +48,7 @@ class Photo extends Component {
 
   render() {
     return (
-      <Container id='photo-container'>
+      <Container id="photo-container">
         {this.props.isGrid ? (
           <GridPhoto
             src={this.props.photo.urls.small}
@@ -54,7 +57,7 @@ class Photo extends Component {
         ) : this.props.isColumn ? (
           <ColumnPhoto
             landscape={this.props.landscape}
-            id='column-photo-img'
+            id="column-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.regular}
             alt={this.props.photo.alt_description}
@@ -62,17 +65,19 @@ class Photo extends Component {
         ) : (
           <ListPhoto
             landscape={this.props.landscape}
-            id='list-photo-img'
+            id="list-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.thumb}
             alt={this.props.photo.alt_description}
           />
         )}
         <Modal
-          id='modal'
+          landscape={this.props.landscape}
+          id="modal"
           onClose={this.toggleModal}
           show={this.state.show}
-          photo={this.props.photo.urls.full}></Modal>
+          photo={this.props.photo.urls.full}
+        ></Modal>
       </Container>
     );
   }

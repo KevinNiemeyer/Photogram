@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
-import Photo from '../../components/Photo';
-import { unsplash } from '../../unsplash';
-import styled, { css } from 'styled-components';
-import UserLink from '../../components/UserLink';
-import { LayoutContext } from '../../App';
-import SelectView from '../../components/SelectView';
+import React, { useState, useEffect } from "react";
+import { toJson } from "unsplash-js";
+import InfiniteScroll from "react-infinite-scroller";
+import Photo from "../../components/Photo";
+import { unsplash } from "../../unsplash";
+import styled, { css } from "styled-components";
+import UserLink from "../../components/UserLink";
+import { LayoutContext } from "../../App";
+import SelectView from "../../components/SelectView";
+import PhotosList from "../../components/PhotosList";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -90,7 +91,7 @@ const Landing = () => {
 
   const getData = () => {
     unsplash.photos
-      .listPhotos(page, 25, 'latest')
+      .listPhotos(page, 25, "latest")
       .then(toJson)
       .then(json => {
         setPhotos([...photos, ...json]);
@@ -107,54 +108,12 @@ const Landing = () => {
     <LayoutContext.Consumer>
       {value => {
         return (
-          <Container id='landing-container'>
-            <Heading id='landing-heading'>
+          <Container id="landing-container">
+            <Heading id="landing-heading">
               Latest Photos:
               <SelectView value={value}></SelectView>
             </Heading>
-            <InfiniteScroll
-              id='infinite-scroll'
-              pageStart={1}
-              loadMore={getData}
-              hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results
-                isGrid={value.isGrid}
-                isColumn={value.isColumn}
-                isList={value.isList}
-                id='landing-results'>
-                {photos.map(photo => {
-                  const { height, width } = photo;
-                  return (
-                    <ResultContainer
-                      key={photo.id}
-                      isGrid={value.isGrid}
-                      isColumn={value.isColumn}
-                      isList={value.isList}
-                      landscape={width > height}
-                      id='result-container'>
-                      <UserLink
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        key={photo.user.id}
-                        id='userlink'
-                        photo={photo}
-                      />
-                      <Photo
-                        landscape={width > height}
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        id='photo'
-                        key={photo.id}
-                        photo={photo}
-                      />
-                    </ResultContainer>
-                  );
-                })}
-              </Results>
-            </InfiniteScroll>
+            <PhotosList getData={getData} photos={photos} />
           </Container>
         );
       }}
