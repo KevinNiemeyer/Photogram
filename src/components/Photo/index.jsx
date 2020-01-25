@@ -9,7 +9,9 @@ const Container = styled.div`
 const ColumnPhoto = styled.img`
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
-
+  &:hover {
+    opacity: 0.8;
+  }
   ${props =>
     props.landscape
       ? css`
@@ -21,6 +23,9 @@ const ColumnPhoto = styled.img`
 `;
 
 const GridPhoto = styled.img`
+  &:hover {
+    opacity: 0.8;
+  }
   width: 100%;
   height: 200px;
   background: url(${props => props.src}) no-repeat center center;
@@ -28,6 +33,10 @@ const GridPhoto = styled.img`
 `;
 
 const ListPhoto = styled.img`
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
   width: 64px;
   height: 64px;
   background: url(${props => props.src}) no-repeat center center;
@@ -48,6 +57,7 @@ class Photo extends Component {
       <Container id='photo-container'>
         {this.props.isGrid ? (
           <GridPhoto
+            landscape={this.props.landscape}
             src={this.props.photo.urls.small}
             onClick={this.toggleModal}
           />

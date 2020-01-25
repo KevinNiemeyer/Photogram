@@ -40,7 +40,6 @@ const FullName = styled.div`
 `;
 
 export default function UserInfo({ user }) {
-  console.log(user);
   if (!user) {
     return null;
   }

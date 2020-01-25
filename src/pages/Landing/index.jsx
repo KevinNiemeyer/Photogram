@@ -40,7 +40,9 @@ const Results = styled.div`
 `;
 
 const ResultContainer = styled.div`
-
+  &:hover {
+    opacity: 0.8;
+  }
   margin-bottom: 25px;
   display: flex;
   flex-direction: column;

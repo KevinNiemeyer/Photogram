@@ -27,6 +27,7 @@ const Results = styled.div`
     css`
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
     `}
 `;
@@ -46,17 +47,19 @@ ${props =>
   props.isGrid &&
   css`
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     width: 250px;
     height: 250px;
     padding: 0;
-    margin-left: 20x;
-    margin-right: 20px;
+    padding: 0 20px 40px 20px;
   `}
 ${props =>
   props.isList &&
   css`
-    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
     height: 64px;
     padding-left: 10px;
     padding-bottom: 50px;
@@ -66,8 +69,9 @@ ${props =>
   css`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 50%;
     padding-bottom: 75px;
   `}
 `;
@@ -92,6 +96,7 @@ const UserPage = props => {
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
   const user = photos.length ? photos[0].user : null;
+  console.log(props);
   return (
     <LayoutContext.Consumer>
       {value => {
