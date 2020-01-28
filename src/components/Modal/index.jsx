@@ -8,7 +8,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   left: 35%;
-  top: 20px;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -27,7 +27,6 @@ const Container2 = styled.div`
 
 const Img = styled.img`
   display: block;
-  opacity: 1;
   ${props =>
     props.landscape
       ? css`
