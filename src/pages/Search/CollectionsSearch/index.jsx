@@ -9,7 +9,6 @@ const Loader = styled.div``;
 
 const Container = styled.div`
   margin: 0 auto;
-  text-align: center;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -23,7 +22,7 @@ const Heading = styled.div`
 const Results = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   position: relative;
   padding: 20px;
@@ -39,12 +38,15 @@ const LinkContainer = styled.div`
   }
 `;
 const LinkTitle = styled.div`
-  padding: 10px 0px;
+  padding: 10px;
   font-size: 20px;
+  color: rgb(247, 154, 120);
+  text-align: center;
 `;
 const Img = styled.img`
-  margin-right: 20px;
-  width: 100%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 `;
 const linkStyle = {
   textDecoration: 'none'
@@ -61,10 +63,6 @@ export class CollectionSearch extends Component {
   componentDidMount() {
     this.getData();
   }
-
-  // componentDidUpdate() {
-  //   this.getData();
-  // }
 
   getData = () => {
     unsplash.search
@@ -97,8 +95,9 @@ export class CollectionSearch extends Component {
 
     return (
       <Container>
-        <Heading collection={this.state.collection}>
-          Search results for "{this.props.match.params.collection}":
+        <Heading>
+          Search results for "{this.props.match.params.collection}" in category
+          "Collections":
         </Heading>
 
         <InfiniteScroll
@@ -109,8 +108,10 @@ export class CollectionSearch extends Component {
           <Results>
             {collections.map(collection => {
               return (
-                <LinkContainer>
+                <LinkContainer id='collection-search-link-container'>
                   <Link
+                    category='collection'
+                    id={collection.id}
                     to={`/collection/${collection.id}`}
                     style={linkStyle}
                     key={collection.id}>

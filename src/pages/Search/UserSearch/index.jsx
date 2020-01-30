@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
 import styled from 'styled-components';
 import { unsplash } from '../../../unsplash';
+import InfiniteScroll from 'react-infinite-scroller';
+
+const Loader = styled.div``;
 
 const Container = styled.div`
   background-color: rgb(250, 250, 250);
@@ -48,10 +51,16 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
+const linkStyle = {
+  textDecoration: 'none'
+};
+
 export class UserSearch extends Component {
   state = {
     users: [],
-    page: 1
+    page: 1,
+    hasMore: true,
+    user: ''
   };
 
   componentDidMount() {
@@ -60,36 +69,60 @@ export class UserSearch extends Component {
 
   getData = () => {
     unsplash.search
-      .users(this.props.match.params.user, 1, 5)
+      .users(this.props.match.params.user, this.state.page, 5)
       .then(toJson)
       .then(json => {
-        this.setState({
-          users: json.results
+        if (!json.results.length) {
+          return this.setState({ hasMore: false });
+        }
+        this.setState(state => {
+          const newState = {
+            users: [...state.users, ...json.results],
+            page: state.page + 1,
+            user: state.user
+          };
+          if (!state.totalPages) {
+            newState.totalPages = json.total_pages;
+          }
+          if (newState.page === state.totalPages) {
+            newState.hasMore = false;
+          }
+          return newState;
         });
       });
   };
+
   render() {
     const { users } = this.state;
-    if (!this.state.users.length) return null;
+
     return (
       <Container id='user-search-container'>
-        <Heading>Search results for "{this.props.match.params.user}"</Heading>
-        <Results id='user-search-results'>
-          {users.map(user => {
-            return (
-              <LinkContainer id='user-search-link-container'>
-                <Link
-                  category='user'
-                  id={user.id}
-                  to={`/user/${user.username}`}
-                  style={{ textDecoration: 'none' }}>
-                  <LinkTitle>{user.username}</LinkTitle>
-                  <Img src={user.profile_image.medium} alt={user.p} />
-                </Link>
-              </LinkContainer>
-            );
-          })}
-        </Results>
+        <Heading>
+          Search results for "{this.props.match.params.user}" in category
+          "user":
+        </Heading>
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={this.getData}
+          hasMore={this.state.hasMore}
+          loader={<Loader key={0}>Loading ...</Loader>}>
+          <Results id='user-search-results'>
+            {users.map(user => {
+              return (
+                <LinkContainer id='user-search-link-container'>
+                  <Link
+                    category='user'
+                    id={user.id}
+                    to={`/user/${user.username}`}
+                    style={linkStyle}>
+                    <LinkTitle>{user.username}</LinkTitle>
+                    <Img src={user.profile_image.medium} alt={user.p} />
+                  </Link>
+                </LinkContainer>
+              );
+            })}
+          </Results>
+        </InfiniteScroll>
       </Container>
     );
   }
