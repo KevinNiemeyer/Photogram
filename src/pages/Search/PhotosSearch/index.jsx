@@ -3,7 +3,7 @@ import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../../components/Photo';
 import { unsplash } from '../../../unsplash';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import UserLink from '../../../components/UserLink';
 import { LayoutContext } from '../../../App';
 import SelectView from '../../../components/SelectView';
@@ -21,21 +21,64 @@ const Heading = styled.div`
 `;
 
 const Results = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  position: relative;
-  padding: 20px;
-  padding-right: 20px;
   width: 100%;
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
 `;
 
 const PhotoContainer = styled.div`
-  width: 150px;
-  height: auto;
-  padding: 20px;
+display: flex;
+flex-direction: column;
+margin: 20px;
+align-items: center;
+cursor: pointer;
+
+${props =>
+  props.landscape
+    ? css`
+        width: 80vw;
+      `
+    : css`
+        height: 80vh;
+      `}
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      width: 250px;
+      height: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    `}
+${props =>
+  props.isList &&
+  css`
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: 100%;
+    height: 64px;
+    padding-left: 30px;
+  `}
+${props =>
+  props.isColumn &&
+  css`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 50%;
+  `}
 `;
 
 const Loader = styled.div``;

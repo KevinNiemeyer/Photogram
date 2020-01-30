@@ -10,7 +10,6 @@ import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
-  text-align: center;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -40,11 +39,9 @@ const Results = styled.div`
 `;
 
 const ResultContainer = styled.div`
-
   display: flex;
   flex-direction: column;
   margin: 20px;
-  
   align-items: center;
   cursor: pointer;
 

@@ -40,10 +40,9 @@ const Results = styled.div`
 `;
 
 const PhotoContainer = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   margin: 20px;
-  flex: 1;
   align-items: center;
   cursor: pointer;
 
@@ -55,15 +54,15 @@ display: flex;
       : css`
           height: 80vh;
         `}
-    ${props =>
-      props.isGrid &&
-      css`
-        display: flex;
-        width: 250px;
-        height: 250px;
-        padding-left: 15px;
-        padding-right: 15px;
-      `}
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      width: 250px;
+      height: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    `}
   ${props =>
     props.isList &&
     css`
