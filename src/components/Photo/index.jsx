@@ -7,8 +7,8 @@ const Container = styled.div`
 `;
 
 const ColumnPhoto = styled.img`
+  display: block;
   background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
   &:hover {
     opacity: 0.8;
   }
@@ -82,7 +82,8 @@ class Photo extends Component {
           id='modal'
           onClose={this.toggleModal}
           show={this.state.show}
-          photo={this.props.photo.urls.full}></Modal>
+          photo={this.props.photo.urls.full}
+        />
       </Container>
     );
   }

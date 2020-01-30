@@ -5,7 +5,8 @@ import styled, { css } from 'styled-components';
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  width: 100%;
+  justify-content: center;
   align-items: center;
   padding-bottom: 10px;
 
@@ -13,6 +14,7 @@ const LinkContainer = styled.div`
     props.isList &&
     css`
       margin-left: 20px;
+      width: auto;
     `}
   &:hover img {
     opacity: 0.8;

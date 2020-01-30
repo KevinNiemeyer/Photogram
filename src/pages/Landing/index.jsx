@@ -41,10 +41,11 @@ const Results = styled.div`
 
 const ResultContainer = styled.div`
 
-  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  margin: 20px;
+  
+  align-items: center;
   cursor: pointer;
 
   ${props =>
@@ -60,7 +61,7 @@ const ResultContainer = styled.div`
       css`
         display: flex;
         width: 250px;
-        height: 250px;
+        height: 100%;
         padding-left: 15px;
         padding-right: 15px;
       `}
@@ -78,6 +79,7 @@ const ResultContainer = styled.div`
     css`
       display: flex;
       flex-direction: column;
+      flex: 1;
       width: 50%;
     `}
 `;

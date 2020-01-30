@@ -3,26 +3,15 @@ import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';
 
 const Container = styled.div`
   margin: 0 auto;
-  background-color: rgb(250, 250, 250);
-`;
 
-const Results = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  position: relative;
-  padding: 20px;
-  padding-right: 20px;
-  width: 100%;
+  background-color: rgb(250, 250, 250);
 `;
 
 const Heading = styled.div`
@@ -32,10 +21,65 @@ const Heading = styled.div`
   padding: 20px 0 0 20px;
 `;
 
+const Results = styled.div`
+  width: 100%;
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
+`;
+
 const PhotoContainer = styled.div`
-  width: 150px;
-  height: auto;
-  padding: 20px;
+display: flex;
+  flex-direction: column;
+  margin: 20px;
+  flex: 1;
+  align-items: center;
+  cursor: pointer;
+
+  ${props =>
+    props.landscape
+      ? css`
+          width: 80vw;
+        `
+      : css`
+          height: 80vh;
+        `}
+    ${props =>
+      props.isGrid &&
+      css`
+        display: flex;
+        width: 250px;
+        height: 250px;
+        padding-left: 15px;
+        padding-right: 15px;
+      `}
+  ${props =>
+    props.isList &&
+    css`
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      width: 100%;
+      height: 64px;
+      padding-left: 30px;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    `}
 `;
 
 const Loader = styled.div``;
@@ -63,7 +107,10 @@ const Collection = props => {
         console.log(value);
         return (
           <Container>
-            <Heading>Collection:</Heading>
+            <Heading>
+              Collection:
+              <SelectView value={value}></SelectView>
+            </Heading>
 
             <InfiniteScroll
               id='infinite-scroll'

@@ -8,7 +8,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   left: 35%;
-  top: 0px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -22,7 +22,6 @@ const Container2 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 1;
 `;
 
 const Img = styled.img`
@@ -54,36 +53,25 @@ const Close = styled.span`
   }
 `;
 
-export class Modal extends Component {
-  onClose = e => {
-    this.props.onClose && this.props.onClose(e);
-  };
-
-  render() {
-    if (!this.props.show) {
-      return null;
-    }
-    return (
-      <Container id='container1'>
-        <Container2 id='container2'>
-          <Img
-            src={this.props.photo}
-            alt='nada'
-            onClick={e => {
-              this.onClose(e);
-            }}
-          />
-
-          <Close
-            onClick={e => {
-              this.onClose(e);
-            }}>
-            &times;
-          </Close>
-        </Container2>
-      </Container>
-    );
+const Modal = props => {
+  if (!props.show) {
+    return null;
   }
-}
+  console.log(props);
+  return (
+    <Container id='container1'>
+      <Container2 id='container2'>
+        <Img
+          landscape={props.landscape}
+          src={props.photo}
+          alt='nada'
+          onClick={props.onClose}
+        />
+
+        <Close onClick={props.onClose}>&times;</Close>
+      </Container2>
+    </Container>
+  );
+};
 
 export default Modal;
