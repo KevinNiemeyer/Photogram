@@ -1,7 +1,6 @@
 import React from 'react';
 import Logo from '../Logo/index.jsx';
 import SearchBar from '../SearchBar';
-import Nav from '../Nav';
 import styled from 'styled-components';
 
 const Container = styled.div`
