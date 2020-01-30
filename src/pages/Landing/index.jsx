@@ -38,7 +38,7 @@ const Results = styled.div`
     `}
 `;
 
-const ResultContainer = styled.div`
+const PhotoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px;
@@ -125,7 +125,7 @@ const Landing = () => {
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
-                    <ResultContainer
+                    <PhotoContainer
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
@@ -149,7 +149,7 @@ const Landing = () => {
                         key={photo.id}
                         photo={photo}
                       />
-                    </ResultContainer>
+                    </PhotoContainer>
                   );
                 })}
               </Results>
