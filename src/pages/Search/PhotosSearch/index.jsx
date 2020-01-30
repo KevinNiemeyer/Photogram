@@ -89,12 +89,11 @@ const PhotoSearch = props => {
 
   const getData = () => {
     unsplash.search
-      .photos(props.match.params.searchTerm, 1, 5, {
+      .photos(props.match.params.searchTerm, page, 5, {
         orientation: 'portrait'
       })
       .then(toJson)
       .then(json => {
-        console.log(json);
         setPhotos([...photos, ...json.results]);
         setPage(page + 1);
       });
@@ -106,7 +105,6 @@ const PhotoSearch = props => {
   return (
     <LayoutContext.Consumer>
       {value => {
-        console.log(photos);
         return (
           <Container>
             <Heading>
