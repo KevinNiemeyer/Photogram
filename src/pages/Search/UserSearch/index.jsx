@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { unsplash } from '../../../unsplash';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -34,11 +34,10 @@ const LinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
+  width: 15%;
   height: 100%;
   padding: 20px;
   text-decoration: none;
-  padding: 20px;
   &:hover {
     opacity: 0.8;
   }
@@ -50,8 +49,8 @@ const LinkTitle = styled.div`
   text-align: center;
 `;
 const Img = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
 `;
 
@@ -102,18 +101,26 @@ export class UserSearch extends Component {
 
   render() {
     const { users } = this.state;
-
+    const { hasMore } = this.state;
+    console.log(this.state.hasMore);
     return (
       <Container id='user-search-container'>
         <Heading>
           Search results for
-          <SearchTerm>{this.props.match.params.user}</SearchTerm> in Users:
+          <SearchTerm> {this.props.match.params.user}</SearchTerm> in Users:
         </Heading>
         <InfiniteScroll
           pageStart={1}
           loadMore={this.getData}
-          hasMore={this.state.hasMore}
-          loader={<Loader key={0}>Loading ...</Loader>}>
+          hasMore={hasMore}
+          loader={
+            hasMore ? (
+              //this doesn't really work. needs more work.
+              <Loader key={0}>Loading...</Loader>
+            ) : (
+              <Loader key={0}>No more photos</Loader>
+            )
+          }>
           <Results id='user-search-results'>
             {users.map(user => {
               return (

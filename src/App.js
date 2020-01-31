@@ -23,20 +23,6 @@ class App extends React.Component {
     isColumn: false
   };
 
-  goToTop = e => {
-    window.onscroll = () => {
-      const myButton = document.getElementById('goToTop');
-      if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-      ) {
-        myButton.style.display = 'block';
-      } else {
-        myButton.style.display = 'none';
-      }
-    };
-  };
-
   toggleView = e => {
     //get current values from state and copy it
     const currentValues = { ...this.state }; //spread the state object
@@ -66,8 +52,7 @@ class App extends React.Component {
           isGrid: this.state.isGrid,
           isList: this.state.isList,
           isColumn: this.state.isColumn,
-          toggleView: this.toggleView,
-          goToTop: this.goToTop
+          toggleView: this.toggleView
         }}>
         <Router>
           <div className='app-container'>
