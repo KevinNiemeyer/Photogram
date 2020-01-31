@@ -101,7 +101,7 @@ export class CollectionSearch extends Component {
     return (
       <Container>
         <Heading>
-          Search results for{' '}
+          Search results for
           <SearchTerm> {this.props.match.params.collection} </SearchTerm>in
           Collections:
         </Heading>
@@ -111,7 +111,7 @@ export class CollectionSearch extends Component {
           loadMore={this.getData}
           hasMore={this.state.hasMore}
           loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results>
+          <Results id='collection-search-results'>
             {collections.map(collection => {
               return (
                 <LinkContainer id='collection-search-link-container'>
@@ -135,9 +135,3 @@ export class CollectionSearch extends Component {
 }
 
 export default CollectionSearch;
-
-/* unsplash.search.collections("dogs", 1)
-  .then(toJson)
-  .then(json => {
-    // Your code
-  }); */
