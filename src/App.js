@@ -6,6 +6,7 @@ import UserSearch from './pages/Search/UserSearch';
 import CollectionsSearch from './pages/Search/CollectionsSearch';
 import Collection from './pages/Collection';
 import PhotosSearch from './pages/Search/PhotosSearch';
+import GoToTop from './components/GoToTop';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import './reset.css';
@@ -20,6 +21,20 @@ class App extends React.Component {
     isGrid: true,
     isList: false,
     isColumn: false
+  };
+
+  goToTop = e => {
+    window.onscroll = () => {
+      const myButton = document.getElementById('goToTop');
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        myButton.style.display = 'block';
+      } else {
+        myButton.style.display = 'none';
+      }
+    };
   };
 
   toggleView = e => {
@@ -51,11 +66,12 @@ class App extends React.Component {
           isGrid: this.state.isGrid,
           isList: this.state.isList,
           isColumn: this.state.isColumn,
-          //toggleRow: this.toggleRow,
-          toggleView: this.toggleView
+          toggleView: this.toggleView,
+          goToTop: this.goToTop
         }}>
         <Router>
           <div className='app-container'>
+            <GoToTop />
             <HeaderComponent />
             <div className='routes-container'>
               <Switch>

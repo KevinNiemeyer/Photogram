@@ -106,7 +106,7 @@ export class UserSearch extends Component {
     return (
       <Container id='user-search-container'>
         <Heading>
-          Search results for{' '}
+          Search results for
           <SearchTerm>{this.props.match.params.user}</SearchTerm> in Users:
         </Heading>
         <InfiniteScroll

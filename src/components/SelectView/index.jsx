@@ -56,10 +56,6 @@ const RadioGroup = styled.ul`
   }
 `;
 
-const Label = styled.label``;
-
-const Input = styled.input``;
-
 export class SelectView extends Component {
   render() {
     return (
