@@ -96,7 +96,6 @@ const UserPage = props => {
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
   const user = photos.length ? photos[0].user : null;
-  console.log(props);
   return (
     <LayoutContext.Consumer>
       {value => {

@@ -9,6 +9,8 @@ const Loader = styled.div``;
 
 const Container = styled.div`
   background-color: rgb(250, 250, 250);
+  display: flex;
+  flex-direction: column;
 `;
 
 const Heading = styled.div`
@@ -22,7 +24,9 @@ const Results = styled.div`
   position: relative;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
 `;
 
@@ -54,6 +58,10 @@ const Img = styled.img`
 const linkStyle = {
   textDecoration: 'none'
 };
+
+const SearchTerm = styled.span`
+  color: rgb(247, 154, 120);
+`;
 
 export class UserSearch extends Component {
   state = {
@@ -98,8 +106,8 @@ export class UserSearch extends Component {
     return (
       <Container id='user-search-container'>
         <Heading>
-          Search results for "{this.props.match.params.user}" in category
-          "user":
+          Search results for{' '}
+          <SearchTerm>{this.props.match.params.user}</SearchTerm> in Users:
         </Heading>
         <InfiniteScroll
           pageStart={1}

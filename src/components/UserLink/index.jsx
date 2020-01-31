@@ -30,7 +30,7 @@ const Img = styled.img`
 
 const linkStyle = {
   textDecoration: 'none',
-  color: 'red',
+  color: `rgb(247, 154, 120)`,
   display: 'flex',
   alignItems: 'center',
   paddingLeft: '5px'

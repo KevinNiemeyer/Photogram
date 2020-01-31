@@ -81,6 +81,10 @@ ${props =>
   `}
 `;
 
+const SearchTerm = styled.span`
+  color: rgb(247, 154, 120);
+`;
+
 const Loader = styled.div``;
 
 const PhotoSearch = props => {
@@ -108,7 +112,9 @@ const PhotoSearch = props => {
         return (
           <Container>
             <Heading>
-              Search results for {props.match.params.searchTerm}
+              Search results for{' '}
+              <SearchTerm>{props.match.params.searchTerm}</SearchTerm> in
+              Photos:
               <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll

@@ -21,9 +21,10 @@ const Heading = styled.div`
 
 const Results = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: relative;
   padding: 20px;
   width: 100%;
@@ -51,6 +52,10 @@ const Img = styled.img`
 const linkStyle = {
   textDecoration: 'none'
 };
+
+const SearchTerm = styled.span`
+  color: rgb(247, 154, 120);
+`;
 
 export class CollectionSearch extends Component {
   state = {
@@ -96,8 +101,9 @@ export class CollectionSearch extends Component {
     return (
       <Container>
         <Heading>
-          Search results for "{this.props.match.params.collection}" in category
-          "Collections":
+          Search results for{' '}
+          <SearchTerm> {this.props.match.params.collection} </SearchTerm>in
+          Collections:
         </Heading>
 
         <InfiniteScroll
