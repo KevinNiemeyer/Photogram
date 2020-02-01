@@ -11,6 +11,7 @@ const Container = styled.div`
   width: 30px;
   padding-right: 15px;
   width: 100%;
+  flex: 1;
 `;
 
 const Img = styled.img`

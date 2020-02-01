@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
+import MenuBox from '../MenuBox';
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex: 1;
+`;
 
 const Form = styled.form`
   display: flex;
+
   width: 100%;
 `;
 
@@ -28,7 +36,7 @@ const Button = styled.button`
     opacity: 0.9;
   }
   &:active img {
-    transform: scale(0.9);
+    transform: scale(0.7);
   }
 `;
 
@@ -61,25 +69,25 @@ export class SearchBar extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <select required onChange={this.handleCategoryChange}>
-          <option value='' default selected disabled hidden>
-            Category
-          </option>
-          <option value='User'>Users</option>
-          <option value='Collections'>Collections</option>
-          <option value='Photos'>Photos</option>
-        </select>
-        <Input
-          required
-          onChange={this.handleSearchChange}
-          type='text'
-          placeholder='Search'
-        />
-        <Button>
-          <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
-        </Button>
-      </Form>
+      <Container id='search-bar-container'>
+        <MenuBox id='menubox'></MenuBox>
+        <Form id='form' onSubmit={this.handleSubmit}>
+          <Input
+            id='search-input'
+            required
+            onChange={this.handleSearchChange}
+            type='text'
+            placeholder='Search'
+          />
+          <Button id='search-button'>
+            <Img
+              id='search-button-img'
+              src={MagnifyingGlassIcon}
+              alt='magnifying-glass'
+            />
+          </Button>
+        </Form>
+      </Container>
     );
   }
 }
