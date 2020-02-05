@@ -57,6 +57,7 @@ class Photo extends Component {
       <Container id='photo-container'>
         {this.props.isGrid ? (
           <GridPhoto
+            download
             landscape={this.props.landscape}
             src={this.props.photo.urls.small}
             onClick={this.toggleModal}
