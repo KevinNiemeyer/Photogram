@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
-import MenuBox from '../MenuBox';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import Select from 'react-select';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +14,6 @@ const Container = styled.div`
 
 const Form = styled.form`
   display: flex;
-
   width: 100%;
 `;
 
@@ -48,14 +49,15 @@ const Img = styled.img`
 export class SearchBar extends Component {
   state = {
     searchTerm: '',
-    category: ''
+    category: 'users'
   };
 
   handleSearchChange = e =>
     this.setState({ searchTerm: e.target.value.toLowerCase() });
 
   handleCategoryChange = e => {
-    this.setState({ category: e.target.value.toLowerCase() });
+    this.setState({ category: e.value.toLowerCase });
+    console.log(e.value);
   };
 
   handleSubmit = e => {
@@ -68,10 +70,55 @@ export class SearchBar extends Component {
   };
 
   render() {
+    const options = [
+      { value: 'users', label: 'Users' },
+      { value: 'collections', label: 'Collections' },
+      { value: 'photos', label: 'Photos' }
+    ];
+
+    const customStyles = {
+      menu: (provided, state) => ({
+        ...provided,
+        width: state.selectProps.width,
+        display: state.selectProps.display,
+        flexDirection: state.selectProps.flexDirection,
+        justifyContent: state.selectProps.justifyContent,
+        color: state.selectProps.menuColor,
+        marginRight: state.selectProps.marginRight,
+        padding: 5
+      }),
+      dropdownIndicator: (provided, state) => ({
+        color: state.selectProps.menuColor
+      }),
+      control: (
+        _,
+        { selectProps: { width, display, flexDirection, marginRight } }
+      ) => ({
+        width: width,
+        display: display,
+        flexDirection: flexDirection,
+        marginRight: marginRight
+      }),
+
+      singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+
+        return { ...provided, opacity, transition };
+      }
+    };
     return (
       <Container id='search-bar-container'>
-        <MenuBox id='menubox'></MenuBox>
         <Form id='form' onSubmit={this.handleSubmit}>
+          <Select
+            styles={customStyles}
+            width='150px'
+            menuColor='rgb(247, 154, 120)'
+            display='flex'
+            marginRight='20px'
+            options={options}
+            onChange={this.handleCategoryChange}
+          />
           <Input
             id='search-input'
             required
@@ -79,6 +126,7 @@ export class SearchBar extends Component {
             type='text'
             placeholder='Search'
           />
+
           <Button id='search-button'>
             <Img
               id='search-button-img'

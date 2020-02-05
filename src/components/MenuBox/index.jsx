@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import onClickOutside from 'react-onclickoutside';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   font-size: 16px;
+  width: 150px;
 `;
 // trying to get the list to drop down below the headerbar.
 const Wrapper = styled.div`
@@ -81,6 +84,7 @@ const Icon = styled.p`
 
 class MenuBox extends Component {
   state = {
+    category: '',
     listOpen: false,
     buttonText: 'Category'
   };
@@ -95,14 +99,34 @@ class MenuBox extends Component {
     }));
   }
 
+  handleChange = e => {
+    this.setState({ category: e.value });
+    console.log(this.state);
+  };
+
   handleClick = e => {
     this.setState({ buttonText: e.target.innerHTML });
   };
 
   render() {
+    const mystyle = {
+      color: 'white',
+      backgroundColor: 'DodgerBlue',
+      padding: '10px',
+      fontFamily: 'Arial'
+    };
     const { listOpen, buttonText } = this.state;
-    console.log(listOpen);
+    const options = ['Users', 'Collections', 'Photos'];
+    const defaultOption = options[0];
     return (
+      <Container>
+        <Dropdown
+          onChange={this.handleChange}
+          options={options}
+          placeholder='Category'
+        />
+      </Container>
+      /*
       <Container id='dd-container'>
         <Wrapper id='dd-wrapper'>
           <Header
@@ -130,6 +154,7 @@ class MenuBox extends Component {
           </Icon>
         </IconContainer>
       </Container>
+      */
     );
   }
 }
