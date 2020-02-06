@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../Modal';
+import unsplash from '../../unsplash';
 
 const Container = styled.div`
   height: 100%;
@@ -57,7 +58,6 @@ class Photo extends Component {
       <Container id='photo-container'>
         {this.props.isGrid ? (
           <GridPhoto
-            download
             landscape={this.props.landscape}
             src={this.props.photo.urls.small}
             onClick={this.toggleModal}
@@ -83,7 +83,8 @@ class Photo extends Component {
           id='modal'
           onClose={this.toggleModal}
           show={this.state.show}
-          photo={this.props.photo.urls.full}
+          //photo={this.props.photo.urls.full}
+          photo={this.props.photo}
         />
       </Container>
     );

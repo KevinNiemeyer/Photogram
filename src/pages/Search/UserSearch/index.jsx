@@ -102,7 +102,9 @@ export class UserSearch extends Component {
   render() {
     const { users } = this.state;
     const { hasMore } = this.state;
-    console.log(this.state.users);
+    if (users.length === 0) {
+      return null;
+    }
 
     return (
       <Container id='user-search-container'>

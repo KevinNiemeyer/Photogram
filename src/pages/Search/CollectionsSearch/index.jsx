@@ -97,7 +97,9 @@ export class CollectionSearch extends Component {
 
   render() {
     const { collections } = this.state;
-
+    if (collections.length === 0) {
+      return null;
+    }
     return (
       <Container>
         <Heading>

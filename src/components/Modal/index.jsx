@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { toJson } from 'unsplash-js';
+import { unsplash } from '../../unsplash';
 
 const Container = styled.div`
   position: fixed;
@@ -54,19 +55,19 @@ const Close = styled.span`
   }
 `;
 
-const A = styled.a``;
-
 const Modal = props => {
   if (!props.show) {
     return null;
   }
-  console.log(props.photo);
+
   return (
     <Container id='container1'>
       <Container2 id='container2'>
-        <A href={props.photo} download>
-          <Img landscape={props.landscape} src={props.photo} alt='nada' />
-        </A>
+        <Img
+          landscape={props.landscape}
+          src={props.photo.urls.full}
+          alt='nada'
+        />
 
         <Close onClick={props.onClose}>&times;</Close>
       </Container2>
