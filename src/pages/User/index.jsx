@@ -7,6 +7,7 @@ import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';
+import GoToTop from '../../components/GoToTop';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -101,6 +102,7 @@ const UserPage = props => {
       {value => {
         return (
           <Container>
+            <GoToTop />
             <UserInfo user={user} />
             <SelectView value={value}></SelectView>
             <InfiniteScroll
