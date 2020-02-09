@@ -3,7 +3,7 @@ import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
 import { unsplash } from '../../unsplash';
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';

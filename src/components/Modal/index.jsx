@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { toJson } from 'unsplash-js';
 import { unsplash } from '../../unsplash';
+import { toJson } from 'unsplash-js';
 
 const Container = styled.div`
   position: fixed;
@@ -55,7 +55,19 @@ const Close = styled.span`
   }
 `;
 
+// this is sending a request to the server, and getting a response, but not popping up a download window
 const Modal = props => {
+  const clickMe = () => {
+    unsplash.photos
+      .getPhoto(props.photo.id)
+      .then(toJson)
+      .then(json => {
+        console.log(json);
+        unsplash.photos.downloadPhoto(json);
+      });
+  };
+
+  const [photo, setPhoto] = useState([]);
   if (!props.show) {
     return null;
   }
@@ -68,6 +80,8 @@ const Modal = props => {
           src={props.photo.urls.full}
           alt='nada'
         />
+
+        <button onClick={clickMe}>click</button>
 
         <Close onClick={props.onClose}>&times;</Close>
       </Container2>

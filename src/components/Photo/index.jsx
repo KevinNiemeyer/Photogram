@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import Modal from '../Modal';
 import unsplash from '../../unsplash';
 
@@ -83,7 +83,6 @@ class Photo extends Component {
           id='modal'
           onClose={this.toggleModal}
           show={this.state.show}
-          //photo={this.props.photo.urls.full}
           photo={this.props.photo}
         />
       </Container>

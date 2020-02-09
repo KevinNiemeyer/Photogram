@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 const LinkContainer = styled.div`
   display: flex;
