@@ -101,10 +101,13 @@ const Landing = () => {
       });
   };
 
-  // is this code needed, and if so, why?
   useEffect(() => {
     getData();
   }, []);
+
+  if (photos.length === 0) {
+    return null;
+  }
 
   return (
     <LayoutContext.Consumer>

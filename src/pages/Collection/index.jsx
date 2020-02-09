@@ -8,6 +8,7 @@ import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';
 import GoToTop from '../../components/GoToTop';
+
 const Container = styled.div`
   margin: 0 auto;
 
@@ -100,10 +101,12 @@ const Collection = props => {
     getData();
   }, []);
 
+  if (photos.length === 0) {
+    return null;
+  }
   return (
     <LayoutContext.Consumer>
       {value => {
-        console.log(value);
         return (
           <Container>
             <GoToTop />

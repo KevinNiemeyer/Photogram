@@ -107,6 +107,10 @@ const PhotoSearch = props => {
     getData();
   }, []);
 
+  if (photos.length === 0) {
+    return null;
+  }
+
   return (
     <LayoutContext.Consumer>
       {value => {

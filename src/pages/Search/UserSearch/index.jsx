@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { unsplash } from '../../../unsplash';
 import InfiniteScroll from 'react-infinite-scroller';
+import GoToTop from '../../../components/GoToTop';
 
 const Loader = styled.div``;
 
@@ -25,19 +26,19 @@ const Results = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
 `;
 
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 15%;
+  width: 150px;
   height: 100%;
   padding: 20px;
   text-decoration: none;
+  padding: 20px;
   &:hover {
     opacity: 0.8;
   }
@@ -49,18 +50,14 @@ const LinkTitle = styled.div`
   text-align: center;
 `;
 const Img = styled.img`
-  width: 125px;
-  height: 125px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 `;
 
 const linkStyle = {
   textDecoration: 'none'
 };
-
-const SearchTerm = styled.span`
-  color: rgb(247, 154, 120);
-`;
 
 export class UserSearch extends Component {
   state = {
@@ -101,26 +98,21 @@ export class UserSearch extends Component {
 
   render() {
     const { users } = this.state;
-    const { hasMore } = this.state;
-    console.log(this.state.hasMore);
+    if (users.length === 0) {
+      return 0;
+    }
     return (
       <Container id='user-search-container'>
+        <GoToTop />
         <Heading>
-          Search results for
-          <SearchTerm> {this.props.match.params.user}</SearchTerm> in Users:
+          Search results for "{this.props.match.params.user}" in category
+          "Users":
         </Heading>
         <InfiniteScroll
           pageStart={1}
           loadMore={this.getData}
-          hasMore={hasMore}
-          loader={
-            hasMore ? (
-              //this doesn't really work. needs more work.
-              <Loader key={0}>Loading...</Loader>
-            ) : (
-              <Loader key={0}>No more photos</Loader>
-            )
-          }>
+          hasMore={this.state.hasMore}
+          loader={<Loader key={0}>Loading ...</Loader>}>
           <Results id='user-search-results'>
             {users.map(user => {
               return (

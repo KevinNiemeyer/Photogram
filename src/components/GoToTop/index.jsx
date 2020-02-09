@@ -49,7 +49,7 @@ class GoToTop extends Component {
   };
 
   // trying to get the arrow to appear/disappear when it is at the top of the page
-  componentDidUpdate() {
+  componentDidMount() {
     window.onscroll = () => {
       if (
         document.body.scrollTop > 20 ||
@@ -66,6 +66,7 @@ class GoToTop extends Component {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   };
+
   render() {
     return (
       <LayoutContext.Consumer>
