@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import UserLink from '../../../components/UserLink';
 import { LayoutContext } from '../../../App';
 import SelectView from '../../../components/SelectView';
+import GoToTop from '../../../components/GoToTop';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -107,6 +108,7 @@ const PhotoSearch = props => {
       {value => {
         return (
           <Container>
+            <GoToTop />
             <Heading>
               Search results for {props.match.params.searchTerm}
               <SelectView value={value}></SelectView>

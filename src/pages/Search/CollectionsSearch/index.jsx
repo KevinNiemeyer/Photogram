@@ -4,6 +4,7 @@ import { toJson } from 'unsplash-js';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
+import GoToTop from '../../../components/GoToTop';
 
 const Loader = styled.div``;
 
@@ -95,6 +96,7 @@ export class CollectionSearch extends Component {
 
     return (
       <Container>
+        <GoToTop />
         <Heading>
           Search results for "{this.props.match.params.collection}" in category
           "Collections":

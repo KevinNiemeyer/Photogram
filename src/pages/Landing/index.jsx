@@ -1,3 +1,6 @@
+//getting an issue where the first search you do works, but if you type in a different search term,
+//it still displays the first search
+
 import React, { useState, useEffect } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -7,6 +10,7 @@ import styled, { css } from 'styled-components';
 import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';
+import GoToTop from '../../components/GoToTop';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -107,6 +111,7 @@ const Landing = () => {
       {value => {
         return (
           <Container id='landing-container'>
+            <GoToTop />
             <Heading id='landing-heading'>
               Latest Photos:
               <SelectView value={value}></SelectView>
