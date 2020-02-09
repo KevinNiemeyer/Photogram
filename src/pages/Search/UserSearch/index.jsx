@@ -52,7 +52,6 @@ const LinkTitle = styled.div`
 const Img = styled.img`
   width: 150px;
   height: 150px;
-  border-radius: 50%;
 `;
 
 const linkStyle = {
@@ -95,7 +94,6 @@ export class UserSearch extends Component {
         });
       });
   };
-
   render() {
     const { users } = this.state;
     if (users.length === 0) {
@@ -123,7 +121,7 @@ export class UserSearch extends Component {
                     to={`/user/${user.username}`}
                     style={linkStyle}>
                     <LinkTitle>{user.username}</LinkTitle>
-                    <Img src={user.profile_image.medium} alt={user.p} />
+                    <Img src={user.profile_image.large} alt={user.p} />
                   </Link>
                 </LinkContainer>
               );

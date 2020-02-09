@@ -48,7 +48,6 @@ const LinkTitle = styled.div`
 const Img = styled.img`
   width: 150px;
   height: 150px;
-  border-radius: 50%;
 `;
 const linkStyle = {
   textDecoration: 'none'

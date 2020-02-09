@@ -7,7 +7,8 @@ const Container = styled.div`
 `;
 
 const ColumnPhoto = styled.img`
-  display: block;
+  display: flex;
+  justify-content: center;
   background: url(${props => props.src}) no-repeat center center;
   &:hover {
     opacity: 0.8;
