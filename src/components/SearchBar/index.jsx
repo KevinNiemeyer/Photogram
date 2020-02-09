@@ -43,16 +43,17 @@ export class SearchBar extends Component {
     category: ''
   };
 
-  handleSearchChange = e =>
+  handleSearchChange = e => {
     this.setState({ searchTerm: e.target.value.toLowerCase() });
-
+  };
   handleCategoryChange = e => {
     this.setState({ category: e.target.value.toLowerCase() });
   };
 
   handleSubmit = e => {
+    document.getElementById('search-input').value = '';
     e.preventDefault();
-    if (this.state.searchTerm) {
+    if (this.state.searchTerm && this.state.searchTerm) {
       this.props.history.push(
         `/search/${this.state.category}/${this.state.searchTerm}`
       );
@@ -71,6 +72,7 @@ export class SearchBar extends Component {
           <option value='Photos'>Photos</option>
         </select>
         <Input
+          id='search-input'
           required
           onChange={this.handleSearchChange}
           type='text'

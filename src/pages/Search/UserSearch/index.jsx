@@ -58,6 +58,10 @@ const linkStyle = {
   textDecoration: 'none'
 };
 
+const SearchTerm = styled.span`
+  color: rgb(247, 154, 120);
+`;
+
 export class UserSearch extends Component {
   state = {
     users: [],
@@ -103,8 +107,9 @@ export class UserSearch extends Component {
       <Container id='user-search-container'>
         <GoToTop />
         <Heading>
-          Search results for "{this.props.match.params.user}" in category
-          "Users":
+          Search results for{' '}
+          <SearchTerm> {this.props.match.params.user} </SearchTerm> in
+          <SearchTerm> Users</SearchTerm>:
         </Heading>
         <InfiniteScroll
           pageStart={1}

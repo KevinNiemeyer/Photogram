@@ -104,7 +104,7 @@ export class CollectionSearch extends Component {
         <Heading>
           Search results for
           <SearchTerm> {this.props.match.params.collection} </SearchTerm>in
-          Collections:
+          <SearchTerm> Collections</SearchTerm>:
         </Heading>
 
         <InfiniteScroll

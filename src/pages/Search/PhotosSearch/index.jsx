@@ -118,9 +118,9 @@ const PhotoSearch = props => {
           <Container>
             <GoToTop />
             <Heading>
-              Search results for{' '}
-              <SearchTerm>{props.match.params.searchTerm}</SearchTerm> in
-              Photos:
+              Search results for
+              <SearchTerm> {props.match.params.searchTerm} </SearchTerm> in
+              <SearchTerm> Photos: </SearchTerm>
               <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll
