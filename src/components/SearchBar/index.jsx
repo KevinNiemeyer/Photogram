@@ -51,19 +51,23 @@ export class SearchBar extends Component {
   };
 
   handleSubmit = e => {
-    document.getElementById('search-input').value = '';
+    console.log(this.state.searchTerm);
+
     e.preventDefault();
-    if (this.state.searchTerm && this.state.searchTerm) {
+    if (this.state.searchTerm && this.state.category) {
       this.props.history.push(
         `/search/${this.state.category}/${this.state.searchTerm}`
       );
     }
+    document.getElementById('search-input').value = '';
+    document.getElementById('select-box').selectedIndex = 0;
   };
+  //can't get it to select the same category with a different search term
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <select required onChange={this.handleCategoryChange}>
+        <select id='select-box' required onChange={this.handleCategoryChange}>
           <option value='' default selected disabled hidden>
             Category
           </option>

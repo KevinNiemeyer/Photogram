@@ -75,6 +75,7 @@ export class UserSearch extends Component {
   }
 
   getData = () => {
+    console.log(this.props.match.params.user);
     unsplash.search
       .users(this.props.match.params.user, this.state.page, 5)
       .then(toJson)
@@ -103,6 +104,7 @@ export class UserSearch extends Component {
     if (users.length === 0) {
       return 0;
     }
+
     return (
       <Container id='user-search-container'>
         <GoToTop />
