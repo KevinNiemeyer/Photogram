@@ -46,21 +46,53 @@ const ListPhoto = styled.img`
 `;
 
 const FavIcon = styled.div`
-  transition: 0.5s;
+  color: red;
   position: absolute;
   font-size: 24px;
   top: 5px;
   left: 5px;
-  -webkit-text-stroke: 1px red;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  &:active {
+    transform: scale(0.9);
+  }
+`;
+
+const ToolTip = styled.span`
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
   &:hover {
-    -webkit-text-fill-color: red;
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
 class Photo extends Component {
   state = {
-    show: false
+    show: false,
+    favorite: false
   };
   toggleModal = () => {
     this.setState({ show: !this.state.show });
@@ -75,14 +107,24 @@ class Photo extends Component {
   }; */
 
   toggleFavorite = () => {
-    let getArr = JSON.parse(localStorage.getItem('photos'));
-    if (!getArr) {
-      getArr = [];
+    if (this.state.favorite) {
+      //remove the photo from favorites
+      if (localStorage.getItem('photos', this.photo)) {
+        localStorage.removeItem('photos', this.photo);
+      }
+    } else {
+      let getArr = JSON.parse(localStorage.getItem('photos'));
+      if (!getArr) {
+        getArr = [];
+      }
+
+      getArr.push(this.props.photo);
+
+      localStorage.setItem('photos', JSON.stringify(getArr));
+      //trying to get the heart to toggle when it's selected, and the picture to delete
+      this.setState({ favorite: true });
+      console.log(this.state);
     }
-
-    getArr.push(this.props.photo);
-
-    localStorage.setItem('photos', JSON.stringify(getArr));
   };
 
   componentDidMount() {}
@@ -113,7 +155,9 @@ class Photo extends Component {
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon onClick={this.toggleFavorite}>&hearts;</FavIcon>
+        <FavIcon onClick={this.toggleFavorite}>
+          <ToolTip>Add to favorites</ToolTip>&hearts;
+        </FavIcon>
         <Modal
           id='modal'
           onClose={this.toggleModal}
