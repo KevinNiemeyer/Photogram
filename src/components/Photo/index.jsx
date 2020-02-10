@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../Modal';
+import ReactTooltip from 'react-tooltip';
 
 const Container = styled.div`
   position: relative;
@@ -155,8 +156,8 @@ class Photo extends Component {
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon onClick={this.toggleFavorite}>
-          <ToolTip>Add to favorites</ToolTip>&hearts;
+        <FavIcon data-tip='Add to favorites' onClick={this.toggleFavorite}>
+          &hearts;
         </FavIcon>
         <Modal
           id='modal'
@@ -164,6 +165,7 @@ class Photo extends Component {
           show={this.state.show}
           photo={this.props.photo.urls.full}
         />
+        <ReactTooltip type='info' />
       </Container>
     );
   }

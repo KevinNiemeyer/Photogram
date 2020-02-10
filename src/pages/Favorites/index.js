@@ -11,6 +11,7 @@ import UserLink from '../../components/UserLink';
 import { LayoutContext } from '../../App';
 import SelectView from '../../components/SelectView';
 import GoToTop from '../../components/GoToTop';
+import ReactTooltip from 'react-tooltip';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -44,6 +45,7 @@ const Results = styled.div`
 `;
 
 const PhotoContainer = styled.div`
+position: relative;
   display: flex;
   flex-direction: column;
   margin: 20px;
@@ -84,6 +86,23 @@ const PhotoContainer = styled.div`
       flex: 1;
       width: 50%;
     `}
+`;
+
+const Remove = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: red;
+  background-color: rgb(250, 250, 250);
+  border-radius: 3px;
+  z-index: 2;
 `;
 
 const Loader = styled.div``;
@@ -154,10 +173,12 @@ class Favorites extends Component {
                         key={photo.id}
                         photo={photo}
                       />
+                      <Remove data-tip='Remove from favorites'>x</Remove>
                     </PhotoContainer>
                   );
                 })}
               </Results>
+              <ReactTooltip type='info' />
             </Container>
           );
         }}
