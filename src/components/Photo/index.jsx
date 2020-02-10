@@ -66,13 +66,23 @@ class Photo extends Component {
     this.setState({ show: !this.state.show });
   };
   //cant get the state object to add more photos to itself:
+  /* toggleFavorite = () => {
+    const favArray = JSON.parse(localStorage.getItem('favorites') || []);
+    console.log(favArray);
+    //let tmpArr = [...favArray, this.props.photo];
+    //console.log(tmpArr);
+    //localStorage.setItem('favorites', JSON.stringify(favArray));
+  }; */
+
   toggleFavorite = () => {
-    let locData = JSON.parse(localStorage.getItem('favorites'));
-    const tmpData = {
-      ...locData,
-      [this.props.photo.id]: this.props.photo
-    };
-    localStorage.setItem('favorites', JSON.stringify(tmpData));
+    let getArr = JSON.parse(localStorage.getItem('photos'));
+    if (!getArr) {
+      getArr = [];
+    }
+
+    getArr.push(this.props.photo);
+
+    localStorage.setItem('photos', JSON.stringify(getArr));
   };
 
   componentDidMount() {}

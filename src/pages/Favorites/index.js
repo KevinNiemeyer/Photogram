@@ -1,7 +1,7 @@
 //getting an issue where the first search you do works, but if you type in a different search term,
 //it still displays the first search
 
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
@@ -22,6 +22,7 @@ const Heading = styled.div`
   text-align: center;
   font-size: 40px;
   padding: 20px 0 0 20px;
+  background-color: rgb(250, 250, 250);
 `;
 
 const Results = styled.div`
@@ -87,59 +88,45 @@ const PhotoContainer = styled.div`
 
 const Loader = styled.div``;
 
-const Favorites = () => {
-  const [photos, setPhotos] = useState({});
-  const [page, setPage] = useState(1);
-
-  const getData = () => {
-    let locData = JSON.parse(localStorage.getItem('favorites'));
-    //console.log(locData['bN9FFTPlLjU'].id);
-    Object.keys(locData).forEach(prop => {
-      setPhotos(locData[prop]);
-      console.log(locData[prop]);
-    });
-
-    setPage(page + 1);
-    /*
-    unsplash.photos
-      .listPhotos(page, 25, 'latest')
-      .then(toJson)
-      .then(json => {
-        setPhotos([...photos, ...json]);
-        setPage(page + 1);
-      });
-      */
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  if (photos.length === 0) {
-    return null;
+class Favorites extends Component {
+  state = { photos: [] };
+  componentDidMount() {
+    const photos = localStorage.getItem('photos');
+    this.setState({ photos: JSON.parse(photos) });
+    //if (favorites) this.setState(JSON.parse(favorites));
   }
 
-  return (
-    <LayoutContext.Consumer>
-      {value => {
-        return (
-          <Container id='favorites-container'>
-            <GoToTop />
-            <Heading id='favorites-heading'>
-              Favorites:
-              <SelectView value={value}></SelectView>
-            </Heading>
-            <InfiniteScroll
-              id='infinite-scroll'
-              pageStart={1}
-              loadMore={getData}
-              hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
+  //setPage(page + 1);
+  /*
+  unsplash.photos
+  .listPhotos(page, 25, 'latest')
+  .then(toJson)
+  .then(json => {
+    setPhotos([...photos, ...json]);
+    setPage(page + 1);
+  });
+  */
+
+  render() {
+    const { photos } = this.state;
+    if (!photos) {
+      return <Heading id='favorites-heading'>No photos to display.</Heading>;
+    }
+    return (
+      <LayoutContext.Consumer>
+        {value => {
+          return (
+            <Container id='favorites-container'>
+              <GoToTop />
+              <Heading id='favorites-heading'>
+                Favorites:
+                <SelectView value={value}></SelectView>
+              </Heading>
               <Results
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
                 isList={value.isList}
-                id='favorites-results'>
+                id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
@@ -171,12 +158,11 @@ const Favorites = () => {
                   );
                 })}
               </Results>
-            </InfiniteScroll>
-          </Container>
-        );
-      }}
-    </LayoutContext.Consumer>
-  );
-};
-
+            </Container>
+          );
+        }}
+      </LayoutContext.Consumer>
+    );
+  }
+}
 export default Favorites;
