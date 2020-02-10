@@ -6,6 +6,7 @@ import UserSearch from './pages/Search/UserSearch';
 import CollectionsSearch from './pages/Search/CollectionsSearch';
 import Collection from './pages/Collection';
 import PhotosSearch from './pages/Search/PhotosSearch';
+import Favorites from './pages/Favorites';
 import GoToTop from './components/GoToTop';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -74,6 +75,7 @@ class App extends React.Component {
                   exact
                   component={PhotosSearch}
                 />
+                <Route path='/favorites' exact component={Favorites} />
                 <Route path='*' component={FourOhFour} />
               </Switch>
             </div>

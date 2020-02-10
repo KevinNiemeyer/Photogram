@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Modal from '../Modal';
 
 const Container = styled.div`
+  position: relative;
   height: 100%;
 `;
 
@@ -44,14 +45,37 @@ const ListPhoto = styled.img`
   background-size: cover;
 `;
 
+const FavIcon = styled.div`
+  transition: 0.5s;
+  position: absolute;
+  font-size: 24px;
+  top: 5px;
+  left: 5px;
+  -webkit-text-stroke: 1px red;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  &:hover {
+    -webkit-text-fill-color: red;
+  }
+`;
+
 class Photo extends Component {
   state = {
     show: false
   };
-
   toggleModal = () => {
     this.setState({ show: !this.state.show });
   };
+  //cant get the state object to add more photos to itself:
+  toggleFavorite = () => {
+    let locData = JSON.parse(localStorage.getItem('favorites'));
+    const tmpData = {
+      ...locData,
+      [this.props.photo.id]: this.props.photo.urls.regular
+    };
+    localStorage.setItem('favorites', JSON.stringify(tmpData));
+  };
+
+  componentDidMount() {}
 
   render() {
     return (
@@ -79,6 +103,7 @@ class Photo extends Component {
             alt={this.props.photo.alt_description}
           />
         )}
+        <FavIcon onClick={this.toggleFavorite}>&hearts;</FavIcon>
         <Modal
           id='modal'
           onClose={this.toggleModal}
