@@ -70,7 +70,7 @@ class Photo extends Component {
     let locData = JSON.parse(localStorage.getItem('favorites'));
     const tmpData = {
       ...locData,
-      [this.props.photo.id]: this.props.photo.urls.regular
+      [this.props.photo.id]: this.props.photo
     };
     localStorage.setItem('favorites', JSON.stringify(tmpData));
   };

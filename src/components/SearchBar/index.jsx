@@ -51,8 +51,6 @@ export class SearchBar extends Component {
   };
 
   handleSubmit = e => {
-    console.log(this.state.searchTerm);
-
     e.preventDefault();
     if (this.state.searchTerm && this.state.category) {
       this.props.history.push(
