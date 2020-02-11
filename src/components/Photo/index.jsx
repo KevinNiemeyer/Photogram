@@ -57,39 +57,6 @@ const FavIcon = styled.div`
   }
 `;
 
-const ToolTip = styled.span`
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-
-  &:hover {
-    visibility: visible;
-    opacity: 1;
-  }
-`;
-
 class Photo extends Component {
   state = {
     show: false,
@@ -107,7 +74,7 @@ class Photo extends Component {
     //localStorage.setItem('favorites', JSON.stringify(favArray));
   }; */
 
-  toggleFavorite = () => {
+  addFavorite = () => {
     if (this.state.favorite) {
       //remove the photo from favorites
       if (localStorage.getItem('photos', this.photo)) {
@@ -127,8 +94,6 @@ class Photo extends Component {
       console.log(this.state);
     }
   };
-
-  componentDidMount() {}
 
   render() {
     return (
@@ -156,7 +121,7 @@ class Photo extends Component {
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon data-tip='Add to favorites' onClick={this.toggleFavorite}>
+        <FavIcon data-tip='Add to favorites' onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
         <Modal

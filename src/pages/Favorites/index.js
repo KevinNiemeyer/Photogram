@@ -2,6 +2,7 @@
 //it still displays the first search
 
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
 import Photo from '../../components/Photo';
@@ -96,7 +97,7 @@ const Remove = styled.div`
   height: 20px;
   position: absolute;
   bottom: 10px;
-  right: 20px;
+  right: 25px;
   font-size: 16px;
   font-weight: bold;
   color: red;
@@ -112,19 +113,11 @@ class Favorites extends Component {
   componentDidMount() {
     const photos = localStorage.getItem('photos');
     this.setState({ photos: JSON.parse(photos) });
-    //if (favorites) this.setState(JSON.parse(favorites));
   }
 
-  //setPage(page + 1);
-  /*
-  unsplash.photos
-  .listPhotos(page, 25, 'latest')
-  .then(toJson)
-  .then(json => {
-    setPhotos([...photos, ...json]);
-    setPage(page + 1);
-  });
-  */
+  removeFavorite = () => {
+    console.log(this.props.photo);
+  };
 
   render() {
     const { photos } = this.state;
@@ -172,8 +165,15 @@ class Favorites extends Component {
                         id='photo'
                         key={photo.id}
                         photo={photo}
+                        photoToRemove={photo}
                       />
-                      <Remove data-tip='Remove from favorites'>x</Remove>
+                      <Remove
+                        photo={photo} //not sure why this won't
+                        //pass to the remove favorite function
+                        onClick={this.removeFavorite}
+                        data-tip='Remove from favorites'>
+                        x
+                      </Remove>
                     </PhotoContainer>
                   );
                 })}
