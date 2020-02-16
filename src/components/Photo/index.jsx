@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../Modal';
 import ReactTooltip from 'react-tooltip';
+import Favorites from '../../pages/Favorites';
 
 const Container = styled.div`
   position: relative;
@@ -62,40 +63,28 @@ class Photo extends Component {
     show: false,
     favorite: false
   };
+
   toggleModal = () => {
     this.setState({ show: !this.state.show });
   };
-  //cant get the state object to add more photos to itself:
-  /* toggleFavorite = () => {
-    const favArray = JSON.parse(localStorage.getItem('favorites') || []);
-    console.log(favArray);
-    //let tmpArr = [...favArray, this.props.photo];
-    //console.log(tmpArr);
-    //localStorage.setItem('favorites', JSON.stringify(favArray));
-  }; */
 
   addFavorite = () => {
-    if (this.state.favorite) {
-      //remove the photo from favorites
-      if (localStorage.getItem('photos', this.photo)) {
-        localStorage.removeItem('photos', this.photo);
-      }
-    } else {
-      let getArr = JSON.parse(localStorage.getItem('photos'));
-      if (!getArr) {
-        getArr = [];
-      }
-
-      getArr.push(this.props.photo);
-
-      localStorage.setItem('photos', JSON.stringify(getArr));
-      //trying to get the heart to toggle when it's selected, and the picture to delete
-      this.setState({ favorite: true });
-      console.log(this.state);
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+    if (!storedFavorites) {
+      storedFavorites = [];
     }
+    if (storedFavorites.includes(this.props.photo.id)) {
+      console.log('already in favorites');
+    } else {
+      storedFavorites.push(this.props.photo.id);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+    this.setState({ favorite: true });
   };
 
   render() {
+    console.log(this.props.photo);
     return (
       <Container id='photo-container'>
         {this.props.isGrid ? (

@@ -1,7 +1,7 @@
 //getting an issue where the first search you do works, but if you type in a different search term,
 //it still displays the first search
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { toJson } from 'unsplash-js';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -108,82 +108,96 @@ const Remove = styled.div`
 
 const Loader = styled.div``;
 
-class Favorites extends Component {
-  state = { photos: [] };
-  componentDidMount() {
-    const photos = localStorage.getItem('photos');
-    this.setState({ photos: JSON.parse(photos) });
-  }
+const Favorites = () => {
+  const [photos, setPhotos] = useState([]);
 
-  removeFavorite = () => {
-    console.log(this.props.photo);
+  let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+  if (!storedFavorites) {
+    console.log('no favorites');
+    storedFavorites = [];
+  }
+  var tmpArr = [];
+  const getData = () => {
+    storedFavorites.forEach(id => {
+      unsplash.photos
+        .getPhoto(id)
+        .then(toJson)
+        .then(json => {
+          tmpArr.push(json);
+          setPhotos(tmpArr);
+        });
+    });
   };
 
-  render() {
-    const { photos } = this.state;
-    if (!photos) {
-      return <Heading id='favorites-heading'>No photos to display.</Heading>;
-    }
-    return (
-      <LayoutContext.Consumer>
-        {value => {
-          return (
-            <Container id='favorites-container'>
-              <GoToTop />
-              <Heading id='favorites-heading'>
-                Favorites:
-                <SelectView value={value}></SelectView>
-              </Heading>
-              <Results
-                isGrid={value.isGrid}
-                isColumn={value.isColumn}
-                isList={value.isList}
-                id='landing-results'>
-                {photos.map(photo => {
-                  const { height, width } = photo;
-                  return (
-                    <PhotoContainer
-                      key={photo.id}
+  const removeFavorite = photo => {
+    console.log(photo);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  if (!photos.length) {
+    return null;
+  }
+
+  return (
+    <LayoutContext.Consumer>
+      {value => {
+        return (
+          <Container id='favorites-container'>
+            <GoToTop />
+            <Heading id='favorites-heading'>
+              Favorites:
+              <SelectView value={value}></SelectView>
+            </Heading>
+            <Results
+              isGrid={value.isGrid}
+              isColumn={value.isColumn}
+              isList={value.isList}
+              id='landing-results'>
+              {photos.map(photo => {
+                const { height, width } = photo;
+                return (
+                  <PhotoContainer
+                    key={photo.id}
+                    isGrid={value.isGrid}
+                    isColumn={value.isColumn}
+                    isList={value.isList}
+                    landscape={width > height}>
+                    <UserLink
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
+                      key={photo.user.id}
+                      id='userlink'
+                      photo={photo}
+                    />
+                    <Photo
                       landscape={width > height}
-                      id='result-container'>
-                      <UserLink
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        key={photo.user.id}
-                        id='userlink'
-                        photo={photo}
-                      />
-                      <Photo
-                        landscape={width > height}
-                        isGrid={value.isGrid}
-                        isColumn={value.isColumn}
-                        isList={value.isList}
-                        id='photo'
-                        key={photo.id}
-                        photo={photo}
-                        photoToRemove={photo}
-                      />
-                      <Remove
-                        photo={photo} //not sure why this won't
-                        //pass to the remove favorite function
-                        onClick={this.removeFavorite}
-                        data-tip='Remove from favorites'>
-                        x
-                      </Remove>
-                    </PhotoContainer>
-                  );
-                })}
-              </Results>
-              <ReactTooltip type='info' />
-            </Container>
-          );
-        }}
-      </LayoutContext.Consumer>
-    );
-  }
-}
+                      isGrid={value.isGrid}
+                      isColumn={value.isColumn}
+                      isList={value.isList}
+                      id='photo'
+                      key={photo.id}
+                      photo={photo}
+                      photoToRemove={photo}
+                    />
+                    <Remove
+                      photo={photo}
+                      onClick={() => this.removeFavorite(photo)}
+                      data-tip='Remove from favorites'>
+                      x
+                    </Remove>
+                  </PhotoContainer>
+                );
+              })}
+            </Results>
+            <ReactTooltip type='info' />
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
+  );
+};
 export default Favorites;
