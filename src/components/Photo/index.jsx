@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import Modal from '../Modal';
-import ReactTooltip from 'react-tooltip';
-import Favorites from '../../pages/Favorites';
+import React, { Component } from "react";
+import styled, { css } from "styled-components";
+import Modal from "../Modal";
+import ReactTooltip from "react-tooltip";
+import Favorites from "../../pages/Favorites";
 
 const Container = styled.div`
   position: relative;
@@ -69,24 +69,23 @@ class Photo extends Component {
   };
 
   addFavorite = () => {
-    let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+    let storedFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (!storedFavorites) {
       storedFavorites = [];
     }
     if (storedFavorites.includes(this.props.photo.id)) {
-      console.log('already in favorites');
+      console.log("already in favorites");
     } else {
       storedFavorites.push(this.props.photo.id);
     }
 
-    localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+    localStorage.setItem("favorites", JSON.stringify(storedFavorites));
     this.setState({ favorite: true });
   };
 
   render() {
-    console.log(this.props.photo);
     return (
-      <Container id='photo-container'>
+      <Container id="photo-container">
         {this.props.isGrid ? (
           <GridPhoto
             landscape={this.props.landscape}
@@ -96,7 +95,7 @@ class Photo extends Component {
         ) : this.props.isColumn ? (
           <ColumnPhoto
             landscape={this.props.landscape}
-            id='column-photo-img'
+            id="column-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.regular}
             alt={this.props.photo.alt_description}
@@ -104,22 +103,22 @@ class Photo extends Component {
         ) : (
           <ListPhoto
             landscape={this.props.landscape}
-            id='list-photo-img'
+            id="list-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.thumb}
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon data-tip='Add to favorites' onClick={this.addFavorite}>
+        <FavIcon data-tip="Add to favorites" onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
         <Modal
-          id='modal'
+          id="modal"
           onClose={this.toggleModal}
           show={this.state.show}
           photo={this.props.photo.urls.full}
         />
-        <ReactTooltip type='info' />
+        <ReactTooltip type="info" />
       </Container>
     );
   }

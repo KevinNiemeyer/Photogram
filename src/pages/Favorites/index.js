@@ -1,18 +1,18 @@
 //getting an issue where the first search you do works, but if you type in a different search term,
 //it still displays the first search
 
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
-import Photo from '../../components/Photo';
-import { unsplash } from '../../unsplash';
-import styled, { css } from 'styled-components';
-import UserLink from '../../components/UserLink';
-import { LayoutContext } from '../../App';
-import SelectView from '../../components/SelectView';
-import GoToTop from '../../components/GoToTop';
-import ReactTooltip from 'react-tooltip';
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import { toJson } from "unsplash-js";
+import InfiniteScroll from "react-infinite-scroller";
+import Photo from "../../components/Photo";
+import { unsplash } from "../../unsplash";
+import styled, { css } from "styled-components";
+import UserLink from "../../components/UserLink";
+import { LayoutContext } from "../../App";
+import SelectView from "../../components/SelectView";
+import GoToTop from "../../components/GoToTop";
+import ReactTooltip from "react-tooltip";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -111,22 +111,16 @@ const Loader = styled.div``;
 const Favorites = () => {
   const [photos, setPhotos] = useState([]);
 
-  let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
-  if (!storedFavorites) {
-    console.log('no favorites');
-    storedFavorites = [];
-  }
-  var tmpArr = [];
-  const getData = () => {
-    storedFavorites.forEach(id => {
-      unsplash.photos
-        .getPhoto(id)
-        .then(toJson)
-        .then(json => {
-          tmpArr.push(json);
-          setPhotos(tmpArr);
-        });
-    });
+  const getData = async () => {
+    let storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const newPhotos = await Promise.all(
+      storedFavorites.map(id => {
+        return unsplash.photos.getPhoto(id).then(toJson);
+      })
+    );
+
+    setPhotos(newPhotos);
   };
 
   const removeFavorite = photo => {
@@ -137,17 +131,13 @@ const Favorites = () => {
     getData();
   }, []);
 
-  if (!photos.length) {
-    return null;
-  }
-
   return (
     <LayoutContext.Consumer>
       {value => {
         return (
-          <Container id='favorites-container'>
+          <Container id="favorites-container">
             <GoToTop />
-            <Heading id='favorites-heading'>
+            <Heading id="favorites-heading">
               Favorites:
               <SelectView value={value}></SelectView>
             </Heading>
@@ -155,7 +145,8 @@ const Favorites = () => {
               isGrid={value.isGrid}
               isColumn={value.isColumn}
               isList={value.isList}
-              id='landing-results'>
+              id="landing-results"
+            >
               {photos.map(photo => {
                 const { height, width } = photo;
                 return (
@@ -164,13 +155,14 @@ const Favorites = () => {
                     isGrid={value.isGrid}
                     isColumn={value.isColumn}
                     isList={value.isList}
-                    landscape={width > height}>
+                    landscape={width > height}
+                  >
                     <UserLink
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
                       key={photo.user.id}
-                      id='userlink'
+                      id="userlink"
                       photo={photo}
                     />
                     <Photo
@@ -178,7 +170,7 @@ const Favorites = () => {
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
-                      id='photo'
+                      id="photo"
                       key={photo.id}
                       photo={photo}
                       photoToRemove={photo}
@@ -186,14 +178,15 @@ const Favorites = () => {
                     <Remove
                       photo={photo}
                       onClick={() => this.removeFavorite(photo)}
-                      data-tip='Remove from favorites'>
+                      data-tip="Remove from favorites"
+                    >
                       x
                     </Remove>
                   </PhotoContainer>
                 );
               })}
             </Results>
-            <ReactTooltip type='info' />
+            <ReactTooltip type="info" />
           </Container>
         );
       }}
