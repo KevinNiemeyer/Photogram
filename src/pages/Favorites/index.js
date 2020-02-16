@@ -118,15 +118,15 @@ const Favorites = () => {
   }
   var tmpArr = [];
   const getData = () => {
-    storedFavorites.forEach(id => {
+    const newFavorites = storedFavorites.map(id => {
       unsplash.photos
         .getPhoto(id)
         .then(toJson)
         .then(json => {
           tmpArr.push(json);
-          setPhotos(tmpArr);
         });
     });
+    setPhotos(tmpArr);
   };
 
   const removeFavorite = photo => {

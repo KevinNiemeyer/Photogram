@@ -84,7 +84,6 @@ class Photo extends Component {
   };
 
   render() {
-    console.log(this.props.photo);
     return (
       <Container id='photo-container'>
         {this.props.isGrid ? (
