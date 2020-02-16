@@ -109,22 +109,23 @@ const Remove = styled.div`
 const Loader = styled.div``;
 
 const Favorites = () => {
-  const [photos, setPhotos] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const getData = async () => {
     let storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-    const newPhotos = await Promise.all(
-      storedFavorites.map(id => {
-        return unsplash.photos.getPhoto(id).then(toJson);
-      })
-    );
-
-    setPhotos(newPhotos);
+    setFavorites(storedFavorites);
   };
 
-  const removeFavorite = photo => {
-    console.log(photo);
+  const removeFavorite = photoId => {
+    let nextFavorite = favorites.filter(favorite => {
+      console.log(photoId);
+      console.log(favorite.id);
+      return photoId !== favorite.id;
+    });
+    setFavorites(nextFavorite);
+
+    localStorage.setItem("favorites", JSON.stringify(nextFavorite));
   };
 
   useEffect(() => {
@@ -147,7 +148,7 @@ const Favorites = () => {
               isList={value.isList}
               id="landing-results"
             >
-              {photos.map(photo => {
+              {favorites.map(photo => {
                 const { height, width } = photo;
                 return (
                   <PhotoContainer
@@ -176,8 +177,7 @@ const Favorites = () => {
                       photoToRemove={photo}
                     />
                     <Remove
-                      photo={photo}
-                      onClick={() => this.removeFavorite(photo)}
+                      onClick={() => removeFavorite(photo.id)}
                       data-tip="Remove from favorites"
                     >
                       x
