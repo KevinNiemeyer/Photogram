@@ -109,37 +109,28 @@ const Remove = styled.div`
 const Loader = styled.div``;
 
 const Favorites = () => {
-  const [photos, setPhotos] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
-  let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
-  if (!storedFavorites) {
-    console.log('no favorites');
-    storedFavorites = [];
-  }
-  var tmpArr = [];
-  const getData = () => {
-    const newFavorites = storedFavorites.map(id => {
-      unsplash.photos
-        .getPhoto(id)
-        .then(toJson)
-        .then(json => {
-          tmpArr.push(json);
-        });
-    });
-    setPhotos(tmpArr);
+  const getData = async () => {
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    setFavorites(storedFavorites);
   };
 
-  const removeFavorite = photo => {
-    console.log(photo);
+  const removeFavorite = photoId => {
+    let nextFavorite = favorites.filter(favorite => {
+      console.log(photoId);
+      console.log(favorite.id);
+      return photoId !== favorite.id;
+    });
+    setFavorites(nextFavorite);
+
+    localStorage.setItem('favorites', JSON.stringify(nextFavorite));
   };
 
   useEffect(() => {
     getData();
   }, []);
-
-  if (!photos.length) {
-    return null;
-  }
 
   return (
     <LayoutContext.Consumer>
@@ -156,7 +147,7 @@ const Favorites = () => {
               isColumn={value.isColumn}
               isList={value.isList}
               id='landing-results'>
-              {photos.map(photo => {
+              {favorites.map(photo => {
                 const { height, width } = photo;
                 return (
                   <PhotoContainer
@@ -184,8 +175,7 @@ const Favorites = () => {
                       photoToRemove={photo}
                     />
                     <Remove
-                      photo={photo}
-                      onClick={() => this.removeFavorite(photo)}
+                      onClick={() => removeFavorite(photo.id)}
                       data-tip='Remove from favorites'>
                       x
                     </Remove>

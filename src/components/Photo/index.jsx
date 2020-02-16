@@ -73,10 +73,10 @@ class Photo extends Component {
     if (!storedFavorites) {
       storedFavorites = [];
     }
-    if (storedFavorites.includes(this.props.photo.id)) {
+    if (storedFavorites.includes(this.props.photo)) {
       console.log('already in favorites');
     } else {
-      storedFavorites.push(this.props.photo.id);
+      storedFavorites.push(this.props.photo);
     }
 
     localStorage.setItem('favorites', JSON.stringify(storedFavorites));
