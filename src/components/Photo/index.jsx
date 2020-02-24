@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled, { css } from "styled-components";
-import Modal from "../Modal";
-import ReactTooltip from "react-tooltip";
-import Favorites from "../../pages/Favorites";
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+import Modal from '../Modal';
+import ReactTooltip from 'react-tooltip';
+import Favorites from '../../pages/Favorites';
 
 const Container = styled.div`
   position: relative;
@@ -51,17 +51,45 @@ const FavIcon = styled.div`
   color: red;
   position: absolute;
   font-size: 24px;
-  top: 5px;
-  left: 5px;
+  top: 10px;
+  left: 10px;
+  -webkit-text-stroke: 2px red;
+  -webkit-text-fill-color: transparent;
   &:active {
     transform: scale(0.9);
+    -webkit-text-fill-color: red;
   }
+`;
+
+const AddMsg = styled.div`
+  position: absolute;
+  top: -75px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  background-color: rgb(247, 154, 120);
+  padding: 5px;
+  border-radius: 3px;
+
+  ${props =>
+    props.showAdd
+      ? css`
+          opacity: 1;
+        `
+      : css`
+          opacity: 0;
+        `}
 `;
 
 class Photo extends Component {
   state = {
     show: false,
-    favorite: false
+    favorite: false,
+    exists: false,
+    showAdd: false,
+    msg: ''
   };
 
   toggleModal = () => {
@@ -69,23 +97,36 @@ class Photo extends Component {
   };
 
   addFavorite = () => {
-    let storedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+
     if (!storedFavorites) {
       storedFavorites = [];
     }
-    if (storedFavorites.includes(this.props.photo)) {
-      console.log("already in favorites");
-    } else {
-      storedFavorites.push(this.props.photo);
-    }
 
-    localStorage.setItem("favorites", JSON.stringify(storedFavorites));
-    this.setState({ favorite: true });
+    var tmpArr = storedFavorites.filter(photo => {
+      return this.props.photo.id === photo.id;
+    });
+    console.log(tmpArr);
+
+    if (tmpArr.length) {
+      this.setState({ msg: 'That photo is already in your favorites.' });
+      this.setState({ exists: true });
+    } else {
+      this.setState({ exists: false });
+      storedFavorites.push(this.props.photo);
+      localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      this.setState({ favorite: true });
+      this.setState({ msg: 'Photo added to favorites.' });
+    }
+    this.setState({ showAdd: true });
+    setTimeout(() => {
+      this.setState({ showAdd: false });
+    }, 1500);
   };
 
   render() {
     return (
-      <Container id="photo-container">
+      <Container id='photo-container'>
         {this.props.isGrid ? (
           <GridPhoto
             landscape={this.props.landscape}
@@ -95,7 +136,7 @@ class Photo extends Component {
         ) : this.props.isColumn ? (
           <ColumnPhoto
             landscape={this.props.landscape}
-            id="column-photo-img"
+            id='column-photo-img'
             onClick={this.toggleModal}
             src={this.props.photo.urls.regular}
             alt={this.props.photo.alt_description}
@@ -103,22 +144,23 @@ class Photo extends Component {
         ) : (
           <ListPhoto
             landscape={this.props.landscape}
-            id="list-photo-img"
+            id='list-photo-img'
             onClick={this.toggleModal}
             src={this.props.photo.urls.thumb}
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon data-tip="Add to favorites" onClick={this.addFavorite}>
+        <FavIcon data-tip='Add to favorites' onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
         <Modal
-          id="modal"
+          id='modal'
           onClose={this.toggleModal}
           show={this.state.show}
           photo={this.props.photo.urls.full}
         />
-        <ReactTooltip type="info" />
+        <AddMsg showAdd={this.state.showAdd}>{this.state.msg}</AddMsg>
+        <ReactTooltip type='info' />
       </Container>
     );
   }
