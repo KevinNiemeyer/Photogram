@@ -1,18 +1,18 @@
 //getting an issue where the first search you do works, but if you type in a different search term,
 //it still displays the first search
 
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { toJson } from "unsplash-js";
-import InfiniteScroll from "react-infinite-scroller";
-import Photo from "../../components/Photo";
-import { unsplash } from "../../unsplash";
-import styled, { css } from "styled-components";
-import UserLink from "../../components/UserLink";
-import { LayoutContext } from "../../App";
-import SelectView from "../../components/SelectView";
-import GoToTop from "../../components/GoToTop";
-import ReactTooltip from "react-tooltip";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { toJson } from 'unsplash-js';
+import InfiniteScroll from 'react-infinite-scroller';
+import Photo from '../../components/Photo';
+import { unsplash } from '../../unsplash';
+import styled, { css } from 'styled-components';
+import UserLink from '../../components/UserLink';
+import { LayoutContext } from '../../App';
+import SelectView from '../../components/SelectView';
+import GoToTop from '../../components/GoToTop';
+import ReactTooltip from 'react-tooltip';
 
 const Container = styled.div`
   margin: 0 auto;
@@ -112,7 +112,7 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
   const getData = async () => {
-    let storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     setFavorites(storedFavorites);
   };
@@ -125,7 +125,7 @@ const Favorites = () => {
     });
     setFavorites(nextFavorite);
 
-    localStorage.setItem("favorites", JSON.stringify(nextFavorite));
+    localStorage.setItem('favorites', JSON.stringify(nextFavorite));
   };
 
   useEffect(() => {
@@ -136,9 +136,9 @@ const Favorites = () => {
     <LayoutContext.Consumer>
       {value => {
         return (
-          <Container id="favorites-container">
+          <Container id='favorites-container'>
             <GoToTop />
-            <Heading id="favorites-heading">
+            <Heading id='favorites-heading'>
               Favorites:
               <SelectView value={value}></SelectView>
             </Heading>
@@ -146,8 +146,7 @@ const Favorites = () => {
               isGrid={value.isGrid}
               isColumn={value.isColumn}
               isList={value.isList}
-              id="landing-results"
-            >
+              id='landing-results'>
               {favorites.map(photo => {
                 const { height, width } = photo;
                 return (
@@ -156,14 +155,13 @@ const Favorites = () => {
                     isGrid={value.isGrid}
                     isColumn={value.isColumn}
                     isList={value.isList}
-                    landscape={width > height}
-                  >
+                    landscape={width > height}>
                     <UserLink
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
                       key={photo.user.id}
-                      id="userlink"
+                      id='userlink'
                       photo={photo}
                     />
                     <Photo
@@ -171,22 +169,21 @@ const Favorites = () => {
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
                       isList={value.isList}
-                      id="photo"
+                      id='photo'
                       key={photo.id}
                       photo={photo}
                       photoToRemove={photo}
                     />
                     <Remove
                       onClick={() => removeFavorite(photo.id)}
-                      data-tip="Remove from favorites"
-                    >
+                      data-tip='Remove from favorites'>
                       x
                     </Remove>
                   </PhotoContainer>
                 );
               })}
             </Results>
-            <ReactTooltip type="info" />
+            <ReactTooltip type='info' />
           </Container>
         );
       }}

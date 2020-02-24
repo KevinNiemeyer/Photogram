@@ -160,7 +160,7 @@ class Photo extends Component {
           photo={this.props.photo.urls.full}
         />
         <AddMsg showAdd={this.state.showAdd}>{this.state.msg}</AddMsg>
-        <ReactTooltip type='info' />
+        <ReactTooltip type='info' effect='solid' />
       </Container>
     );
   }
