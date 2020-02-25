@@ -153,6 +153,7 @@ class Photo extends Component {
         <FavIcon data-tip='Add to favorites' onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
+        <ReactTooltip type='info' place='left' />
         <Modal
           id='modal'
           onClose={this.toggleModal}
@@ -160,7 +161,6 @@ class Photo extends Component {
           photo={this.props.photo.urls.full}
         />
         <AddMsg showAdd={this.state.showAdd}>{this.state.msg}</AddMsg>
-        <ReactTooltip type='info' effect='solid' />
       </Container>
     );
   }

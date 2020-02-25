@@ -106,8 +106,6 @@ const Remove = styled.div`
   z-index: 2;
 `;
 
-const Loader = styled.div``;
-
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
