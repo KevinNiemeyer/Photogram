@@ -135,7 +135,9 @@ const Favorites = () => {
   return (
     <LayoutContext.Consumer>
       {value => {
-        return (
+        return !favorites.length ? (
+          'No favorites to show'
+        ) : (
           <Container id='favorites-container'>
             <GoToTop />
             <Heading id='favorites-heading'>
