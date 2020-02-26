@@ -59,6 +59,11 @@ const FavIcon = styled.div`
     transform: scale(0.9);
     -webkit-text-fill-color: red;
   }
+  ${props =>
+    props.list &&
+    css`
+      display: none;
+    `}
 `;
 
 const AddMsg = styled.div`
@@ -150,10 +155,13 @@ class Photo extends Component {
             alt={this.props.photo.alt_description}
           />
         )}
-        <FavIcon data-tip='Add to favorites' onClick={this.addFavorite}>
+        <FavIcon
+          list={this.props.isList}
+          data-tip='Add to favorites'
+          onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
-        <ReactTooltip type='info' place='left' />
+        <ReactTooltip type='info' place='left' effect='solid' />
         <Modal
           id='modal'
           onClose={this.toggleModal}

@@ -183,7 +183,6 @@ const Favorites = () => {
                 );
               })}
             </Results>
-            <ReactTooltip type='info' />
           </Container>
         );
       }}
