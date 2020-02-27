@@ -64,6 +64,11 @@ const FavIcon = styled.div`
     css`
       display: none;
     `}
+  ${props =>
+    props.isFavoritePage &&
+    css`
+      display: none;
+    `}
 `;
 
 const AddMsg = styled.div`
@@ -94,7 +99,8 @@ class Photo extends Component {
     favorite: false,
     exists: false,
     showAdd: false,
-    msg: ''
+    msg: '',
+    isFavoritePage: false
   };
 
   toggleModal = () => {
@@ -111,7 +117,6 @@ class Photo extends Component {
     var tmpArr = storedFavorites.filter(photo => {
       return this.props.photo.id === photo.id;
     });
-    console.log(tmpArr);
 
     if (tmpArr.length) {
       this.setState({ msg: 'That photo is already in your favorites.' });
@@ -156,12 +161,13 @@ class Photo extends Component {
           />
         )}
         <FavIcon
+          isFavoritePage={this.props.isFavoritePage}
           list={this.props.isList}
           data-tip='Add to favorites'
           onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
-        <ReactTooltip type='info' place='left' effect='solid' />
+        <ReactTooltip type='info' place='top' effect='solid' />
         <Modal
           id='modal'
           onClose={this.toggleModal}

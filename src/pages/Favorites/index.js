@@ -165,6 +165,7 @@ const Favorites = () => {
                       photo={photo}
                     />
                     <Photo
+                      isFavoritePage={'true'}
                       landscape={width > height}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
