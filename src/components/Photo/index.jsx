@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../Modal';
 import ReactTooltip from 'react-tooltip';
-import Favorites from '../../pages/Favorites';
 
 const Container = styled.div`
   position: relative;
