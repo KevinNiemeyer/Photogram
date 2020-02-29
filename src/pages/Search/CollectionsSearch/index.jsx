@@ -1,12 +1,12 @@
-import React, { useState, useEffect, Component } from 'react';
-import { LayoutContext } from '../../../App';
-import { Link } from 'react-router-dom';
-import { toJson } from 'unsplash-js';
-import { unsplash } from '../../../unsplash';
-import styled from 'styled-components';
-import InfiniteScroll from 'react-infinite-scroller';
-import GoToTop from '../../../components/GoToTop';
-import SelectView from '../../../components/SelectView';
+import React, { useState, useEffect, Component } from "react";
+import { LayoutContext } from "../../../App";
+import { Link } from "react-router-dom";
+import { toJson } from "unsplash-js";
+import { unsplash } from "../../../unsplash";
+import styled from "styled-components";
+import InfiniteScroll from "react-infinite-scroller";
+import GoToTop from "../../../components/GoToTop";
+import SelectView from "../../../components/SelectView";
 
 const Loader = styled.div``;
 
@@ -52,7 +52,7 @@ const Img = styled.img`
   height: 150px;
 `;
 const linkStyle = {
-  textDecoration: 'none'
+  textDecoration: "none"
 };
 
 const SearchTerm = styled.span`
@@ -63,37 +63,21 @@ const CollectionSearch = props => {
   const [collections, setCollections] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [collection, setCollection] = useState('');
+  const [totalPages, setTotalPages] = useState(0);
 
   const getData = () => {
+    if (!hasMore) return;
     unsplash.search
       .collections(props.match.params.collection, page, 5)
       .then(toJson)
       .then(json => {
-        if (!json.results.length) {
-          return { hasMore: false };
-        }
         setCollections([...collections, ...json.results]);
         setPage(page + 1);
-
-        //how do I convert the code below??
-
-        /* this.setState(state => {
-          const newState = {
-            collections: [...state.collections, ...json.results],
-            page: state.page + 1,
-            collection: state.collection
-          };
-          if (!state.totalPages) {
-            newState.totalPages = json.total_pages;
-          }
-          if (newState.page === state.totalPages) {
-            newState.hasMore = false;
-          }
-          return newState;
-        }); */
+        if (!totalPages) setTotalPages(json.total_pages);
+        if (json.results === 0) setHasMore(false);
       });
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -115,22 +99,24 @@ const CollectionSearch = props => {
               pageStart={1}
               loadMore={getData}
               hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
-              <Results id='collection-search-results'>
+              loader={<Loader key={0}>Loading ...</Loader>}
+            >
+              <Results id="collection-search-results">
                 {collections.map(collection => {
                   console.log(collection);
                   return (
-                    <LinkContainer id='collection-search-link-container'>
+                    <LinkContainer id="collection-search-link-container">
                       <Link
-                        category='collection'
+                        category="collection"
                         id={collection.id}
                         to={`/collection/${collection.id}`}
                         style={linkStyle}
-                        key={collection.id}>
+                        key={collection.id}
+                      >
                         <LinkTitle>{collection.title}</LinkTitle>
                         <Img
                           src={collection.cover_photo.urls.small}
-                          alt='none'
+                          alt="none"
                         />
                       </Link>
                     </LinkContainer>

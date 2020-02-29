@@ -1,10 +1,11 @@
-import React from 'react';
-import Logo from '../Logo/index.jsx';
-import SearchBar from '../SearchBar';
-import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import Logo from "../Logo/index.jsx";
+import SearchBar from "../SearchBar";
+import styled from "styled-components";
+import { withRouter } from "react-router-dom";
+import { Container, Row } from "../ui/styles";
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   position: fixed;
   display: flex;
   justify-content: flex-start;
@@ -12,7 +13,7 @@ const Container = styled.div`
   width: 100%;
   height: 75px;
   border-bottom: solid 1px lightgrey;
-  background-color: white;
+  background-color: red;
   z-index: 2;
 `;
 
@@ -41,11 +42,15 @@ class Header extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Logo />
-        <SearchBar />
-        <Button onClick={this.handleClick}>Favorites</Button>
-      </Container>
+      <HeaderContainer>
+        <Container>
+          <Row>
+            <Logo />
+            <SearchBar />
+            <Button onClick={this.handleClick}>Favorites</Button>
+          </Row>
+        </Container>
+      </HeaderContainer>
     );
   }
 }

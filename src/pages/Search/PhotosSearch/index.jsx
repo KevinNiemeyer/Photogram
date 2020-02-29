@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
-import Photo from '../../../components/Photo';
-import { unsplash } from '../../../unsplash';
-import styled, { css } from 'styled-components';
-import UserLink from '../../../components/UserLink';
-import { LayoutContext } from '../../../App';
-import SelectView from '../../../components/SelectView';
-import GoToTop from '../../../components/GoToTop';
+import React, { useState, useEffect } from "react";
+import { toJson } from "unsplash-js";
+import InfiniteScroll from "react-infinite-scroller";
+import Photo from "../../../components/Photo";
+import { unsplash } from "../../../unsplash";
+import styled, { css } from "styled-components";
+import UserLink from "../../../components/UserLink";
+import { LayoutContext } from "../../../App";
+import SelectView from "../../../components/SelectView";
+import GoToTop from "../../../components/GoToTop";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -95,7 +95,7 @@ const PhotoSearch = props => {
   const getData = () => {
     unsplash.search
       .photos(props.match.params.searchTerm, page, 5, {
-        orientation: 'portrait'
+        orientation: "portrait"
       })
       .then(toJson)
       .then(json => {
@@ -124,18 +124,23 @@ const PhotoSearch = props => {
               <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll
-              id='infinite-scroll'
+              id="infinite-scroll"
               pageStart={1}
               loadMore={getData}
               hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
+              loader={<Loader key={0}>Loading ...</Loader>}
+            >
               <Results
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
                 isList={value.isList}
-                id='landing-results'>
+                id="landing-results"
+              >
                 {photos.map(photo => {
                   const { height, width } = photo;
+                  // return (
+                  //   <PhotoContainerComponent photo={photo} key={photo.id} />
+                  // );
                   return (
                     <PhotoContainer
                       key={photo.id}
@@ -143,22 +148,21 @@ const PhotoSearch = props => {
                       isColumn={value.isColumn}
                       isList={value.isList}
                       landscape={width > height}
-                      id='photo-container'>
+                      id="photo-container"
+                    >
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
-                        key={photo.user.id}
-                        id='userlink'
-                        photo={photo}
+                        id="userlink"
+                        user={photo.user}
                       />
                       <Photo
                         landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
-                        id='photo'
-                        key={photo.id}
+                        id="photo"
                         photo={photo}
                       />
                     </PhotoContainer>

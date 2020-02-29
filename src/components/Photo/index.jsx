@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import Modal from '../Modal';
-import ReactTooltip from 'react-tooltip';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import styled, { css } from "styled-components";
+import Modal from "../Modal";
+import ReactTooltip from "react-tooltip";
 
 const Container = styled.div`
   position: relative;
@@ -64,7 +65,7 @@ const FavIcon = styled.div`
       display: none;
     `}
   ${props =>
-    props.isFavoritePage &&
+    props.hide &&
     css`
       display: none;
     `}
@@ -92,13 +93,18 @@ const AddMsg = styled.div`
         `}
 `;
 
+const hidePhoto = {
+  "/favorites": true,
+  "/random": true
+};
+
 class Photo extends Component {
   state = {
     show: false,
     favorite: false,
     exists: false,
     showAdd: false,
-    msg: '',
+    msg: "",
     isFavoritePage: false
   };
 
@@ -107,7 +113,7 @@ class Photo extends Component {
   };
 
   addFavorite = () => {
-    let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+    let storedFavorites = JSON.parse(localStorage.getItem("favorites"));
 
     if (!storedFavorites) {
       storedFavorites = [];
@@ -118,14 +124,14 @@ class Photo extends Component {
     });
 
     if (tmpArr.length) {
-      this.setState({ msg: 'That photo is already in your favorites.' });
+      this.setState({ msg: "That photo is already in your favorites." });
       this.setState({ exists: true });
     } else {
       this.setState({ exists: false });
       storedFavorites.push(this.props.photo);
-      localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      localStorage.setItem("favorites", JSON.stringify(storedFavorites));
       this.setState({ favorite: true });
-      this.setState({ msg: 'Photo added to favorites.' });
+      this.setState({ msg: "Photo added to favorites." });
     }
     this.setState({ showAdd: true });
     setTimeout(() => {
@@ -135,7 +141,7 @@ class Photo extends Component {
 
   render() {
     return (
-      <Container id='photo-container'>
+      <Container id="photo-container">
         {this.props.isGrid ? (
           <GridPhoto
             landscape={this.props.landscape}
@@ -145,7 +151,7 @@ class Photo extends Component {
         ) : this.props.isColumn ? (
           <ColumnPhoto
             landscape={this.props.landscape}
-            id='column-photo-img'
+            id="column-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.regular}
             alt={this.props.photo.alt_description}
@@ -153,22 +159,23 @@ class Photo extends Component {
         ) : (
           <ListPhoto
             landscape={this.props.landscape}
-            id='list-photo-img'
+            id="list-photo-img"
             onClick={this.toggleModal}
             src={this.props.photo.urls.thumb}
             alt={this.props.photo.alt_description}
           />
         )}
         <FavIcon
-          isFavoritePage={this.props.isFavoritePage}
+          hide={hidePhoto[this.props.match.path]}
           list={this.props.isList}
-          data-tip='Add to favorites'
-          onClick={this.addFavorite}>
+          data-tip="Add to favorites"
+          onClick={this.addFavorite}
+        >
           &hearts;
         </FavIcon>
-        <ReactTooltip type='info' place='top' effect='solid' />
+        <ReactTooltip type="info" place="top" effect="solid" />
         <Modal
-          id='modal'
+          id="modal"
           onClose={this.toggleModal}
           show={this.state.show}
           photo={this.props.photo.urls.full}
@@ -179,4 +186,4 @@ class Photo extends Component {
   }
 }
 
-export default Photo;
+export default withRouter(Photo);

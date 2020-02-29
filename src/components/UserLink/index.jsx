@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
 
 const LinkContainer = styled.div`
   display: flex;
@@ -28,32 +28,31 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
-const linkStyle = {
-  textDecoration: 'none',
-  color: `rgb(247, 154, 120)`,
-  display: 'flex',
-  alignItems: 'center',
-  paddingLeft: '5px'
-};
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: rgb(247, 154, 120);
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+`;
 
 const pStyle = {
-  paddingLeft: '10px'
+  paddingLeft: "10px"
 };
+
 class UserLink extends Component {
   render() {
+    console.log(this.props);
     return (
-      <LinkContainer isList={this.props.isList} id='userlink-container'>
-        <Link
-          style={linkStyle}
-          id='userlink-link'
-          to={`/user/${this.props.photo.user.username}`}>
+      <LinkContainer isList={this.props.isList} id="userlink-container">
+        <StyledLink id="userlink-link" to={`/user/${this.props.user.username}`}>
           <Img
-            id='userlink-image'
-            alt={this.props.photo.description}
-            src={this.props.photo.user.profile_image.small}
+            id="userlink-image"
+            alt={this.props.user.name}
+            src={this.props.user.profile_image.small}
           />
-          <p style={pStyle}>{this.props.photo.user.name}</p>
-        </Link>
+          <p style={pStyle}>{this.props.user.name}</p>
+        </StyledLink>
       </LinkContainer>
     );
   }

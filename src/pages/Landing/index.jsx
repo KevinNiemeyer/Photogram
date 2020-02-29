@@ -1,27 +1,21 @@
 //getting an issue where the first search you do works, but if you type in a different search term,
 //it still displays the first search
 
-import React, { useState, useEffect } from 'react';
-import { toJson } from 'unsplash-js';
-import InfiniteScroll from 'react-infinite-scroller';
-import Photo from '../../components/Photo';
-import { unsplash } from '../../unsplash';
-import styled, { css } from 'styled-components';
-import UserLink from '../../components/UserLink';
-import { LayoutContext } from '../../App';
-import SelectView from '../../components/SelectView';
-import GoToTop from '../../components/GoToTop';
+import React, { useState, useEffect } from "react";
+import { toJson } from "unsplash-js";
+import InfiniteScroll from "react-infinite-scroller";
+import Photo from "../../components/Photo";
+import { unsplash } from "../../unsplash";
+import styled, { css } from "styled-components";
+import UserLink from "../../components/UserLink";
+import { LayoutContext } from "../../App";
+import SelectView from "../../components/SelectView";
+import GoToTop from "../../components/GoToTop";
+import { Heading } from "../../components/ui/styles";
 
 const Container = styled.div`
   margin: 0 auto;
   background-color: rgb(250, 250, 250);
-`;
-
-const Heading = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  font-size: 40px;
-  padding: 20px 0 0 20px;
 `;
 
 const Results = styled.div`
@@ -93,7 +87,7 @@ const Landing = () => {
 
   const getData = () => {
     unsplash.photos
-      .listPhotos(page, 25, 'latest')
+      .listPhotos(page, 25, "latest")
       .then(toJson)
       .then(json => {
         setPhotos([...photos, ...json]);
@@ -113,23 +107,25 @@ const Landing = () => {
     <LayoutContext.Consumer>
       {value => {
         return (
-          <Container id='landing-container'>
+          <Container id="landing-container">
             <GoToTop />
-            <Heading id='landing-heading'>
+            <Heading id="landing-heading">
               Latest Photos:
               <SelectView value={value}></SelectView>
             </Heading>
             <InfiniteScroll
-              id='infinite-scroll'
+              id="infinite-scroll"
               pageStart={1}
               loadMore={getData}
               hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}>
+              loader={<Loader key={0}>Loading ...</Loader>}
+            >
               <Results
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
                 isList={value.isList}
-                id='landing-results'>
+                id="landing-results"
+              >
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
@@ -139,21 +135,22 @@ const Landing = () => {
                       isColumn={value.isColumn}
                       isList={value.isList}
                       landscape={width > height}
-                      id='result-container'>
+                      id="result-container"
+                    >
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
                         key={photo.user.id}
-                        id='userlink'
-                        photo={photo}
+                        id="userlink"
+                        user={photo.user}
                       />
                       <Photo
                         landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
                         isList={value.isList}
-                        id='photo'
+                        id="photo"
                         key={photo.id}
                         photo={photo}
                       />
