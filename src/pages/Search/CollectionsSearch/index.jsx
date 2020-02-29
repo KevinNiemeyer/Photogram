@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
+import { LayoutContext } from '../../../App';
 import { Link } from 'react-router-dom';
 import { toJson } from 'unsplash-js';
 import { unsplash } from '../../../unsplash';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 import GoToTop from '../../../components/GoToTop';
+import SelectView from '../../../components/SelectView';
 
 const Loader = styled.div``;
 
@@ -57,28 +59,26 @@ const SearchTerm = styled.span`
   color: rgb(247, 154, 120);
 `;
 
-export class CollectionSearch extends Component {
-  state = {
-    collections: [],
-    page: 1,
-    hasMore: true,
-    collection: ''
-  };
+const CollectionSearch = props => {
+  const [collections, setCollections] = useState([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [collection, setCollection] = useState('');
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
+  const getData = () => {
     unsplash.search
-      .collections(this.props.match.params.collection, this.state.page, 5)
+      .collections(props.match.params.collection, page, 5)
       .then(toJson)
       .then(json => {
         if (!json.results.length) {
-          return this.setState({ hasMore: false });
+          return { hasMore: false };
         }
+        setCollections([...collections, ...json.results]);
+        setPage(page + 1);
 
-        this.setState(state => {
+        //how do I convert the code below??
+
+        /* this.setState(state => {
           const newState = {
             collections: [...state.collections, ...json.results],
             page: state.page + 1,
@@ -91,48 +91,58 @@ export class CollectionSearch extends Component {
             newState.hasMore = false;
           }
           return newState;
-        });
+        }); */
       });
   };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  render() {
-    const { collections } = this.state;
+  return (
+    <LayoutContext.Consumer>
+      {value => {
+        return (
+          <Container>
+            <GoToTop />
+            <Heading>
+              Search results for
+              <SearchTerm> {props.match.params.collection} </SearchTerm>in
+              <SearchTerm> Collections</SearchTerm>:
+              <SelectView value={value}></SelectView>
+            </Heading>
 
-    return (
-      <Container>
-        <GoToTop />
-        <Heading>
-          Search results for
-          <SearchTerm> {this.props.match.params.collection} </SearchTerm>in
-          <SearchTerm> Collections</SearchTerm>:
-        </Heading>
-
-        <InfiniteScroll
-          pageStart={1}
-          loadMore={this.getData}
-          hasMore={this.state.hasMore}
-          loader={<Loader key={0}>Loading ...</Loader>}>
-          <Results id='collection-search-results'>
-            {collections.map(collection => {
-              return (
-                <LinkContainer id='collection-search-link-container'>
-                  <Link
-                    category='collection'
-                    id={collection.id}
-                    to={`/collection/${collection.id}`}
-                    style={linkStyle}
-                    key={collection.id}>
-                    <LinkTitle>{collection.title}</LinkTitle>
-                    <Img src={collection.cover_photo.urls.small} alt='none' />
-                  </Link>
-                </LinkContainer>
-              );
-            })}
-          </Results>
-        </InfiniteScroll>
-      </Container>
-    );
-  }
-}
+            <InfiniteScroll
+              pageStart={1}
+              loadMore={getData}
+              hasMore
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results id='collection-search-results'>
+                {collections.map(collection => {
+                  console.log(collection);
+                  return (
+                    <LinkContainer id='collection-search-link-container'>
+                      <Link
+                        category='collection'
+                        id={collection.id}
+                        to={`/collection/${collection.id}`}
+                        style={linkStyle}
+                        key={collection.id}>
+                        <LinkTitle>{collection.title}</LinkTitle>
+                        <Img
+                          src={collection.cover_photo.urls.small}
+                          alt='none'
+                        />
+                      </Link>
+                    </LinkContainer>
+                  );
+                })}
+              </Results>
+            </InfiniteScroll>
+          </Container>
+        );
+      }}
+    </LayoutContext.Consumer>
+  );
+};
 
 export default CollectionSearch;
