@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { toJson } from "unsplash-js";
-import InfiniteScroll from "react-infinite-scroller";
-import Photo from "../../../components/Photo";
-import { unsplash } from "../../../unsplash";
-import styled, { css } from "styled-components";
-import UserLink from "../../../components/UserLink";
-import { LayoutContext } from "../../../App";
-import SelectView from "../../../components/SelectView";
-import GoToTop from "../../../components/GoToTop";
-
-const Container = styled.div`
-  margin: 0 auto;
-  background-color: rgb(250, 250, 250);
-`;
-
-const Heading = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  font-size: 40px;
-  padding: 20px 0 0 20px;
-`;
+import React, { useState, useEffect } from 'react';
+import { toJson } from 'unsplash-js';
+import InfiniteScroll from 'react-infinite-scroller';
+import Photo from '../../../components/Photo';
+import { unsplash } from '../../../unsplash';
+import styled, { css } from 'styled-components';
+import UserLink from '../../../components/UserLink';
+import { LayoutContext } from '../../../App';
+import SelectView from '../../../components/SelectView';
+import GoToTop from '../../../components/GoToTop';
+import { Heading, Container } from '../../../components/ui/styles';
 
 const Results = styled.div`
   width: 100%;
@@ -63,15 +52,7 @@ ${props =>
       padding-left: 15px;
       padding-right: 15px;
     `}
-${props =>
-  props.isList &&
-  css`
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    width: 100%;
-    height: 64px;
-    padding-left: 30px;
-  `}
+
 ${props =>
   props.isColumn &&
   css`
@@ -91,25 +72,26 @@ const Loader = styled.div``;
 const PhotoSearch = props => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
 
   const getData = () => {
+    if (!hasMore) return;
     unsplash.search
       .photos(props.match.params.searchTerm, page, 5, {
-        orientation: "portrait"
+        orientation: 'portrait'
       })
       .then(toJson)
       .then(json => {
         setPhotos([...photos, ...json.results]);
         setPage(page + 1);
+        if (!totalPages) setTotalPages(json.total_pages);
+        if (json.results === 0) setHasMore(false);
       });
   };
   useEffect(() => {
     getData();
   }, []);
-
-  if (photos.length === 0) {
-    return null;
-  }
 
   return (
     <LayoutContext.Consumer>
@@ -121,21 +103,18 @@ const PhotoSearch = props => {
               Search results for
               <SearchTerm> {props.match.params.searchTerm} </SearchTerm> in
               <SearchTerm> Photos: </SearchTerm>
-              <SelectView value={value}></SelectView>
             </Heading>
+            <SelectView value={value}></SelectView>
             <InfiniteScroll
-              id="infinite-scroll"
+              id='infinite-scroll'
               pageStart={1}
               loadMore={getData}
               hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}
-            >
+              loader={<Loader key={0}>Loading ...</Loader>}>
               <Results
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
-                isList={value.isList}
-                id="landing-results"
-              >
+                id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
                   // return (
@@ -146,23 +125,19 @@ const PhotoSearch = props => {
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
-                      isList={value.isList}
                       landscape={width > height}
-                      id="photo-container"
-                    >
+                      id='photo-container'>
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
-                        isList={value.isList}
-                        id="userlink"
+                        id='userlink'
                         user={photo.user}
                       />
                       <Photo
                         landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
-                        isList={value.isList}
-                        id="photo"
+                        id='photo'
                         photo={photo}
                       />
                     </PhotoContainer>

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, Component } from "react";
-import { LayoutContext } from "../../../App";
-import { Link } from "react-router-dom";
-import { toJson } from "unsplash-js";
-import { unsplash } from "../../../unsplash";
-import styled from "styled-components";
-import InfiniteScroll from "react-infinite-scroller";
-import GoToTop from "../../../components/GoToTop";
-import SelectView from "../../../components/SelectView";
-
+import React, { useState, useEffect } from 'react';
+import { LayoutContext } from '../../../App';
+import { Link } from 'react-router-dom';
+import { toJson } from 'unsplash-js';
+import { unsplash } from '../../../unsplash';
+import styled, { css } from 'styled-components';
+import InfiniteScroll from 'react-infinite-scroller';
+import GoToTop from '../../../components/GoToTop';
+import SelectView from '../../../components/SelectView';
+import { Heading } from '../../../components/ui/styles';
 const Loader = styled.div``;
 
 const Container = styled.div`
@@ -15,44 +15,72 @@ const Container = styled.div`
   background-color: rgb(250, 250, 250);
 `;
 
-const Heading = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  font-size: 40px;
-  padding: 20px 0 0 20px;
-`;
-
 const Results = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 20px;
   width: 100%;
+  ${props =>
+    props.isGrid &&
+    css`
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
 `;
 
-const LinkContainer = styled.div`
-  width: 150px;
-  height: auto;
-  padding: 20px;
-  &:hover {
-    opacity: 0.8;
-  }
+const Collection = styled.div`
+  margin: 15px 40px 15px 40px;
+  cursor: pointer;
+
+  ${props =>
+    props.isGrid &&
+    css`
+      width: 250px;
+    `}
+
+  ${props =>
+    props.isColumn &&
+    css`
+      width: 50%;
+      flex: 1;
+    `}
 `;
+
 const LinkTitle = styled.div`
   padding: 10px;
   font-size: 20px;
   color: rgb(247, 154, 120);
   text-align: center;
 `;
-const Img = styled.img`
-  width: 150px;
-  height: 150px;
+const Img = styled.div`
+  &:hover {
+    opacity: 0.8;
+  }
+  background: url(${props => props.src}) no-repeat center center;
+  background-size: cover;
+  ${props =>
+    props.isGrid &&
+    css`
+      width: 225px;
+      height: 225px;
+    `}
+  ${props =>
+    props.isColumn &&
+    css`
+      width: 500px;
+      height: 500px;
+    `}
 `;
+
 const linkStyle = {
-  textDecoration: "none"
+  textDecoration: 'none',
+  fontSize: '24px',
+  padding: '10px'
 };
 
 const SearchTerm = styled.span`
@@ -92,34 +120,37 @@ const CollectionSearch = props => {
               Search results for
               <SearchTerm> {props.match.params.collection} </SearchTerm>in
               <SearchTerm> Collections</SearchTerm>:
-              <SelectView value={value}></SelectView>
             </Heading>
+            <SelectView value={value}></SelectView>
 
             <InfiniteScroll
               pageStart={1}
               loadMore={getData}
               hasMore
-              loader={<Loader key={0}>Loading ...</Loader>}
-            >
-              <Results id="collection-search-results">
+              loader={<Loader key={0}>Loading ...</Loader>}>
+              <Results
+                id='collection-search-results'
+                isGrid={value.isGrid}
+                isColumn={value.isColumn}>
                 {collections.map(collection => {
-                  console.log(collection);
                   return (
-                    <LinkContainer id="collection-search-link-container">
+                    <Collection id='collection' key={collection.id}>
                       <Link
-                        category="collection"
+                        category='collection'
                         id={collection.id}
                         to={`/collection/${collection.id}`}
                         style={linkStyle}
-                        key={collection.id}
-                      >
+                        key={collection.id}>
                         <LinkTitle>{collection.title}</LinkTitle>
                         <Img
+                          isGrid={value.isGrid}
+                          isColumn={value.isColumn}
                           src={collection.cover_photo.urls.small}
-                          alt="none"
+                          alt={collection.title}
+                          key={collection.id}
                         />
                       </Link>
-                    </LinkContainer>
+                    </Collection>
                   );
                 })}
               </Results>

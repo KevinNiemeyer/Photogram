@@ -11,7 +11,6 @@ import GoToTop from '../../components/GoToTop';
 
 const Container = styled.div`
   margin: 0 auto;
-
   background-color: rgb(250, 250, 250);
 `;
 
@@ -64,15 +63,7 @@ const PhotoContainer = styled.div`
       padding-left: 15px;
       padding-right: 15px;
     `}
-  ${props =>
-    props.isList &&
-    css`
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      width: 100%;
-      height: 64px;
-      padding-left: 30px;
-    `}
+
   ${props =>
     props.isColumn &&
     css`
@@ -89,6 +80,7 @@ const Collection = props => {
   const [page, setPage] = useState(1);
 
   const getData = () => {
+    console.log(props);
     unsplash.collections
       .getCollectionPhotos(props.match.params.id, page, 10, 'popular')
       .then(toJson)
@@ -124,7 +116,6 @@ const Collection = props => {
               <Results
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}
-                isList={value.isList}
                 id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
@@ -133,13 +124,11 @@ const Collection = props => {
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
-                      isList={value.isList}
                       landscape={width > height}
                       id='photo-container'>
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
-                        isList={value.isList}
                         key={photo.user.id}
                         id='userlink'
                         photo={photo}
@@ -148,7 +137,6 @@ const Collection = props => {
                         landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
-                        isList={value.isList}
                         id='photo'
                         key={photo.id}
                         photo={photo}

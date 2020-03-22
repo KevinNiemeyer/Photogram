@@ -1,11 +1,11 @@
-import React from "react";
-import Logo from "../Logo/index.jsx";
-import SearchBar from "../SearchBar";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import { Container, Row } from "../ui/styles";
+import React from 'react';
+import Logo from '../Logo/index.jsx';
+import SearchBar from '../SearchBar';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { Container, Row } from '../ui/styles';
 
-const HeaderContainer = styled.div`
+const Nav = styled.div`
   position: fixed;
   display: flex;
   justify-content: flex-start;
@@ -42,7 +42,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <HeaderContainer>
+      <Nav>
         <Container>
           <Row>
             <Logo />
@@ -50,7 +50,7 @@ class Header extends React.Component {
             <Button onClick={this.handleClick}>Favorites</Button>
           </Row>
         </Container>
-      </HeaderContainer>
+      </Nav>
     );
   }
 }

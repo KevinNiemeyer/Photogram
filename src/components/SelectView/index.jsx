@@ -9,10 +9,11 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  margin-left: 125px;
   font-size: 16px;
   align-items: center;
   padding: 30px;
-  border-bottom: solid lightgrey 1px;
+
   margin-bottom: 20px;
   background-color: rgb(250, 250, 250);
   & h3 {
@@ -28,12 +29,12 @@ const RadioGroup = styled.ul`
   padding: 0;
   display: flex;
   & li {
-    margin: 0 5px 0 0;
+    margin: 0 0 0 0;
     width: 85px;
     height: 35px;
     position: relative;
     &:hover {
-      color: rgba(0, 0, 0, 0.5);
+      background: rgb(247, 154, 120, 0.5);
     }
   }
   & label,
@@ -55,6 +56,15 @@ const RadioGroup = styled.ul`
     }
   }
 `;
+const HR = styled.hr`
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+`;
 
 export class SelectView extends Component {
   render() {
@@ -64,6 +74,7 @@ export class SelectView extends Component {
           return (
             <ButtonContainer id='select-view-container'>
               <h3>View:</h3>
+
               <RadioGroup className='selectButtons'>
                 <li>
                   <input
@@ -75,16 +86,7 @@ export class SelectView extends Component {
                   />
                   <label for='grid'>Grid</label>
                 </li>
-                <li>
-                  <input
-                    type='radio'
-                    id='list'
-                    onChange={value.toggleView}
-                    name='isList'
-                    checked={value.isList ? true : false}
-                  />
-                  <label for='list'>List</label>
-                </li>
+
                 <li>
                   <input
                     type='radio'

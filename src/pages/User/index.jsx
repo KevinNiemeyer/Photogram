@@ -54,17 +54,7 @@ ${props =>
     padding: 0;
     padding: 0 20px 40px 20px;
   `}
-${props =>
-  props.isList &&
-  css`
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    align-items: center;
-    height: 64px;
-    padding-left: 10px;
-    padding-bottom: 50px;
-  `}
+
 ${props =>
   props.isColumn &&
   css`
@@ -114,8 +104,7 @@ const UserPage = props => {
               <Results
                 id='landing-results'
                 isGrid={value.isGrid}
-                isColumn={value.isColumn}
-                isList={value.isList}>
+                isColumn={value.isColumn}>
                 {photos.map(photo => {
                   const { height, width } = photo;
                   return (
@@ -124,14 +113,12 @@ const UserPage = props => {
                       key={photo.id}
                       isGrid={value.isGrid}
                       isColumn={value.isColumn}
-                      isList={value.isList}
                       landscape={width > height}>
                       <Photo
                         category='user'
                         landscape={width > height}
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
-                        isList={value.isList}
                         id='photo'
                         key={photo.id}
                         photo={photo}
