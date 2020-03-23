@@ -3,28 +3,34 @@ import Logo from '../Logo/index.jsx';
 import SearchBar from '../SearchBar';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { Container, Row } from '../ui/styles';
 
 const Nav = styled.div`
   position: fixed;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 75px;
+  margin-left: -15px;
   border-bottom: solid 1px lightgrey;
   background-color: red;
-  z-index: 2;
+  z-index: 4;
 `;
-
+const ButtonContainer = styled.div`
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Button = styled.button`
-  color: rgb(247, 154, 120);
+  color: rgb(255, 0, 0);
   font-size: 16px;
   width: auto;
-  margin-right: 18%;
   padding: 5px 20px 5px 20px;
+  margin-left: 100px;
   border: solid lightgrey 1px;
   outline: none;
+  border-radius: 3px;
   &:hover {
     opacity: (0.8);
   }
@@ -43,13 +49,11 @@ class Header extends React.Component {
   render() {
     return (
       <Nav>
-        <Container>
-          <Row>
-            <Logo />
-            <SearchBar />
-            <Button onClick={this.handleClick}>Favorites</Button>
-          </Row>
-        </Container>
+        <Logo />
+        <SearchBar />
+        <ButtonContainer>
+          <Button onClick={this.handleClick}>Favorites</Button>
+        </ButtonContainer>
       </Nav>
     );
   }

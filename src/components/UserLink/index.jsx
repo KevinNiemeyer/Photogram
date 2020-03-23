@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 const LinkContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: flex-start;
   align-items: center;
   padding-bottom: 10px;

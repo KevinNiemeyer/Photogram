@@ -8,10 +8,16 @@ import UserLink from '../../../components/UserLink';
 import { LayoutContext } from '../../../App';
 import SelectView from '../../../components/SelectView';
 import GoToTop from '../../../components/GoToTop';
-import { Heading, Container } from '../../../components/ui/styles';
+import { Heading } from '../../../components/ui/styles';
+
+const Container = styled.div`
+  margin: 0 auto;
+  background-color: rgb(250, 250, 250);
+`;
 
 const Results = styled.div`
   width: 100%;
+  margin-top: 25px;
   ${props =>
     props.isGrid &&
     css`
@@ -31,7 +37,7 @@ const Results = styled.div`
 const PhotoContainer = styled.div`
 display: flex;
 flex-direction: column;
-margin: 20px;
+margin: 50px 20px 20px 20px;
 align-items: center;
 cursor: pointer;
 
@@ -52,19 +58,31 @@ ${props =>
       padding-left: 15px;
       padding-right: 15px;
     `}
-
 ${props =>
   props.isColumn &&
   css`
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex: 1;
     width: 50%;
   `}
 `;
 
 const SearchTerm = styled.span`
-  color: rgb(247, 154, 120);
+  color: rgb(255, 0, 0);
+  font-size: 35px;
+`;
+
+const HR = styled.hr`
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  background-color: red;
 `;
 
 const Loader = styled.div``;
@@ -105,6 +123,7 @@ const PhotoSearch = props => {
               <SearchTerm> Photos: </SearchTerm>
             </Heading>
             <SelectView value={value}></SelectView>
+            <HR />
             <InfiniteScroll
               id='infinite-scroll'
               pageStart={1}
@@ -117,9 +136,7 @@ const PhotoSearch = props => {
                 id='landing-results'>
                 {photos.map(photo => {
                   const { height, width } = photo;
-                  // return (
-                  //   <PhotoContainerComponent photo={photo} key={photo.id} />
-                  // );
+
                   return (
                     <PhotoContainer
                       key={photo.id}
@@ -130,6 +147,7 @@ const PhotoSearch = props => {
                       <UserLink
                         isGrid={value.isGrid}
                         isColumn={value.isColumn}
+                        key={photo.id}
                         id='userlink'
                         user={photo.user}
                       />
@@ -139,6 +157,7 @@ const PhotoSearch = props => {
                         isColumn={value.isColumn}
                         id='photo'
                         photo={photo}
+                        key={photo.id}
                       />
                     </PhotoContainer>
                   );

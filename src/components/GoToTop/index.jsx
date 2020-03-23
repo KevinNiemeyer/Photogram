@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { LayoutContext } from '../../App';
 
 const Container = styled.div`
-  background-color: rgb(247, 154, 120);
+  background: rgb(255, 0, 0);
   ${props =>
     props.showButton
       ? css`
@@ -16,7 +16,7 @@ const Container = styled.div`
   align-items: center;
   position: fixed;
   right: 55px;
-  top: 58px;
+  top: 100px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -39,7 +39,7 @@ const TopHat = styled.span`
   top: 5px;
   left: 7px;
   position: absolute;
-
+  z-index: 2;
   font-weight: bold;
 `;
 

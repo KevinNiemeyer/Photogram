@@ -36,17 +36,6 @@ const GridPhoto = styled.img`
   background-size: cover;
 `;
 
-const ListPhoto = styled.img`
-  &:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  width: 64px;
-  height: 64px;
-  background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
-`;
-
 const FavIcon = styled.div`
   color: red;
   position: absolute;

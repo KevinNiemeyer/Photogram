@@ -9,10 +9,10 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-left: 125px;
+  margin-left: 155px;
   font-size: 16px;
   align-items: center;
-  padding: 30px;
+  padding: 10px 0 15px 0;
 
   margin-bottom: 20px;
   background-color: rgb(250, 250, 250);
@@ -34,7 +34,7 @@ const RadioGroup = styled.ul`
     height: 35px;
     position: relative;
     &:hover {
-      background: rgb(247, 154, 120, 0.5);
+      background: rgb(255, 0, 0, 0.7);
     }
   }
   & label,
@@ -51,7 +51,7 @@ const RadioGroup = styled.ul`
       opacity: 0.01;
       z-index: 100;
       &:checked + label {
-        background: rgb(247, 154, 120);
+        background: rgb(255, 0, 0);
       }
     }
   }

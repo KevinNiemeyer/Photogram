@@ -35,7 +35,7 @@ const Results = styled.div`
 `;
 
 const User = styled.div`
-  margin: 15px 40px 15px 40px;
+  margin: 15px 45px 15px 45px;
 
   cursor: pointer;
 
@@ -54,10 +54,10 @@ const User = styled.div`
 `;
 
 const LinkTitle = styled.div`
-  padding: 10px;
+  padding: 0 0 10px 0;
   font-size: 20px;
   color: rgb(247, 154, 120);
-  text-align: center;
+  text-align: left;
 `;
 const Img = styled.img`
   &:hover {
@@ -86,7 +86,19 @@ const linkStyle = {
 };
 
 const SearchTerm = styled.span`
-  color: rgb(247, 154, 120);
+  color: rgb(255, 0, 0);
+  font-size: 35px;
+`;
+
+const HR = styled.hr`
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  background-color: red;
 `;
 
 const UserSearch = props => {
@@ -124,6 +136,7 @@ const UserSearch = props => {
               <SearchTerm> Users</SearchTerm>:
             </Heading>
             <SelectView value={value}></SelectView>
+            <HR />
             <InfiniteScroll
               pageStart={1}
               loadMore={getData}

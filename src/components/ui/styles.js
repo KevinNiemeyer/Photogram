@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 export const Heading = styled.h1`
   font-size: 32px;
   font-weight: 800;
-  margin-bottom: 16px;
-  padding-left: 25px;
+  margin: 15px 0 15px 0;
+  padding-left: 155px;
 `;
 
 export const Container = styled.div`
