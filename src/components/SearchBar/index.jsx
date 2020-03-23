@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
-import { Dropdown } from 'semantic-ui-react';
-
+import Dropdown from '../Dropdown';
 const Form = styled.form`
   display: flex;
   justify-content: center;
@@ -22,10 +21,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   padding: 0 10px 0 10px;
-  background-color: rgb(247, 154, 120);
+  background-color: red;
   border-radius: 0 3px 3px 0;
   outline: none;
-  border: none;
+  border: solid lightgrey 1px;
   &:hover {
     opacity: 0.9;
   }
@@ -67,6 +66,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
+        <Dropdown />
         {/* <select id='select-box' required onChange={this.handleCategoryChange}>
           <option value='' default selected disabled hidden>
             Category
@@ -75,6 +75,7 @@ export class SearchBar extends Component {
           <option value='Collections'>Collections</option>
           <option value='Photos'>Photos</option>
         </select>
+    */}
         <Input
           id='search-input'
           required
@@ -82,7 +83,7 @@ export class SearchBar extends Component {
           type='text'
           placeholder='Search'
         />
-    */}
+
         <Button>
           <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
         </Button>
