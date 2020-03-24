@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
 import Dropdown from '../Dropdown';
+import { CategoryContext } from '../Dropdown';
 const Form = styled.form`
   display: flex;
   justify-content: center;
@@ -48,26 +49,30 @@ export class SearchBar extends Component {
     this.setState({ searchTerm: e.target.value.toLowerCase() });
   };
   handleCategoryChange = e => {
+    console.log(e);
     this.setState({ category: e.target.value.toLowerCase() });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.searchTerm && this.state.category) {
+    /*  if (this.state.searchTerm && this.state.category) {
       this.props.history.push(
         `/search/${this.state.category}/${this.state.searchTerm}`
       );
     }
     document.getElementById('search-input').value = '';
     document.getElementById('select-box').selectedIndex = 0;
+  */
   };
   //can't get it to select the same category with a different search term
-
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Dropdown />
-        {/* <select id='select-box' required onChange={this.handleCategoryChange}>
+      <CategoryContext.Consumer>
+        {value => {
+          return (
+            <Form onSubmit={this.handleSubmit}>
+              <Dropdown onChange={this.handleCategoryChange} />
+              {/* <select id='select-box' required onChange={this.handleCategoryChange}>
           <option value='' default selected disabled hidden>
             Category
           </option>
@@ -76,18 +81,21 @@ export class SearchBar extends Component {
           <option value='Photos'>Photos</option>
         </select>
     */}
-        <Input
-          id='search-input'
-          required
-          onChange={this.handleSearchChange}
-          type='text'
-          placeholder='Search'
-        />
+              <Input
+                id='search-input'
+                required
+                onChange={this.handleSearchChange}
+                type='text'
+                placeholder='Search'
+              />
 
-        <Button>
-          <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
-        </Button>
-      </Form>
+              <Button type='submit'>
+                <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
+              </Button>
+            </Form>
+          );
+        }}
+      </CategoryContext.Consumer>
     );
   }
 }
