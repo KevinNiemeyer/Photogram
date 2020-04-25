@@ -4,6 +4,7 @@ import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
 import Dropdown from '../Dropdown';
 import { CategoryContext } from '../Dropdown';
+
 const Form = styled.form`
   display: flex;
   justify-content: center;
@@ -22,10 +23,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   padding: 0 10px 0 10px;
-  background-color: red;
+  background-color: rgb(250, 250, 250);
   border-radius: 0 3px 3px 0;
   outline: none;
-  border: solid lightgrey 1px;
+  border: none;
   &:hover {
     opacity: 0.9;
   }
@@ -42,18 +43,18 @@ const Img = styled.img`
 export class SearchBar extends Component {
   state = {
     searchTerm: '',
-    category: ''
+    category: '',
   };
 
-  handleSearchChange = e => {
+  handleSearchChange = (e) => {
     this.setState({ searchTerm: e.target.value.toLowerCase() });
   };
-  handleCategoryChange = e => {
+  handleCategoryChange = (e) => {
     console.log(e);
     this.setState({ category: e.target.value.toLowerCase() });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     /*  if (this.state.searchTerm && this.state.category) {
       this.props.history.push(
@@ -68,7 +69,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <CategoryContext.Consumer>
-        {value => {
+        {(value) => {
           return (
             <Form onSubmit={this.handleSubmit}>
               <Dropdown onChange={this.handleCategoryChange} />
