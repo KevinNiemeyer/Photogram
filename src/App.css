@@ -1,5 +1,6 @@
 .app-container {
   margin: 0 auto;
+  width: auto;
 }
 
 .routes-container {

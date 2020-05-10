@@ -34,44 +34,35 @@ const Results = styled.div`
 `;
 
 const PhotoContainer = styled.div`
-cursor: pointer;
+  cursor: pointer;
 
-${(props) =>
-  props.landscape
-    ? css`
-        width: 80vw;
-      `
-    : css`
-        height: 80vh;
-      `}
-${(props) =>
-  props.isGrid &&
-  css`
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-    height: 250px;
-    padding: 0;
-    padding: 0 20px 40px 20px;
-  `}
+  ${(props) =>
+    props.isGrid &&
+    css`
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      height: 250px;
+      padding: 0;
+      padding: 0 20px 40px 20px;
+    `}
 
-${(props) =>
-  props.isColumn &&
-  css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    padding-bottom: 75px;
-  `}
+  ${(props) =>
+    props.isColumn &&
+    css`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      padding-bottom: 75px;
+    `}
 `;
 
 const TitleBar = styled.h1`
   text-align: center;
   font-size: 48px;
   margin: 20px;
-  width: 100%;
 `;
 const Loader = styled.div``;
 
@@ -93,6 +84,7 @@ const UserPage = (props) => {
   }, []); // empty array for componentDidMount,
   // put value in array for componentDidUpdate
   const user = photos.length ? photos[0].user : null;
+  console.log(user);
   return (
     <LayoutContext.Consumer>
       {(value) => {
@@ -119,8 +111,7 @@ const UserPage = (props) => {
                       id='photo-container'
                       key={photo.id}
                       isGrid={value.isGrid}
-                      isColumn={value.isColumn}
-                      landscape={width > height}>
+                      isColumn={value.isColumn}>
                       <Photo
                         category='user'
                         landscape={width > height}

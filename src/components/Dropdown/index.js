@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 
 export const CategoryContext = React.createContext();
 
-const Container = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: inline-block;
   min-width: 75px;
@@ -74,7 +74,7 @@ const Dropdown = (props) => {
   };
 
   return (
-    <Container class='dropdown'>
+    <Wrapper class='dropdown'>
       <DropButton id='dropbtn' class='dropbtn'>
         {category}
       </DropButton>
@@ -89,7 +89,7 @@ const Dropdown = (props) => {
           Photos
         </Button>
       </DropdownContent>
-    </Container>
+    </Wrapper>
   );
 };
 export default Dropdown;

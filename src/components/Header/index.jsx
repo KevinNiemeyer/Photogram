@@ -11,7 +11,6 @@ const Nav = styled.div`
   align-items: center;
   width: 100%;
   height: 75px;
-  margin-left: -15px;
   border-bottom: solid 1px lightgrey;
   background-color: red;
   z-index: 4;
@@ -40,7 +39,7 @@ const Button = styled.button`
 `;
 
 class Header extends React.Component {
-  handleClick = e => {
+  handleClick = (e) => {
     e.preventDefault();
     this.props.history.push(`/favorites`);
   };

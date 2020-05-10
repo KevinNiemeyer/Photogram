@@ -12,9 +12,8 @@ const Loader = styled.div``;
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 100%;
+
   background-color: rgb(250, 250, 250);
-  border: solid black 1px;
 `;
 
 const Results = styled.div`
@@ -61,6 +60,14 @@ const LinkTitle = styled.div`
   text-align: left;
 `;
 const Img = styled.img`
+  ${(props) =>
+    props.landscape
+      ? css`
+          width: 80vw;
+        `
+      : css`
+          height: 80vh;
+        `}
   &:hover {
     opacity: 0.8;
   }
@@ -103,7 +110,6 @@ const HR = styled.hr`
 `;
 
 const UserSearch = (props) => {
-  console.log(props);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -149,6 +155,7 @@ const UserSearch = (props) => {
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}>
                 {users.map((user) => {
+                  const { height, width } = user.profile_image.large;
                   return (
                     <User id='user'>
                       <Link
@@ -164,6 +171,7 @@ const UserSearch = (props) => {
                           src={user.profile_image.large}
                           alt={user.username}
                           key={user.id}
+                          landscape={width > height}
                         />
                       </Link>
                     </User>

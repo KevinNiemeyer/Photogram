@@ -7,12 +7,12 @@ import { LayoutContext } from '../../App';
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
-  width: 100%;
   margin-left: 155px;
   font-size: 16px;
   align-items: center;
-  padding: 50px 0 15px 0;
+  padding: 10px 0 15px 0;
 
   margin-bottom: 20px;
   background-color: rgb(250, 250, 250);
