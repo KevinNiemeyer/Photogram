@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "git": "^0.1.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-infinite-scroller": "^1.2.4",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "react-tooltip": "^4.0.3",
+    "react-tooltip": "^4.2.5",
     "react-transition-group": "^4.3.0",
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^4.4.1",
@@ -37,6 +38,6 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.6"
+    "babel-plugin-styled-components": "^1.10.7"
   }
 }

@@ -36,6 +36,9 @@ const RadioGroup = styled.ul`
     &:hover {
       background: rgb(255, 0, 0, 0.7);
     }
+    &:active {
+      font-size: 0.9rem;
+    }
   }
   & label,
   & input {
@@ -70,7 +73,7 @@ export class SelectView extends Component {
   render() {
     return (
       <LayoutContext.Consumer>
-        {value => {
+        {(value) => {
           return (
             <ButtonContainer id='select-view-container'>
               <h3>View:</h3>
