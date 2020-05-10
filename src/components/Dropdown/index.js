@@ -64,38 +64,32 @@ const Button = styled.button`
   }
 `;
 
-const Dropdown = () => {
+const Dropdown = (props) => {
   const [category, setCategory] = useState('Category');
+
   const handleClick = (e) => {
-    if (e) {
-      e.preventDefault();
-      setCategory(e.target.value);
-      // console.log(e.target.value);
-    }
+    console.log(e.target.value);
+    setCategory(e.target.value);
+    props.handleCategoryChange(e.target.value);
   };
 
   return (
-    <CategoryContext.Provider
-      value={{
-        category: category,
-      }}>
-      <Container class='dropdown'>
-        <DropButton id='dropbtn' class='dropbtn'>
-          {category}
-        </DropButton>
-        <DropdownContent class='dropdown-content'>
-          <Button id='btn1' onClick={handleClick} value='Users'>
-            Users
-          </Button>
-          <Button id='btn2' onClick={handleClick} value='Collections'>
-            Collections
-          </Button>
-          <Button id='btn3' onClick={handleClick} value='Photos'>
-            Photos
-          </Button>
-        </DropdownContent>
-      </Container>
-    </CategoryContext.Provider>
+    <Container class='dropdown'>
+      <DropButton id='dropbtn' class='dropbtn'>
+        {category}
+      </DropButton>
+      <DropdownContent class='dropdown-content'>
+        <Button id='btn1' onClick={handleClick} value='Users'>
+          Users
+        </Button>
+        <Button id='btn2' onClick={handleClick} value='Collections'>
+          Collections
+        </Button>
+        <Button id='btn3' onClick={handleClick} value='Photos'>
+          Photos
+        </Button>
+      </DropdownContent>
+    </Container>
   );
 };
 export default Dropdown;

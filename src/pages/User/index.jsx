@@ -16,14 +16,14 @@ const Container = styled.div`
 const Results = styled.div`
   padding: 20px;
   width: 100%;
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       display: flex;
@@ -36,7 +36,7 @@ const Results = styled.div`
 const PhotoContainer = styled.div`
 cursor: pointer;
 
-${props =>
+${(props) =>
   props.landscape
     ? css`
         width: 80vw;
@@ -44,7 +44,7 @@ ${props =>
     : css`
         height: 80vh;
       `}
-${props =>
+${(props) =>
   props.isGrid &&
   css`
     display: flex;
@@ -55,7 +55,7 @@ ${props =>
     padding: 0 20px 40px 20px;
   `}
 
-${props =>
+${(props) =>
   props.isColumn &&
   css`
     display: flex;
@@ -67,16 +67,22 @@ ${props =>
   `}
 `;
 
+const TitleBar = styled.h1`
+  text-align: center;
+  font-size: 48px;
+  margin: 20px;
+  width: 100%;
+`;
 const Loader = styled.div``;
 
-const UserPage = props => {
+const UserPage = (props) => {
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
   const getData = () => {
     unsplash.users
       .photos(props.match.params.userName, page, 5, 'popular', false)
       .then(toJson)
-      .then(json => {
+      .then((json) => {
         setPhotos([...photos, ...json]);
         setPage(page + 1);
       });
@@ -89,12 +95,13 @@ const UserPage = props => {
   const user = photos.length ? photos[0].user : null;
   return (
     <LayoutContext.Consumer>
-      {value => {
+      {(value) => {
         return (
           <Container>
             <GoToTop />
             <UserInfo user={user} />
             <SelectView value={value}></SelectView>
+            <TitleBar>{props.match.params.userName}'s Photos:</TitleBar>
             <InfiniteScroll
               id='infinite-scroll'
               pageStart={1}
@@ -105,7 +112,7 @@ const UserPage = props => {
                 id='landing-results'
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}>
-                {photos.map(photo => {
+                {photos.map((photo) => {
                   const { height, width } = photo;
                   return (
                     <PhotoContainer

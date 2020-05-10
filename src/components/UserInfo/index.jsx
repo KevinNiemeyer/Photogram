@@ -9,6 +9,7 @@ const Container = styled.div`
   width: 50%;
   padding: 20px;
   align-items: center;
+  border-bottom: solid lightgrey;
 `;
 
 const Img = styled.img`

@@ -14,18 +14,19 @@ const Container = styled.div`
   margin: 0 auto;
   width: 100%;
   background-color: rgb(250, 250, 250);
+  border: solid black 1px;
 `;
 
 const Results = styled.div`
   width: 100%;
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       display: flex;
@@ -39,13 +40,13 @@ const User = styled.div`
 
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       width: 250px;
     `}
 
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       width: 50%;
@@ -63,15 +64,15 @@ const Img = styled.img`
   &:hover {
     opacity: 0.8;
   }
-  background: url(${props => props.src}) no-repeat center center;
+  background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       width: 225px;
       height: 225px;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       width: 350px;
@@ -82,7 +83,7 @@ const Img = styled.img`
 const linkStyle = {
   textDecoration: 'none',
   fontSize: '24px',
-  padding: '10px'
+  padding: '10px',
 };
 
 const SearchTerm = styled.span`
@@ -101,7 +102,8 @@ const HR = styled.hr`
   background-color: red;
 `;
 
-const UserSearch = props => {
+const UserSearch = (props) => {
+  console.log(props);
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -112,7 +114,7 @@ const UserSearch = props => {
     unsplash.search
       .users(props.match.params.user, page, 5)
       .then(toJson)
-      .then(json => {
+      .then((json) => {
         setUsers([...users, ...json.results]);
         setPage(page + 1);
         if (!totalPages) setTotalPages(json.total_pages);
@@ -126,7 +128,7 @@ const UserSearch = props => {
 
   return (
     <LayoutContext.Consumer>
-      {value => {
+      {(value) => {
         return (
           <Container id='user-search-container'>
             <GoToTop />
@@ -146,7 +148,7 @@ const UserSearch = props => {
                 id='user-search-results'
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}>
-                {users.map(user => {
+                {users.map((user) => {
                   return (
                     <User id='user'>
                       <Link
