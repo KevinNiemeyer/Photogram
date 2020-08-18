@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/photogram/static/css/main.cfc7cde3.chunk.css",
+    "main.js": "/photogram/static/js/main.8e5cde69.chunk.js",
+    "main.js.map": "/photogram/static/js/main.8e5cde69.chunk.js.map",
+    "runtime-main.js": "/photogram/static/js/runtime-main.cf5494ca.js",
+    "runtime-main.js.map": "/photogram/static/js/runtime-main.cf5494ca.js.map",
+    "static/js/2.4b62e286.chunk.js": "/photogram/static/js/2.4b62e286.chunk.js",
+    "static/js/2.4b62e286.chunk.js.map": "/photogram/static/js/2.4b62e286.chunk.js.map",
+    "index.html": "/photogram/index.html",
+    "precache-manifest.3a9e8814b78073281d3936ec7dc50351.js": "/photogram/precache-manifest.3a9e8814b78073281d3936ec7dc50351.js",
+    "service-worker.js": "/photogram/service-worker.js",
+    "static/css/main.cfc7cde3.chunk.css.map": "/photogram/static/css/main.cfc7cde3.chunk.css.map",
+    "static/js/2.4b62e286.chunk.js.LICENSE.txt": "/photogram/static/js/2.4b62e286.chunk.js.LICENSE.txt",
+    "static/media/logo.png": "/photogram/static/media/logo.de6873fc.png",
+    "static/media/magnifying-glass.png": "/photogram/static/media/magnifying-glass.cb625baf.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cf5494ca.js",
+    "static/js/2.4b62e286.chunk.js",
+    "static/css/main.cfc7cde3.chunk.css",
+    "static/js/main.8e5cde69.chunk.js"
+  ]
+}

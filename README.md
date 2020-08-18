@@ -1,1 +1,0 @@
-### Instagram-ish app that consumes the Unsplash API to display photos.
