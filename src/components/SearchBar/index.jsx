@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import MagnifyingGlassIcon from '../../assets/magnifying-glass.png';
 import styled from 'styled-components';
-import Dropdown from '../Dropdown';
-import { CategoryContext } from '../Dropdown';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 40%;
 `;
 
 const Input = styled.input`
@@ -59,21 +57,22 @@ const radios = {
 
 const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState('Category');
+  const [category, setCategory] = useState('users');
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
   };
-  const handleCategoryChange = (value) => {
-    if (value) {
-      setCategory(value.toLowerCase());
+  const handleCategoryChange = (e) => {
+    if (e) {
+      setCategory(e.target.value.toLowerCase());
     }
   };
   console.log(category);
   const handleSubmit = () => {
+    console.log("test")
     if (searchTerm && category) {
       props.history.push(`/search/${category}/${searchTerm}`);
-      console.log(this.props.history);
+      console.log(props.history);
     }
     document.getElementById('search-input').value = '';
   };
@@ -81,13 +80,14 @@ const SearchBar = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Wrapper style={radios}>  
-        <input type="radio" id="users" name="category" value="users" />
-        <label for="users">Users</label>
+      <Wrapper style={radios}>
+      <h3>Search for:&nbsp;&nbsp;</h3>
+        <input onChange={handleCategoryChange} type="radio" id="users" name="category" value="users" checked={true} />
+        <label htmlFor="users">Users</label>
         <input type="radio" id="collections" name="category" value="collections" />
-        <label for="collections" >Collections</label>
+        <label htmlFor="collections" >Collections</label>
         <input type="radio" id="photos" name="category" value="photos" />
-        <label for="photos" >Photos</label>
+        <label htmlFor="photos" >Photos</label>
       </Wrapper>
    {/*<Dropdown id='dropdown' handleCategoryChange={handleCategoryChange} /> */}
 
@@ -109,7 +109,7 @@ const SearchBar = (props) => {
           placeholder='Search'
         />
 
-        <Button type='submit'>
+        <Button type='submit' onClick={handleSubmit}>
           <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
         </Button>
       </Wrapper>
