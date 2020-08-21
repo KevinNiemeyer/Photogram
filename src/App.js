@@ -61,14 +61,15 @@ class App extends React.Component {
 						<HeaderComponent />
 						<div className='routes-container'>
 							<Switch>
-								<Route path='/' exact component={LandingPage} />
+								<Route exact path='/' component={LandingPage} />
+								<Route exact path='/photogram' component={LandingPage} />
 								<Route path='/user/:userName' exact component={UserPage} />
 								<Route path='/search/users/:user' exact component={UserSearch} />
 								<Route path='/search/collections/:collection' exact component={CollectionsSearch} />
 								<Route path='/collection/:id' exact component={Collection} />
 								<Route path='/search/photos/:searchTerm' exact component={PhotosSearch} />
 								<Route path='/favorites' exact component={Favorites} />
-								<Route path='*' component={FourOhFour} />
+								<Route path='/*' component={FourOhFour} />
 							</Switch>
 						</div>
 					</div>

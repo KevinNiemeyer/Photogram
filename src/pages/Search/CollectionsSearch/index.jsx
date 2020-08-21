@@ -12,7 +12,7 @@ const Loader = styled.div``;
 
 const Container = styled.div`
   margin: 0 auto;
-  width: 100%
+  width: 100%;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -43,7 +43,6 @@ const Collection = styled.div`
     css`
       width: 250px;
     `}
-
   ${props =>
     props.isColumn &&
     css`
@@ -51,7 +50,6 @@ const Collection = styled.div`
       flex: 1;
     `}
 `;
-
 const LinkTitle = styled.div`
   padding: 0 0 10px 0;
   font-size: 20px;
@@ -59,11 +57,11 @@ const LinkTitle = styled.div`
   text-align: left;
 `;
 const Img = styled.div`
+  background: url(${props => props.src}) no-repeat center center;
+  background-size: cover;
   &:hover {
     opacity: 0.8;
   }
-  background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
   ${props =>
     props.isGrid &&
     css`

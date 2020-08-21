@@ -2,7 +2,7 @@
 	"name": "photogram",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "http://KevinNiemeyer.github.io/photogram",
+	"homepage": "http://KevinNiemeyer.github.io/Photogram",
 	"dependencies": {
 		"git": "^0.1.5",
 		"react": "^16.13.1",

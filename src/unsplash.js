@@ -1,6 +1,6 @@
 import Unsplash from 'unsplash-js';
 export const unsplash = new Unsplash({
-  accessKey: 'f60e5cafcb3b8080fd0df608e7a86a7fc207ebb0fbba65f2e14ac75d130babc0',
+	accessKey: '2c3e172d585783910133a3b7c26b7c24a7dde925f6da708538cddf8081a4b009'
 });
 
 // d05fe364f186af88c5fc71e646845374ca9d2a99aaf8c8ef9e4cc1c058e6bae5

@@ -101,7 +101,7 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
   const getData = async () => {
-    let storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    let storedFavorites = await JSON.parse(localStorage.getItem('favorites')) || [];
 
     setFavorites(storedFavorites);
   };
