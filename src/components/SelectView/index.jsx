@@ -87,7 +87,7 @@ export class SelectView extends Component {
                     name='isGrid'
                     checked={value.isGrid ? true : false}
                   />
-                  <label for='grid'>Grid</label>
+                  <label htmlFor='grid'>Grid</label>
                 </li>
 
                 <li>
@@ -98,7 +98,7 @@ export class SelectView extends Component {
                     name='isColumn'
                     checked={value.isColumn ? true : false}
                   />
-                  <label for='column'>Column</label>
+                  <label htmlFor='column'>Column</label>
                 </li>
               </RadioGroup>
             </ButtonContainer>

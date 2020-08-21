@@ -7,20 +7,21 @@ import { CategoryContext } from '../Dropdown';
 
 const Form = styled.form`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 33%;
 `;
 
 const Input = styled.input`
   border: none;
   outline: none;
-  min-height: 25px;
+  min-height: 30px;
   padding-left: 10px;
   background-color: rgb(250, 250, 250);
 `;
 
-const Button = styled.button`
+const Button = styled.div`
   display: flex;
+  min-height: 32px;
   align-items: center;
   padding: 0 10px 0 10px;
   background-color: rgb(250, 250, 250);
@@ -35,10 +36,26 @@ const Button = styled.button`
   }
 `;
 
-const Img = styled.img`
-  width: 15px;
-  height: 15px;
+const Wrapper = styled.div`
+  padding: 12px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
 `;
+
+const Img = styled.img`
+  max-width: 15px;
+`;
+
+const radios = {
+  display:'flex', 
+  padding: '0 20px',
+  fontSize: '18px'
+}
 
 const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -52,7 +69,7 @@ const SearchBar = (props) => {
       setCategory(value.toLowerCase());
     }
   };
-
+  console.log(category);
   const handleSubmit = () => {
     if (searchTerm && category) {
       props.history.push(`/search/${category}/${searchTerm}`);
@@ -64,7 +81,15 @@ const SearchBar = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Dropdown id='dropdown' handleCategoryChange={handleCategoryChange} />
+      <Wrapper style={radios}>  
+        <input type="radio" id="users" name="category" value="users" />
+        <label for="users">Users</label>
+        <input type="radio" id="collections" name="category" value="collections" />
+        <label for="collections" >Collections</label>
+        <input type="radio" id="photos" name="category" value="photos" />
+        <label for="photos" >Photos</label>
+      </Wrapper>
+   {/*<Dropdown id='dropdown' handleCategoryChange={handleCategoryChange} /> */}
 
       {/* <select id='select-box' required onChange={this.handleCategoryChange}>
           <option value='' default selected disabled hidden>
@@ -75,17 +100,19 @@ const SearchBar = (props) => {
           <option value='Photos'>Photos</option>
         </select>
     */}
-      <Input
-        id='search-input'
-        required
-        onChange={handleSearchChange}
-        type='text'
-        placeholder='Search'
-      />
+      <Wrapper>
+        <Input
+          id='search-input'
+          required
+          onChange={handleSearchChange}
+          type='text'
+          placeholder='Search'
+        />
 
-      <Button type='submit'>
-        <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
-      </Button>
+        <Button type='submit'>
+          <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
+        </Button>
+      </Wrapper>
     </Form>
   );
 };

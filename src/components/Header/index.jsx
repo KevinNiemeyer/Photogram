@@ -10,7 +10,7 @@ const Nav = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 75px;
+  height: 90px;
   border-bottom: solid 1px lightgrey;
   background-color: red;
   z-index: 4;

@@ -110,8 +110,7 @@ const PhotoSearch = (props) => {
 	}, []);
 
 	if (photos.length === 0) {
-		console.log('test');
-		return 'No photos found';
+		return ('No photos found');
 	}
 
 	return (
