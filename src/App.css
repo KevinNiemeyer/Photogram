@@ -2,6 +2,12 @@ html {
   overflow-y: scroll;
 }
 
+:root {
+  --main-color: darkcyan;
+  --secondary-color: firebrick;
+
+}
+
 .app-container {
   margin: 0 auto;
   width: auto;

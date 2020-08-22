@@ -33,12 +33,7 @@ const RadioGroup = styled.ul`
     width: 85px;
     height: 35px;
     position: relative;
-    &:hover {
-      background: rgb(255, 0, 0, 0.7);
-    }
-    &:active {
-      font-size: 0.9rem;
-    }
+  
   }
   & label,
   & input {
@@ -54,19 +49,13 @@ const RadioGroup = styled.ul`
       opacity: 0.01;
       z-index: 100;
       &:checked + label {
-        background: rgb(255, 0, 0);
+        background: var(--secondary-color);
+      }
+      &:checked:active {
+        opacity: 0.9;
       }
     }
   }
-`;
-const HR = styled.hr`
-  display: block;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: auto;
-  margin-right: auto;
-  border-style: inset;
-  border-width: 1px;
 `;
 
 export class SelectView extends Component {

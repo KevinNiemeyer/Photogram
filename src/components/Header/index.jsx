@@ -11,8 +11,8 @@ const Nav = styled.div`
   align-items: center;
   width: 100%;
   height: 90px;
-  border-bottom: solid 1px lightgrey;
-  background-color: red;
+  border-bottom: solid 1px var(--main-color);
+  background-color: darkcyan;
   z-index: 4;
 `;
 const ButtonContainer = styled.div`
@@ -22,19 +22,20 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  color: rgb(255, 0, 0);
+  color: black;  
+  
   font-size: 16px;
   width: auto;
   padding: 5px 20px 5px 20px;
   margin-left: 100px;
-  border: solid lightgrey 1px;
+  border: none;
   outline: none;
   border-radius: 3px;
   &:hover {
-    opacity: (0.8);
+    opacity: 0.9;
   }
   &:active {
-    transform: scale(0.95);
+    transform:scale(0.999)
   }
 `;
 

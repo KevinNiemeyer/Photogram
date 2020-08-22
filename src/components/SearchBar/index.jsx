@@ -53,7 +53,7 @@ const Img = styled.img`
 const radios = {
   display:'flex',
   paddingBottom: '15px', 
-  fontSize: '18px'
+  fontSize: '18px',
 }
 
 const SearchBar = (props) => {

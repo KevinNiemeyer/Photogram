@@ -19,9 +19,9 @@ const Img = styled.img`
 const H2 = styled.h2`
   position: relative;
   font-family: 'Dancing Script', cursive;
+  color: var(--secondary-color);
   font-size: 30px;
   padding-left: 17px;
-  color: black;
   &::before {
     position: absolute;
     content: '';
