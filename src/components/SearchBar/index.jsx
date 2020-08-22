@@ -58,12 +58,6 @@ const radios = {
   
 }
 
-const labels = {
-  
-    color: 'cornflowerblue'
-  
-}
-
 const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');

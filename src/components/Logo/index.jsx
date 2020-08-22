@@ -20,7 +20,7 @@ const H2 = styled.h2`
   position: relative;
   font-family: 'Dancing Script', cursive;
   color: var(--secondary-color);
-  font-size: 30px;
+  font-size: 50px;
   padding-left: 17px;
   &::before {
     position: absolute;

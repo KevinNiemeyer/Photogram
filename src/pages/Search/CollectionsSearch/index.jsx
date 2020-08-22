@@ -59,8 +59,9 @@ const LinkTitle = styled.div`
 const Img = styled.div`
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
+  transition: all 10s;
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.2);
   }
   ${props =>
     props.isGrid &&
@@ -153,6 +154,7 @@ const CollectionSearch = props => {
                         style={linkStyle}
                         key={collection.id}>
                         <LinkTitle>{collection.title}</LinkTitle>
+                        <div style={{overflow: 'hidden'}}>
                         <Img
                           isGrid={value.isGrid}
                           isColumn={value.isColumn}
@@ -160,6 +162,7 @@ const CollectionSearch = props => {
                           alt={collection.title}
                           key={collection.id}
                         />
+                        </div>
                       </Link>
                     </Collection>
                   );

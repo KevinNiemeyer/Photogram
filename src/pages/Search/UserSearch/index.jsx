@@ -51,6 +51,7 @@ const User = styled.div`
       width: 50%;
       flex: 1;
     `}
+    
 `;
 
 const LinkTitle = styled.div`
@@ -68,9 +69,10 @@ const Img = styled.img`
       : css`
           height: 80vh;
         `}
-  &:hover {
-    opacity: 0.8;
-  }
+        transition: all 10s;
+        &:hover {
+          transform: scale(1.2);
+        }
   background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
   ${(props) =>
@@ -117,7 +119,7 @@ const UserSearch = (props) => {
 
   const getData = () => {
     if (!hasMore) return;
-    unsplash.search
+     unsplash.search
       .users(props.match.params.user, page, 5)
       .then(toJson)
       .then((json) => {
@@ -165,6 +167,7 @@ const UserSearch = (props) => {
                         style={linkStyle}
                         key={user.id}>
                         <LinkTitle>{user.username}</LinkTitle>
+                        <div style={{overflow:'hidden'}}>
                         <Img
                           isGrid={value.isGrid}
                           isColumn={value.isColumn}
@@ -173,6 +176,7 @@ const UserSearch = (props) => {
                           key={user.id}
                           landscape={width > height}
                         />
+                        </div>
                       </Link>
                     </User>
                   );

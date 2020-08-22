@@ -8,6 +8,7 @@ import Collection from './pages/Collection';
 import PhotosSearch from './pages/Search/PhotosSearch';
 import Favorites from './pages/Favorites';
 import GoToTop from './components/GoToTop';
+import Footer from './components/Footer'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import './reset.css';
@@ -72,6 +73,7 @@ class App extends React.Component {
 								<Route path='/*' component={FourOhFour} />
 							</Switch>
 						</div>
+						<Footer></Footer>
 					</div>
 				</Router>
 			</LayoutContext.Provider>
