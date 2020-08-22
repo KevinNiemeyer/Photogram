@@ -7,14 +7,16 @@ import ReactTooltip from 'react-tooltip';
 const Container = styled.div`
   position: relative;
   height: 100%;
+  overflow: hidden; 
 `;
 
 const ColumnPhoto = styled.img`
   display: flex;
   justify-content: center;
   background: url(${props => props.src}) no-repeat center center;
+  transition: all 2s;
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.2);
   }
   ${props =>
     props.landscape
@@ -27,8 +29,9 @@ const ColumnPhoto = styled.img`
 `;
 
 const GridPhoto = styled.img`
+transition: all 2s;
   &:hover {
-    opacity: 0.8;
+    transform: scale(1.2);
   }
   width: 100%;
   height: 200px;

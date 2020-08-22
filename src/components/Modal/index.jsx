@@ -14,15 +14,19 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
   transition: 0.3s;
   text-align: center;
+  
 `;
 
 const ModalImage = styled.div`
+  
   position: relative;
   margin: 0 auto;
   width: auto;
   height: 100%;
   display: flex;
   justify-content: center;
+  overflow: hidden;
+
 `;
 
 const Img = styled.img`
@@ -39,6 +43,10 @@ const Img = styled.img`
   /* Set up proportionate scaling */
 
   /* Set up positioning */
+  transition: all 2s;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const Close = styled.span`
