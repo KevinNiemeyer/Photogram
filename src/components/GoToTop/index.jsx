@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { LayoutContext } from '../../App';
 
 const Container = styled.div`
-  background: rgb(255, 0, 0);
+  background: var(--secondary-color);
   ${props =>
     props.showButton
       ? css`

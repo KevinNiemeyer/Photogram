@@ -2,7 +2,7 @@
 	"name": "photogram",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "http://KevinNiemeyer.github.io/Photogram",
+	"homepage": "http://KevinNiemeyer.github.io/photogram",
 	"dependencies": {
 		"git": "^0.1.5",
 		"react": "^16.13.1",
@@ -29,8 +29,8 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [">0.2%", "not dead", "not op_mini all"],
+		"development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
 	},
 	"devDependencies": {
 		"babel-plugin-styled-components": "^1.10.7",

@@ -41,12 +41,15 @@ const FavIcon = styled.div`
   position: absolute;
   font-size: 24px;
   top: 10px;
-  left: 10px;
+  right: 10px;
   -webkit-text-stroke: 2px red;
   -webkit-text-fill-color: transparent;
   &:active {
     transform: scale(0.9);
     -webkit-text-fill-color: red;
+  }
+  &:hover {
+    transform: scale(1.1);
   }
   ${props =>
     props.hide &&

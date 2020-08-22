@@ -68,6 +68,13 @@ const PhotoContainer = styled.div`
 			`};
 `;
 
+const HR1 = styled.div`
+content: " ";	
+width: 100%;
+height: 1px;
+background-color: var(--main-color);
+`;
+
 const HR = styled.hr`
 	display: block;
 	margin-top: 0.5em;
@@ -78,6 +85,7 @@ const HR = styled.hr`
 	border-width: 1px;
 	background-color: red;
 `;
+
 const Loader = styled.div``;
 
 const Landing = () => {
@@ -107,7 +115,7 @@ const Landing = () => {
 						<GoToTop />
 						<Heading id='landing-heading'>Latest Photos:</Heading>
 						<SelectView value={value} />
-						<HR />
+						<HR1 />
 						<InfiniteScroll
 							id='infinite-scroll'
 							pageStart={1}

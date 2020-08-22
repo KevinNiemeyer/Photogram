@@ -22,7 +22,7 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  color: black;  
+  color: var(--secondary-color);  
   
   font-size: 16px;
   width: auto;

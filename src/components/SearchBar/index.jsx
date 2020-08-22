@@ -17,6 +17,7 @@ const Input = styled.input`
   padding-left: 10px;
   border-radius: 3px 0 0 3px;
   background-color: rgb(250, 250, 250);
+
 `;
 
 const Button = styled.button`
@@ -54,6 +55,13 @@ const radios = {
   display:'flex',
   paddingBottom: '15px', 
   fontSize: '18px',
+  
+}
+
+const labels = {
+  
+    color: 'cornflowerblue'
+  
 }
 
 const SearchBar = (props) => {

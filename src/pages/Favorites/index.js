@@ -23,7 +23,7 @@ const Heading = styled.div`
   margin: 0 auto;
   text-align: center;
   font-size: 40px;
-  padding: 20px 0 0 20px;
+  padding: 20px 0 0 0;
   background-color: rgb(250, 250, 250);
 `;
 
@@ -97,6 +97,36 @@ const Remove = styled.div`
   z-index: 2;
 `;
 
+const HR = styled.hr`
+	display: block;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+	background-color: red;
+`;
+
+const HR1 = styled.div`
+margin: 0;
+padding: 0;
+content: " ";	
+width: 100%;
+height: 1px;
+background-color: var(--main-color);
+`;
+
+const EmptyMessage = styled.div`
+  display: flex;  
+  width: 100%;
+  margin-top: 20vh;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  
+    
+`;
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
@@ -125,13 +155,14 @@ const Favorites = () => {
     <LayoutContext.Consumer>
       {value => {
         return !favorites.length ? (
-          'No favorites to show'
+          <EmptyMessage>No favorites to show</EmptyMessage>
         ) : (
           <Container id='favorites-container'>
             <GoToTop />
             <Heading id='favorites-heading'>
               Favorites:
               <SelectView value={value}></SelectView>
+              <HR1 />
             </Heading>
             <Results
               isGrid={value.isGrid}
