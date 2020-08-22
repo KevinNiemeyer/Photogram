@@ -29,14 +29,14 @@ const Heading = styled.div`
 
 const Results = styled.div`
   width: 100%;
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       display: flex;
@@ -53,7 +53,7 @@ position: relative;
   align-items: center;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.landscape
       ? css`
           width: 80vw;
@@ -61,7 +61,7 @@ position: relative;
       : css`
           height: 80vh;
         `}
-    ${props =>
+    ${(props) =>
       props.isGrid &&
       css`
         display: flex;
@@ -70,7 +70,7 @@ position: relative;
         padding-left: 15px;
         padding-right: 15px;
       `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       display: flex;
@@ -98,46 +98,48 @@ const Remove = styled.div`
 `;
 
 const HR = styled.hr`
-	display: block;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-	margin-left: auto;
-	margin-right: auto;
-	border-style: inset;
-	border-width: 1px;
-	background-color: red;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  background-color: red;
 `;
 
 const HR1 = styled.div`
-margin: 0;
-padding: 0;
-content: " ";	
-width: 100%;
-height: 1px;
-background-color: var(--main-color);
+  margin: 0;
+  padding: 0;
+  content: ' ';
+  width: 100%;
+  height: 1px;
+  background-color: var(--main-color);
 `;
 
 const EmptyMessage = styled.div`
-  display: flex;  
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin-top: 20vh;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
-  
-    
+  font-size: 32px;
+
+  color: var(--third-color);
 `;
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
   const getData = async () => {
-    let storedFavorites = await JSON.parse(localStorage.getItem('favorites')) || [];
+    let storedFavorites =
+      (await JSON.parse(localStorage.getItem('favorites'))) || [];
 
     setFavorites(storedFavorites);
   };
 
-  const removeFavorite = photoId => {
-    let nextFavorite = favorites.filter(favorite => {
+  const removeFavorite = (photoId) => {
+    let nextFavorite = favorites.filter((favorite) => {
       console.log(photoId);
       console.log(favorite.id);
       return photoId !== favorite.id;
@@ -153,9 +155,17 @@ const Favorites = () => {
 
   return (
     <LayoutContext.Consumer>
-      {value => {
+      {(value) => {
         return !favorites.length ? (
-          <EmptyMessage>No favorites to show</EmptyMessage>
+          <EmptyMessage>
+            <div>No favorites to show.</div>
+
+            <div>
+              Try adding some by clicking the{' '}
+              <span style={{ color: 'red' }}>&hearts;</span> on your favorite
+              pics!
+            </div>
+          </EmptyMessage>
         ) : (
           <Container id='favorites-container'>
             <GoToTop />
@@ -168,7 +178,7 @@ const Favorites = () => {
               isGrid={value.isGrid}
               isColumn={value.isColumn}
               id='landing-results'>
-              {favorites.map(photo => {
+              {favorites.map((photo) => {
                 const { height, width } = photo;
                 return (
                   <PhotoContainer

@@ -7,20 +7,17 @@ import ReactTooltip from 'react-tooltip';
 const Container = styled.div`
   position: relative;
   height: 100%;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const ColumnPhoto = styled.img`
-overflow: hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   background-size: cover;
-  background: url(${props => props.src}) no-repeat center center;
-  transition: all 10s;
-  &:hover {
-    transform: scale(1.2);
-  }
-  ${props =>
+  background: url(${(props) => props.src}) no-repeat center center;
+
+  ${(props) =>
     props.landscape
       ? css`
           width: 100%;
@@ -31,13 +28,13 @@ overflow: hidden;
 `;
 
 const GridPhoto = styled.img`
-transition: all 5s;
+  transition: all 5s;
   &:hover {
     transform: scale(1.2);
   }
   width: 100%;
   height: 200px;
-  background: url(${props => props.src}) no-repeat center center;
+  background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
 `;
 
@@ -56,7 +53,7 @@ const FavIcon = styled.div`
   &:hover {
     transform: scale(1.1);
   }
-  ${props =>
+  ${(props) =>
     props.hide &&
     css`
       display: none;
@@ -75,7 +72,7 @@ const AddMsg = styled.div`
   padding: 5px;
   border-radius: 3px;
 
-  ${props =>
+  ${(props) =>
     props.showAdd
       ? css`
           opacity: 1;
@@ -87,7 +84,7 @@ const AddMsg = styled.div`
 
 const hidePhoto = {
   '/favorites': true,
-  '/random': true
+  '/random': true,
 };
 
 class Photo extends Component {
@@ -97,7 +94,7 @@ class Photo extends Component {
     exists: false,
     showAdd: false,
     msg: '',
-    isFavoritePage: false
+    isFavoritePage: false,
   };
 
   toggleModal = () => {
@@ -111,7 +108,7 @@ class Photo extends Component {
       storedFavorites = [];
     }
 
-    var tmpArr = storedFavorites.filter(photo => {
+    var tmpArr = storedFavorites.filter((photo) => {
       return this.props.photo.id === photo.id;
     });
 
@@ -155,7 +152,13 @@ class Photo extends Component {
           onClick={this.addFavorite}>
           &hearts;
         </FavIcon>
-        <ReactTooltip type='info' place='top' effect='solid' />
+        <ReactTooltip
+          type='info'
+          place='top'
+          effect='solid'
+          backgroundColor='var(--secondary-color)'
+          textColor='var(--main-color)'
+        />
         <Modal
           id='modal'
           onClose={this.toggleModal}

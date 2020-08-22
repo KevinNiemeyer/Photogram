@@ -51,13 +51,12 @@ const User = styled.div`
       width: 50%;
       flex: 1;
     `}
-    
 `;
 
 const LinkTitle = styled.div`
   padding: 0 0 10px 0;
   font-size: 20px;
-  color: rgb(247, 154, 120);
+  color: var(--third-color);
   text-align: left;
 `;
 const Img = styled.img`
@@ -69,10 +68,10 @@ const Img = styled.img`
       : css`
           height: 80vh;
         `}
-        transition: all 10s;
-        &:hover {
-          transform: scale(1.2);
-        }
+  transition: all 10s;
+  &:hover {
+    transform: scale(1.2);
+  }
   background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
   ${(props) =>
@@ -96,7 +95,7 @@ const linkStyle = {
 };
 
 const SearchTerm = styled.span`
-  color: rgb(255, 0, 0);
+  color: var(--third-color);
   font-size: 35px;
 `;
 
@@ -119,7 +118,7 @@ const UserSearch = (props) => {
 
   const getData = () => {
     if (!hasMore) return;
-     unsplash.search
+    unsplash.search
       .users(props.match.params.user, page, 5)
       .then(toJson)
       .then((json) => {
@@ -167,15 +166,15 @@ const UserSearch = (props) => {
                         style={linkStyle}
                         key={user.id}>
                         <LinkTitle>{user.username}</LinkTitle>
-                        <div style={{overflow:'hidden'}}>
-                        <Img
-                          isGrid={value.isGrid}
-                          isColumn={value.isColumn}
-                          src={user.profile_image.large}
-                          alt={user.username}
-                          key={user.id}
-                          landscape={width > height}
-                        />
+                        <div style={{ overflow: 'hidden' }}>
+                          <Img
+                            isGrid={value.isGrid}
+                            isColumn={value.isColumn}
+                            src={user.profile_image.large}
+                            alt={user.username}
+                            key={user.id}
+                            landscape={width > height}
+                          />
                         </div>
                       </Link>
                     </User>

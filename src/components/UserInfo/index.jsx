@@ -27,6 +27,7 @@ const UserInfoRow = styled.div`
   width: auto;
   padding: 12px 0px 12px 40px;
   box-sizing: content-box;
+  color: var(--third-color);
 `;
 
 const Username = styled.div`
@@ -37,7 +38,7 @@ const Username = styled.div`
 const FullName = styled.div`
   font-weight: bold;
   font-size: 1.2em;
-  color: rgb(247, 154, 120);
+  color: var(--main-color);
 `;
 
 export default function UserInfo({ user }) {
@@ -50,7 +51,7 @@ export default function UserInfo({ user }) {
 
       <UserInfoContainer>
         <UserInfoRow>
-          <Username>{user.username}</Username>
+          <Username>User: {user.username}</Username>
         </UserInfoRow>
         <UserInfoRow>
           <div>{user.total_collections} collections</div>
@@ -58,7 +59,13 @@ export default function UserInfo({ user }) {
           <div>{user.total_likes} likes</div>
         </UserInfoRow>
         <UserInfoRow>
-          <FullName>{user.name}</FullName>
+          <FullName>
+            Full Name:
+            <span style={{ color: 'var(--secondary-color)' }}>
+              {' '}
+              {user.name}
+            </span>
+          </FullName>
         </UserInfoRow>
       </UserInfoContainer>
     </Container>

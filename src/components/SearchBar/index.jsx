@@ -7,17 +7,15 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 40%;
-  
 `;
 
-const Input = styled.input`
+const TextField = styled.input`
   border: none;
   outline: none;
   min-height: 30px;
   padding-left: 10px;
   border-radius: 3px 0 0 3px;
   background-color: rgb(250, 250, 250);
-
 `;
 
 const Button = styled.button`
@@ -44,19 +42,59 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  
 `;
 
 const Img = styled.img`
   max-width: 15px;
 `;
 
-const radios = {
-  display:'flex',
-  paddingBottom: '15px', 
-  fontSize: '18px',
-  
-}
+const Radios = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Radio = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 15px;
+`;
+const Label = styled.label`
+  color: var(--secondary-color);
+  padding: 0 10px;
+  font-size: 18px;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const InputRadio = styled.input`
+  :after {
+    width: 17px;
+    height: 17px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+  }
+  &:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: var(--fourth-color);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 1px solid white;
+  }
+`;
 
 const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -68,11 +106,11 @@ const SearchBar = (props) => {
   const handleCategoryChange = (e) => {
     if (e) {
       setCategory(e.target.value.toLowerCase());
-      console.log(e.target.checked=true);
+      console.log((e.target.checked = true));
     }
   };
   const handleSubmit = () => {
-    console.log("test")
+    console.log('test');
     if (searchTerm && category) {
       props.history.push(`/search/${category}/${searchTerm}`);
     }
@@ -81,17 +119,42 @@ const SearchBar = (props) => {
   //can't get it to select the same category with a different search term
 
   return (
-    <Form onSubmit={handleSubmit} id="form1">
-      <Wrapper style={radios}>
-        <h3>Search for:&nbsp;&nbsp;</h3>
-        <input onChange={handleCategoryChange} type="radio" id="users" name="category" value="users" required />
-        <label htmlFor="users">Users</label>
-        <input onChange={handleCategoryChange} type="radio" id="collections" name="category" value="collections" />
-        <label htmlFor="collections" >Collections</label>
-        <input onChange={handleCategoryChange} type="radio" id="photos" name="category" value="photos" />
-        <label htmlFor="photos" >Photos</label>
-      </Wrapper>
-   {/*<Dropdown id='dropdown' handleCategoryChange={handleCategoryChange} /> */}
+    <Form onSubmit={handleSubmit} id='form1'>
+      <Radios>
+        <Radio>
+          <InputRadio
+            onChange={handleCategoryChange}
+            type='radio'
+            id='users'
+            name='category'
+            value='users'
+            required
+          />
+          <Label htmlFor='users'>Users</Label>
+        </Radio>
+        <Radio>
+          <InputRadio
+            onChange={handleCategoryChange}
+            type='radio'
+            id='collections'
+            name='category'
+            value='collections'
+          />
+          <Label htmlFor='collections'>Collections</Label>
+        </Radio>
+        <Radio>
+          <InputRadio
+            onChange={handleCategoryChange}
+            type='radio'
+            id='photos'
+            name='category'
+            value='photos'
+          />
+          <Label htmlFor='photos'>Photos</Label>
+        </Radio>
+      </Radios>
+
+      {/*<Dropdown id='dropdown' handleCategoryChange={handleCategoryChange} /> */}
 
       {/* <select id='select-box' required onChange={this.handleCategoryChange}>
           <option value='' default selected disabled hidden>
@@ -103,7 +166,7 @@ const SearchBar = (props) => {
         </select>
     */}
       <Wrapper>
-        <Input
+        <TextField
           id='search-input'
           required
           onChange={handleSearchChange}
@@ -111,7 +174,7 @@ const SearchBar = (props) => {
           placeholder='Search'
         />
 
-        <Button type="submit" form="form1">
+        <Button type='submit' form='form1'>
           <Img src={MagnifyingGlassIcon} alt='magnifying-glass' />
         </Button>
       </Wrapper>

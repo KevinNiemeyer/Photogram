@@ -11,8 +11,8 @@ const Nav = styled.div`
   align-items: center;
   width: 100%;
   height: 90px;
-  border-bottom: solid 1px var(--main-color);
-  background-color: darkcyan;
+  background-color: var(--main-color);
+  color: var(--fourth-color);
   z-index: 4;
 `;
 const ButtonContainer = styled.div`
@@ -22,8 +22,8 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  color: var(--secondary-color);  
-  
+  color: var(--main-color);
+  background-color: var(--secondary-color);
   font-size: 16px;
   width: auto;
   padding: 5px 20px 5px 20px;
@@ -35,7 +35,7 @@ const Button = styled.button`
     opacity: 0.9;
   }
   &:active {
-    transform:scale(0.999)
+    transform: scale(0.999);
   }
 `;
 

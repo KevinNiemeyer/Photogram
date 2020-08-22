@@ -3,9 +3,10 @@ html {
 }
 
 :root {
-  --main-color: darkcyan;
-  --secondary-color: firebrick;
-
+  --main-color: #3e4444;
+  --secondary-color: #82b74b;
+  --third-color: #405d27;
+  --fourth-color: #c1946a;
 }
 
 .app-container {

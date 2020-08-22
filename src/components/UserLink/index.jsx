@@ -16,14 +16,15 @@ const Img = styled.img`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: rgb(247, 154, 120);
+  color: var(--third-color);
   display: flex;
   align-items: center;
   padding-left: 5px;
+  font-size: 20px;
 `;
 
 const pStyle = {
-  paddingLeft: '10px'
+  paddingLeft: '10px',
 };
 
 class UserLink extends Component {

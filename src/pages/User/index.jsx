@@ -93,7 +93,12 @@ const UserPage = (props) => {
             <GoToTop />
             <UserInfo user={user} />
             <SelectView value={value}></SelectView>
-            <TitleBar>{props.match.params.userName}'s Photos:</TitleBar>
+            <TitleBar>
+              <span style={{ color: 'var(--secondary-color)' }}>
+                {props.match.params.userName}'s
+              </span>{' '}
+              Photos:
+            </TitleBar>
             <InfiniteScroll
               id='infinite-scroll'
               pageStart={1}

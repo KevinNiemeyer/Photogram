@@ -4,7 +4,7 @@ import { LayoutContext } from '../../App';
 
 const Container = styled.div`
   background: var(--secondary-color);
-  ${props =>
+  ${(props) =>
     props.showButton
       ? css`
           display: flex;
@@ -16,7 +16,7 @@ const Container = styled.div`
   align-items: center;
   position: fixed;
   right: 55px;
-  top: 100px;
+  top: 125px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -32,9 +32,7 @@ const Container = styled.div`
 `;
 
 const TopHat = styled.span`
-  -webkit-text-fill-color: white;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
+  -webkit-text-fill-color: var(--first-color);
   font-size: 36px;
   top: 5px;
   left: 7px;
@@ -45,7 +43,7 @@ const TopHat = styled.span`
 
 class GoToTop extends Component {
   state = {
-    showButton: false
+    showButton: false,
   };
 
   // trying to get the arrow to appear/disappear when it is at the top of the page
@@ -70,7 +68,7 @@ class GoToTop extends Component {
   render() {
     return (
       <LayoutContext.Consumer>
-        {value => {
+        {(value) => {
           return (
             <Container
               id='goToTop'

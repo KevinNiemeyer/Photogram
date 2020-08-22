@@ -18,14 +18,14 @@ const Container = styled.div`
 
 const Results = styled.div`
   width: 100%;
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       display: flex;
@@ -38,12 +38,12 @@ const Collection = styled.div`
   margin: 15px 50px 15px 50px;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       width: 250px;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       width: 50%;
@@ -53,23 +53,23 @@ const Collection = styled.div`
 const LinkTitle = styled.div`
   padding: 0 0 10px 0;
   font-size: 20px;
-  color: rgb(247, 154, 120);
+  color: var(--third-color);
   text-align: left;
 `;
 const Img = styled.div`
-  background: url(${props => props.src}) no-repeat center center;
+  background: url(${(props) => props.src}) no-repeat center center;
   background-size: cover;
   transition: all 10s;
   &:hover {
     transform: scale(1.2);
   }
-  ${props =>
+  ${(props) =>
     props.isGrid &&
     css`
       width: 225px;
       height: 225px;
     `}
-  ${props =>
+  ${(props) =>
     props.isColumn &&
     css`
       width: 500px;
@@ -80,11 +80,11 @@ const Img = styled.div`
 const linkStyle = {
   textDecoration: 'none',
   fontSize: '24px',
-  padding: '10px'
+  padding: '10px',
 };
 
 const SearchTerm = styled.span`
-  color: rgb(255, 0, 0);
+  color: var(--third-color);
   font-size: 35px;
 `;
 
@@ -99,7 +99,7 @@ const HR = styled.hr`
   background-color: red;
 `;
 
-const CollectionSearch = props => {
+const CollectionSearch = (props) => {
   const [collections, setCollections] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -110,7 +110,7 @@ const CollectionSearch = props => {
     unsplash.search
       .collections(props.match.params.collection, page, 5)
       .then(toJson)
-      .then(json => {
+      .then((json) => {
         setCollections([...collections, ...json.results]);
         setPage(page + 1);
         if (!totalPages) setTotalPages(json.total_pages);
@@ -124,7 +124,7 @@ const CollectionSearch = props => {
 
   return (
     <LayoutContext.Consumer>
-      {value => {
+      {(value) => {
         return (
           <Container>
             <GoToTop />
@@ -144,7 +144,7 @@ const CollectionSearch = props => {
                 id='collection-search-results'
                 isGrid={value.isGrid}
                 isColumn={value.isColumn}>
-                {collections.map(collection => {
+                {collections.map((collection) => {
                   return (
                     <Collection id='collection' key={collection.id}>
                       <Link
@@ -154,14 +154,14 @@ const CollectionSearch = props => {
                         style={linkStyle}
                         key={collection.id}>
                         <LinkTitle>{collection.title}</LinkTitle>
-                        <div style={{overflow: 'hidden'}}>
-                        <Img
-                          isGrid={value.isGrid}
-                          isColumn={value.isColumn}
-                          src={collection.cover_photo.urls.small}
-                          alt={collection.title}
-                          key={collection.id}
-                        />
+                        <div style={{ overflow: 'hidden' }}>
+                          <Img
+                            isGrid={value.isGrid}
+                            isColumn={value.isColumn}
+                            src={collection.cover_photo.urls.small}
+                            alt={collection.title}
+                            key={collection.id}
+                          />
                         </div>
                       </Link>
                     </Collection>
